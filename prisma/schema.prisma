@@ -13,3 +13,13 @@ datasource db {
   provider = "postgresql"
   url      = env("NEXTAUTH_DATABASE_URL")
 }
+
+model users {
+  id           Int     @id @default(autoincrement())
+  username     String  @db.VarChar(100)
+  email        String  @unique @db.VarChar(50)
+  password     String
+  phone_number String?
+  address      String?
+  company_name String? @unique @db.VarChar(70)
+}

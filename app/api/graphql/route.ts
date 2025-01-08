@@ -1,14 +1,15 @@
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import { typeDefs } from "@/lib/TypeDefs";
-import { resolvers } from "@/lib/Resolvers";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/db";
-import { getUserFromToken } from "@/helper/GetUserInfo";
+import { typeDefs } from "@/constants/TypeDefs";
+import { resolvers } from "@/constants/Resolvers";
+import { getUserFromToken } from "@/constants/GetUserInfo";
 
 const allowedOrigins = [
-  "https://ensileta-hub.webibee.com",
-  "https://designhub.ensileta.com",
+  // "https://ensileta-hub.webibee.com",
+  // "https://designhub.ensileta.com",
+  "http://localhost:3000/",
 ];
 
 const context = async (req: NextRequest) => {

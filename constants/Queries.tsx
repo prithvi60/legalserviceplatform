@@ -9,7 +9,6 @@ export const SIGN_UP = gql`
     $company_name: String!
     $phone_number: String!
     $address: String!
-    $department: String!
     $password: String!
     $confirmPassword: String!
   ) {
@@ -19,7 +18,6 @@ export const SIGN_UP = gql`
       company_name: $company_name
       phone_number: $phone_number
       address: $address
-      department: $department
       password: $password
       confirmPassword: $confirmPassword
     ) {
