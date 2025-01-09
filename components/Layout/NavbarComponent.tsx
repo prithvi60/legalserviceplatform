@@ -1,5 +1,4 @@
-"use client"
-import React from "react";
+"use client";
 import {
     Navbar,
     NavbarBrand,
@@ -10,6 +9,17 @@ import {
     NavbarItem,
 } from "@nextui-org/navbar";
 import Link from "next/link";
+import { navLinks } from "@/constants/Data";
+import {
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
+} from "@nextui-org/dropdown";
+import { IoIosArrowDown } from "react-icons/io";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export const AcmeLogo = () => {
     return (
@@ -25,7 +35,23 @@ export const AcmeLogo = () => {
 };
 
 export default function NavbarComponent() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { status } = useSession();
+    const [isStatus, setIsStatus] = useState(false);
+    const handleLogout = () => {
+        signOut({ redirect: true, callbackUrl: "/" });
+    };
+    useEffect(() => {
+        if (status === "authenticated") {
+            setIsStatus(true);
+        } else {
+            setIsStatus(false);
+        }
+    }, [status]);
+
+    if (status === "loading") {
+        return <div>Loading...</div>;
+    }
 
     const menuItems = [
         "Profile",
@@ -41,7 +67,12 @@ export default function NavbarComponent() {
     ];
 
     return (
-        <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+        <Navbar
+            isBordered
+            maxWidth="full"
+            isMenuOpen={isMenuOpen}
+            onMenuOpenChange={setIsMenuOpen}
+        >
             <NavbarContent className="sm:hidden" justify="start">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -49,46 +80,75 @@ export default function NavbarComponent() {
             </NavbarContent>
 
             <NavbarContent className="sm:hidden pr-3" justify="center">
-                <NavbarBrand>
+                <NavbarBrand as={Link} href={"/"}>
                     <AcmeLogo />
                     <p className="font-bold text-inherit">LSP</p>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarBrand>
+                <NavbarBrand as={Link} href={"/"}>
                     <AcmeLogo />
                     <p className="font-bold text-inherit">LSP</p>
                 </NavbarBrand>
-                <NavbarItem>
-                    <Link href="/">Home</Link>
-                </NavbarItem>
-                <NavbarItem isActive>
-                    <Link aria-current="page" href="#">
-                        Business
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link href="#">FAQ</Link>
-                </NavbarItem>
             </NavbarContent>
 
             <NavbarContent justify="end">
-                <NavbarItem className="hidden lg:flex">
-                    <Link href="/api/auth/signin">Login</Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link href="/auth/signup" className="rounded-md p-3 bg-primary text-white">Sign Up</Link>
-                </NavbarItem>
+                {navLinks.map((list, idx) => (
+                    <NavbarItem key={idx} className="mx-2.5">
+                        <Dropdown>
+                            <DropdownTrigger className="flex items-center gap-4 rounded-md">
+                                <Link href={list.href} className="p-2 bg-slate-100">
+                                    {list.menu}{" "}
+                                    <span>
+                                        <IoIosArrowDown className="text-xl font-bold" />
+                                    </span>
+                                </Link>
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Static Actions">
+                                {list.subCategories.map((item, index) => (
+                                    <DropdownItem
+                                        endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                        key={index}
+                                    >
+                                        {item.subMenu}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+                    </NavbarItem>
+                ))}
+
+                {isStatus ? (
+                    <NavbarItem>
+                        <button
+                            className="flex items-center rounded-md py-2 px-4 bg-primary text-white gap-3.5 font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+                            onClick={handleLogout}
+                        >
+                            Log Out
+                        </button>
+                    </NavbarItem>
+                ) : (
+                    <>
+                        <NavbarItem className="hidden lg:flex">
+                            <Link href="/api/auth/signin">Login</Link>
+                        </NavbarItem>
+                        <NavbarItem>
+                            <Link
+                                href="/auth/signup"
+                                className="rounded-md py-2 px-4 bg-primary text-white"
+                            >
+                                Sign Up
+                            </Link>
+                        </NavbarItem>
+                    </>
+                )}
             </NavbarContent>
 
             <NavbarMenu>
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            className="w-full"
-                            href="#"
-                        >
+                        <Link className="w-full" href="#">
                             {item}
                         </Link>
                     </NavbarMenuItem>

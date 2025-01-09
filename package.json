@@ -16,6 +16,7 @@
     "@neondatabase/serverless": "^0.10.4",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@nextui-org/button": "^2.2.9",
+    "@nextui-org/dropdown": "^2.3.9",
     "@nextui-org/navbar": "^2.2.8",
     "@nextui-org/system": "^2.4.6",
     "@nextui-org/theme": "^2.4.5",
