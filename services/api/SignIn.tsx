@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import toast from "react-hot-toast";
-import Link from "next/link";
 import { Loader } from "@/components/UI/Loader";
 
 const schema = z.object({
@@ -250,13 +249,13 @@ export const SignIn = () => {
                                 </div>
                             )}
                         </form>
-                        <div className="text-end">
+                        {/* <div className="text-end">
                             <p>
                                 <Link href="/forgot-password" className="text-primary text-sm md:text-base hover:text-primary/70">
                                     Forgot Password ?
                                 </Link>
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

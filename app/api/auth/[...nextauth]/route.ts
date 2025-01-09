@@ -9,38 +9,43 @@ import { JWT } from "next-auth/jwt";
 declare module "next-auth" {
   interface Session {
     user: {
-      role?: string; // Add role property
       name?: string;
       email?: string;
+      accessToken?: string;
     };
+    accessToken?: string;
   }
+
   interface User {
-    role?: string; // Add role property
+    id: string;
+    name: string;
+    email: string;
+    accessToken: string;
   }
 }
+
 declare module "next-auth/jwt" {
   interface JWT {
-    role?: string; // Add role property
+    accessToken?: string;
   }
 }
+
 const JWT_SECRET = process.env.NEXTAUTH_SECRET;
 
 if (!JWT_SECRET) {
   throw new Error("NEXTAUTH_SECRET is not defined in environment variables");
 }
 
-const generateToken = (user: { id: number; email: string; role?: string }) => {
-  return jwt.sign(
-    { id: user.id, email: user.email, role: user.role || "" },
-    JWT_SECRET,
-    {
-      expiresIn: "1d",
-    }
-  );
+const generateToken = (user: { id: number; email: string }) => {
+  return jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+    expiresIn: "1d",
+  });
 };
 
-const authenticateUser = async (email: string, password: string) => {
-  // Check user in 'users' table
+const authenticateUser = async (
+  email: string,
+  password: string
+): Promise<User | null> => {
   const user = await prisma.users.findUnique({ where: { email } });
 
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -48,33 +53,12 @@ const authenticateUser = async (email: string, password: string) => {
       id: user.id.toString(),
       name: user.username,
       email: user.email,
-      role: user.role || "",
       accessToken: generateToken({
         id: user.id,
         email: user.email,
-        role: user.role || "",
       }),
     };
   }
-
-  // Check user in 'accessControl' table
-  const employeeUser = await prisma.accessControl.findUnique({
-    where: { email },
-  });
-
-  if (employeeUser && (await bcrypt.compare(password, employeeUser.password))) {
-    return {
-      id: employeeUser.id.toString(),
-      email: employeeUser.email,
-      role: employeeUser.role || "",
-      accessToken: generateToken({
-        id: employeeUser.id,
-        email: employeeUser.email,
-        role: employeeUser.role,
-      }),
-    };
-  }
-
   return null;
 };
 
@@ -113,16 +97,15 @@ const handler = NextAuth({
     maxAge: 24 * 60 * 60, // 1 day
   },
   callbacks: {
-    async jwt({ token, user }: { user: User; token: JWT }) {
+    async jwt({ token, user }: { user?: User; token: JWT }) {
       if (user) {
-        token.role = user.role;
         token.accessToken = user.accessToken;
       }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
-      session.user.role = token.role;
       session.accessToken = token.accessToken;
+      session.user.accessToken = token.accessToken;
       return session;
     },
   },

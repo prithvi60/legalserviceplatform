@@ -1,9 +1,9 @@
 "use client";
 
-import client from '@/context/apolloClient';
-import { ApolloProvider } from '@apollo/client';
-import { SessionProvider } from 'next-auth/react';
-
+import client from "@/context/apolloClient";
+import { ApolloProvider } from "@apollo/client";
+import { SessionProvider } from "next-auth/react";
+import { NextUIProvider } from "@nextui-org/system";
 
 interface ProvidersProps {
     children: React.ReactNode;
@@ -12,10 +12,9 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
     return (
         <SessionProvider>
-            <ApolloProvider client={client}>
-                {children}
-            </ApolloProvider>
+            <NextUIProvider>
+                <ApolloProvider client={client}>{children}</ApolloProvider>
+            </NextUIProvider>
         </SessionProvider>
     );
 }
-

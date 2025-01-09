@@ -148,7 +148,7 @@ export const SignUp = () => {
                 </div> */}
 
                 <div className="w-full p-4 sm:px-6 border-2">
-                    <div className="w-full px-4 py-7 sm:p-12.5 xl:p-17.5 text-[#0E132A]">
+                    <div className="w-full px-4 py-4 sm:p-12.5 xl:p-17.5 text-[#0E132A]">
                         {/* <span className="mb-1.5 block font-medium text-sm md:text-base">Start for free</span> */}
                         <h2 className="mb-6 text-lg font-bold text-[#0E132A] md:text-2xl">
                             Create a New Account
@@ -156,7 +156,7 @@ export const SignUp = () => {
 
                         <form
                             onSubmit={handleSubmit(onSubmit)}
-                            className="space-y-4 relative"
+                            className="space-y-8 relative"
                         >
                             <div className="relative">
                                 <div className="flex gap-3 items-center">

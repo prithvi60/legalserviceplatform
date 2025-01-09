@@ -6,7 +6,7 @@ const Dashboard = () => {
     const { status } = useSession();
     const [isStatus, setIsStatus] = useState(false)
     const handleLogout = () => {
-        signOut({ redirect: true, callbackUrl: "/api/auth/signin" });
+        signOut({ redirect: true, callbackUrl: "/" });
     }
     useEffect(() => {
         if (status === "authenticated") {
