@@ -63,6 +63,7 @@ export const SignUp = () => {
         register,
         handleSubmit,
         setError,
+        reset,
         formState: { errors, isSubmitting, isValid },
     } = useForm<FormFields>({
         resolver: zodResolver(schema),
@@ -76,6 +77,7 @@ export const SignUp = () => {
             const { data: result } = await signUp({ variables: { ...data } });
 
             if (result) {
+                reset()
                 router.push("/api/auth/signin");
                 toast.success("Signed up successfully", {
                     position: "top-right",
@@ -482,7 +484,7 @@ export const SignUp = () => {
                             <div className="text-center !-mt-2 ">
                                 <p>
                                     Already have an account?{" "}
-                                    <Link href="/api/auth/signin" className="text-secondary">
+                                    <Link href="/api/auth/signin" className="text-primary text-sm md:text-base hover:text-primary/70">
                                         Sign in
                                     </Link>
                                 </p>

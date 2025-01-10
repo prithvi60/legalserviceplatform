@@ -7,8 +7,7 @@ import { resolvers } from "@/constants/Resolvers";
 import { getUserFromToken } from "@/constants/GetUserInfo";
 
 const allowedOrigins = [
-  // "https://ensileta-hub.webibee.com",
-  // "https://designhub.ensileta.com",
+  "https://legalserviceplatform.vercel.app/",
   "http://localhost:3000/",
 ];
 

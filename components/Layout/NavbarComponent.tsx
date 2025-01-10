@@ -20,6 +20,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/button";
 
 export const AcmeLogo = () => {
     return (
@@ -37,10 +39,10 @@ export const AcmeLogo = () => {
 export default function NavbarComponent() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { status } = useSession();
+    const router = useRouter();
     const [isStatus, setIsStatus] = useState(false);
     const handleLogout = () => {
-        const fromUrl = typeof window !== "undefined" ? window.location.pathname : "/";
-        signOut({ redirect: true, callbackUrl: fromUrl });
+        signOut({ redirect: true, callbackUrl: "/" });
     };
     useEffect(() => {
         if (status === "authenticated") {
@@ -49,6 +51,16 @@ export default function NavbarComponent() {
             setIsStatus(false);
         }
     }, [status]);
+
+    const handleClick = (val: string) => {
+        setIsMenuOpen(false);
+        if (status === "authenticated") {
+            router.push(val);
+        } else {
+            localStorage.setItem("returnUrl", val);
+            router.push("/api/auth/signin");
+        }
+    };
 
     return (
         <Navbar
@@ -75,23 +87,41 @@ export default function NavbarComponent() {
                     <NavbarItem key={idx} className="mx-2.5">
                         <Dropdown>
                             <DropdownTrigger className="flex items-center gap-4 rounded-md">
-                                <Link href={list.href} className="p-2 bg-slate-100">
+                                <div className="p-2 cursor-pointer bg-slate-100">
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
                                     </span>
-                                </Link>
+                                </div>
                             </DropdownTrigger>
-                            <DropdownMenu aria-label="Static Actions">
-                                {list.subCategories.map((item, index) => (
-                                    <DropdownItem
-                                        endContent={<MdKeyboardArrowRight className="text-xl" />}
-                                        key={index}
-                                    >
-                                        {item.subMenu}
-                                    </DropdownItem>
-                                ))}
-                            </DropdownMenu>
+                            {list.menu === "Documentation" ? (
+                                <DropdownMenu aria-label="Static Actions">
+                                    {list.subCategories.map((item, index) => (
+                                        <DropdownItem
+                                            as={Button}
+                                            onPress={() => handleClick(item.href)}
+                                            key={index}
+                                            className="bg-transparent"
+                                            endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                        >
+                                            {item.subMenu}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            ) : (
+                                <DropdownMenu aria-label="Static Actions">
+                                    {list.subCategories.map((item, index) => (
+                                        <DropdownItem
+                                            as={Link}
+                                            href={item.href}
+                                            key={index}
+                                            endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                        >
+                                            {item.subMenu}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            )}
                         </Dropdown>
                     </NavbarItem>
                 ))}
@@ -133,23 +163,42 @@ export default function NavbarComponent() {
                     <NavbarMenuItem key={idx} className="mx-2.5">
                         <Dropdown>
                             <DropdownTrigger className="flex justify-between items-center rounded-md">
-                                <Link href={list.href} className="p-2 bg-slate-100">
+                                <div className="p-2 bg-slate-100">
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
                                     </span>
-                                </Link>
+                                </div>
                             </DropdownTrigger>
-                            <DropdownMenu aria-label="Static Actions">
-                                {list.subCategories.map((item, index) => (
-                                    <DropdownItem
-                                        endContent={<MdKeyboardArrowRight className="text-xl" />}
-                                        key={index}
-                                    >
-                                        {item.subMenu}
-                                    </DropdownItem>
-                                ))}
-                            </DropdownMenu>
+                            {list.menu === "Documentation" ? (
+                                <DropdownMenu aria-label="Static Actions">
+                                    {list.subCategories.map((item, index) => (
+                                        <DropdownItem
+                                            as={Button}
+                                            onPress={() => handleClick(item.href)}
+                                            key={index}
+                                            className="bg-transparent"
+                                            endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                        >
+                                            {item.subMenu}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            ) : (
+                                <DropdownMenu aria-label="Static Actions">
+                                    {list.subCategories.map((item, index) => (
+                                        <DropdownItem
+                                            as={Button}
+                                            onPress={() => setIsMenuOpen(false)}
+                                            key={index}
+                                            className="bg-transparent"
+                                            endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                        >
+                                            {item.subMenu}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            )}
                         </Dropdown>
                     </NavbarMenuItem>
                 ))}

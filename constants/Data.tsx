@@ -1,6 +1,5 @@
 export const navLinks = [
     {
-        href: "/",
         menu: "Consult an Expert",
         subCategories: [
             { href: "#", subMenu: "Talk to a Lawyer" },
@@ -9,7 +8,6 @@ export const navLinks = [
         ],
     },
     {
-        href: "/",
         menu: "Business setup",
         subCategories: [
             { href: "#", subMenu: "Company Registration" },
@@ -18,12 +16,11 @@ export const navLinks = [
         ],
     },
     {
-        href: "/",
         menu: "Documentation",
         subCategories: [
-            { href: "#", subMenu: "Business Contracts" },
-            { href: "#", subMenu: "Personal & Family" },
-            { href: "#", subMenu: "Real Estate" },
+            { href: "/documentation", subMenu: "Business Contracts" },
+            { href: "/documentation", subMenu: "Personal & Family" },
+            { href: "/documentation", subMenu: "Real Estate" },
         ],
     },
 ];

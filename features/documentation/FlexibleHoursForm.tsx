@@ -13,15 +13,20 @@ import { DateValue } from "@react-types/calendar";
 import { IoMdDownload } from "react-icons/io";
 import { Tooltip } from "@nextui-org/tooltip";
 import { FieldGroup, FormData } from "@/types/Types";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { decryptText, encryptText } from "@/services/encryption";
+import { Loader } from "@/components/UI/Loader";
+
+const SENSITIVE_CONTENT = `I am open to discussing how this arrangement can be structured to
+                        suit both the team's needs and my professional
+                        responsibilities. I would be happy to provide any additional
+                        information and discuss this further at your convenience.`;
 
 const FlexibleHoursForm: React.FC = () => {
     const [step, setStep] = useState<number>(1);
     const [progress, setProgress] = useState<number>(0);
-    const { status } = useSession();
-    const router = useRouter();
-    // const [isStatus, setIsStatus] = useState(false)
+    const [encryptedContent, setEncryptedContent] = useState<string>("");
+    const [isDecrypted, setIsDecrypted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState<FormData>({
         entityType: "company",
         employeeName: "",
@@ -53,6 +58,12 @@ const FlexibleHoursForm: React.FC = () => {
     const isFormComplete = (): boolean => {
         return progress === 100;
     };
+
+    useEffect(() => {
+        const encrypted = encryptText(SENSITIVE_CONTENT);
+        console.log(encrypted);
+        setEncryptedContent(encrypted);
+    }, []);
 
     // Define field groups for each step
     const fieldGroups: FieldGroup[] = [
@@ -97,29 +108,7 @@ const FlexibleHoursForm: React.FC = () => {
     useEffect(() => {
         const newProgress = calculateProgress();
         setProgress(newProgress);
-
-        // Store form data in sessionStorage
-        sessionStorage.setItem("formData", JSON.stringify(formData));
     }, [formData, step]);
-
-    useEffect(() => {
-        const storedData = sessionStorage.getItem("formData");
-        if (storedData) {
-            setFormData(JSON.parse(storedData));
-        }
-    }, []);
-
-    // useEffect(() => {
-    //     if (status === "authenticated") {
-    //         setIsStatus(true)
-    //     } else {
-    //         setIsStatus(false)
-    //     }
-    // }, [status]);
-
-    // if (status === "loading") {
-    //     return <div>Loading...</div>;
-    // }
 
     // Check if current step is complete
 
@@ -153,12 +142,21 @@ const FlexibleHoursForm: React.FC = () => {
     };
 
     const handleDownload = async () => {
-        if (status === "authenticated") {
+        setIsLoading(true);
+        try {
+            setIsDecrypted(true);
+            await new Promise((resolve) => setTimeout(resolve, 200));
             await toPDF();
-        } else {
-            router.push("/api/auth/signin");
+        } catch (error) {
+            console.error("Error generating PDF:", error);
+            setIsDecrypted(false);
+        } finally {
+            setIsLoading(false);
+            setIsDecrypted(false);
         }
     };
+
+    console.log(isDecrypted);
 
     const renderStep = (): JSX.Element | null => {
         switch (step) {
@@ -305,91 +303,104 @@ const FlexibleHoursForm: React.FC = () => {
         }
     };
 
-    const LetterPreview: React.FC = () => (
-        <div
-            ref={targetRef}
-            id="letter-preview"
-            className={`p-6 bg-white rounded-lg shadow ${isFormComplete() && "blur-sm"
-                }`}
-        >
-            <div className="mb-4">
-                <p>Date: { }</p>
-            </div>
-            <div className="mb-4">
-                <p>Dear HR Manager,</p>
-            </div>
-            <div className="mb-4">
-                <p>
-                    I, {formData.employeeName}, currently working as{" "}
-                    {formData.designation} in the {formData.department} department, am
-                    writing to request flexible working hours.
-                </p>
-            </div>
-            <div className="mb-4">
-                <p>
-                    Currently, I work from {formData.currentStartTime} to{" "}
-                    {formData.currentEndTime}. I would like to propose changing my working
-                    hours to {formData.proposedStartTime} to {formData.proposedEndTime}.
-                </p>
-            </div>
-            <div className="mb-4">
-                <p>
-                    This arrangement would commence from{" "}
-                    {formData.startDate
-                        ? format(new Date(formData.startDate.toString()), "dd-MM-yyyy")
-                        : "dd/mm/yyyy"}{" "}
-                    until{" "}
-                    {formData.endDate
-                        ? format(new Date(formData.endDate.toString()), "dd-MM-yyyy")
-                        : "dd/mm/yyyyy"}
-                    .
-                    {formData.trialPeriod &&
-                        ` I am open to a trial period of ${formData.trialPeriod}.`}
-                </p>
-                {!isFormComplete() ? (
-                    <Tooltip
-                        showArrow
-                        offset={-4}
-                        closeDelay={10}
-                        color="primary"
-                        size="lg"
-                        className="text-xl px-4 py-3"
-                        content="Unlock clear and readable text by downloading the document now!"
-                    >
-                        <p className="blur-sm py-4">
-                            I am open to discussing how this arrangement can be structured to
-                            suit both the team&apos;s needs and my professional
-                            responsibilities. I would be happy to provide any additional
-                            information and discuss this further at your convenience.
-                        </p>
-                    </Tooltip>
-                ) : (
-                    <p className="blur-sm py-4">
-                        I am open to discussing how this arrangement can be structured to
-                        suit both the team&apos;s needs and my professional
-                        responsibilities. I would be happy to provide any additional
-                        information and discuss this further at your convenience.
+    const LetterPreview: React.FC = () => {
+        const sensitiveContent =
+            isDecrypted === true ? decryptText(encryptedContent) : encryptedContent;
+        return (
+            <div
+                ref={targetRef}
+                id="letter-preview"
+                className={`p-6 bg-white rounded-lg shadow ${isFormComplete() && "blur-sm"
+                    }`}
+            >
+                <div className="mb-4">
+                    <p>Dear HR Manager,</p>
+                </div>
+                <div className="mb-4">
+                    <p>
+                        {`I, ${formData.employeeName === "" ? "______" : formData.employeeName
+                            } , currently working as ${formData.designation === "" ? "______" : formData.designation
+                            }
+                    in the ${formData.department === ""
+                                ? "______"
+                                : formData.department
+                            } department, am
+                    writing to request flexible working hours.`}
                     </p>
-                )}
+                </div>
+                <div className="mb-4">
+                    <p>
+                        {`Currently, I work from ${formData.currentStartTime === ""
+                            ? "______"
+                            : formData.currentStartTime
+                            } to ${formData.currentEndTime === ""
+                                ? "______"
+                                : formData.currentEndTime
+                            }
+                    . I would like to propose changing my working
+                    hours to ${formData.proposedStartTime === ""
+                                ? "______"
+                                : formData.proposedStartTime
+                            } to ${formData.proposedEndTime === ""
+                                ? "______"
+                                : formData.proposedEndTime
+                            }.`}
+                    </p>
+                </div>
+                {/* ${ === "" ? "______" : } */}
+                <div className="mb-4">
+                    <p>
+                        This arrangement would commence from{" "}
+                        {formData.startDate
+                            ? format(new Date(formData.startDate.toString()), "dd-MM-yyyy")
+                            : "dd/mm/yyyy"}{" "}
+                        until{" "}
+                        {formData.endDate
+                            ? format(new Date(formData.endDate.toString()), "dd-MM-yyyy")
+                            : "dd/mm/yyyyy"}
+                        .
+                        {`I am open to a trial period of ${formData.trialPeriod === "" ? "_____ " : formData.trialPeriod
+                            }.`}
+                    </p>
+                    {!isFormComplete() ? (
+                        <Tooltip
+                            showArrow
+                            offset={-4}
+                            closeDelay={10}
+                            color="primary"
+                            size="lg"
+                            className="text-xl px-4 py-3"
+                            content="Unlock clear and readable text by downloading the document now!"
+                        >
+                            <p className="py-4 blur-sm max-w-xl line-clamp-3">
+                                {sensitiveContent}
+                            </p>
+                        </Tooltip>
+                    ) : (
+                        <p className={`py-4 max-w-xl line-clamp-3 ${!isDecrypted ? "blur-sm" : ""}`}>
+                            {sensitiveContent}
+                        </p>
+                    )}
+                </div>
+                <div className="mb-4">
+                    <p>Reason for request: {formData.reason}</p>
+                </div>
+                <div className="mt-8">
+                    <p>Sincerely,</p>
+                    <p>{formData.employeeName}</p>
+                    <p>{formData.designation}</p>
+                </div>
             </div>
-            <div className="mb-4">
-                <p>Reason for request: {formData.reason}</p>
-            </div>
-            <div className="mt-8">
-                <p>Sincerely,</p>
-                <p>{formData.employeeName}</p>
-                <p>{formData.designation}</p>
-            </div>
-        </div>
-    );
+        );
+    };
 
     return (
         <div className="container mx-auto p-4 max-w-6xl">
-            <div className={`flex justify-center items-start gap-10`}>
+            <div className={`flex flex-col lg:flex-row justify-center items-start gap-10`}>
                 {" "}
                 {!isFormComplete() && (
-                    <div className="basis-full md:basis-2/5">
-                        <Card className="!max-w-md">
+                    <div className="w-full basis-full lg:basis-2/5">
+                        <Card className=" lg:max-w-md">
                             <CardBody>
                                 <Progress
                                     value={progress}
@@ -420,8 +431,8 @@ const FlexibleHoursForm: React.FC = () => {
                         </Card>
                     </div>
                 )}
-                <div className={`basis-full md:basis-3/5 select-none`}>
-                    <Card>
+                <div className={`w-full basis-full lg:basis-3/5 select-none`}>
+                    <Card className="w-full">
                         <CardBody>
                             <h3 className="text-lg font-semibold mb-4">Preview</h3>
                             <LetterPreview />
@@ -430,9 +441,9 @@ const FlexibleHoursForm: React.FC = () => {
                                     onClick={handleDownload}
                                     className="mt-4 w-full"
                                     color="primary"
-                                    endContent={<IoMdDownload className="text-xl ml-5" />}
+                                    endContent={!isLoading && <IoMdDownload className="text-xl ml-5" />}
                                 >
-                                    Download PDF
+                                    {isLoading ? (<Loader />) : "Download PDF"}
                                 </Button>
                             )}
                         </CardBody>

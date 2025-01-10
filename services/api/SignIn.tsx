@@ -1,17 +1,18 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";;
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import toast from "react-hot-toast";
 import { Loader } from "@/components/UI/Loader";
+import Link from "next/link";
 
 const schema = z.object({
     email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters")
+    password: z.string().min(6, "Password must be at least 6 characters"),
 });
 type FormFields = z.infer<typeof schema>;
 
@@ -19,24 +20,28 @@ export const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
     const { status } = useSession();
-    // console.log(session?.user);
 
     const {
         register,
         handleSubmit,
         setError,
+        reset,
         formState: { errors, isSubmitting },
     } = useForm<FormFields>({
         resolver: zodResolver(schema),
         mode: "onBlur",
     });
-    const fromUrl = typeof window !== 'undefined' ? window.location.pathname : '/';
+
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
+        const returnUrl =
+            typeof window !== "undefined"
+                ? localStorage.getItem("returnUrl") || "/"
+                : "/";
         try {
             const result = await signIn("credentials", {
                 redirect: false,
                 ...data,
-                callbackUrl: fromUrl,
+                callbackUrl: returnUrl,
             });
 
             if (result?.error) {
@@ -55,7 +60,11 @@ export const SignIn = () => {
                     },
                 });
             } else if (result) {
-                router.push(result.url ?? fromUrl);
+                // Clear the stored return URL
+                localStorage.removeItem("returnUrl");
+                reset();
+                // Redirect to the stored return URL
+                router.push(result.url ?? returnUrl);
                 toast.success("Logged in successfully", {
                     position: "top-right",
                     duration: 3000,
@@ -77,21 +86,12 @@ export const SignIn = () => {
         }
     };
 
-    // useEffect(() => {
-    //     if (status === "authenticated") {
-    //         router.push("/dashboard");
-    //     } else {
-    //         router.push("/api/auth/signin");
-    //     }
-    // }, [status, router]);
-
     if (status === "loading") {
         return <div>Loading...</div>;
     }
 
     return (
         <div className="rounded-md border-4 border-secondary bg-white shadow-xl m-4">
-
             <div className="block p-4 md:p-7">
                 {/* <div className="hidden w-full xl:block xl:w-1/2">
 
@@ -126,7 +126,10 @@ export const SignIn = () => {
 
                         {/* Form with validation */}
 
-                        <form onSubmit={handleSubmit(onSubmit)} className="px-4 sm:px-12.5 xl:px-17.5 space-y-7 relative">
+                        <form
+                            onSubmit={handleSubmit(onSubmit)}
+                            className="px-4 sm:px-12.5 xl:px-17.5 space-y-7 relative"
+                        >
                             <div className="mb-4 relative">
                                 <label className="mb-2.5 block font-medium text-[#0E132A]">
                                     Email
@@ -243,20 +246,23 @@ export const SignIn = () => {
                                 {isSubmitting ? <Loader /> : "Log In"}
                             </button>
 
-
                             {errors.root && (
                                 <div className="absolute -bottom-6 text-sm md:text-base w-full left-1/2 -translate-x-1/2 text-red-500 font-semibold text-center mt-5">
                                     {errors.root.message}
                                 </div>
                             )}
                         </form>
-                        {/* <div className="text-end">
+                        <div className="text-end">
                             <p>
-                                <Link href="/forgot-password" className="text-primary text-sm md:text-base hover:text-primary/70">
-                                    Forgot Password ?
+                                No account?{" "}
+                                <Link
+                                    href="/auth/signup"
+                                    className="text-primary text-sm md:text-base hover:text-primary/70"
+                                >
+                                    Create one!
                                 </Link>
                             </p>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>
