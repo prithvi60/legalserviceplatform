@@ -50,10 +50,6 @@ export default function NavbarComponent() {
         }
     }, [status]);
 
-    if (status === "loading") {
-        return <div>Loading...</div>;
-    }
-
     return (
         <Navbar
             isBordered
