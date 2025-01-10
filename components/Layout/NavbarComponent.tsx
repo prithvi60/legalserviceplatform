@@ -39,7 +39,8 @@ export default function NavbarComponent() {
     const { status } = useSession();
     const [isStatus, setIsStatus] = useState(false);
     const handleLogout = () => {
-        signOut({ redirect: true, callbackUrl: "/" });
+        const fromUrl = typeof window !== "undefined" ? window.location.pathname : "/";
+        signOut({ redirect: true, callbackUrl: fromUrl });
     };
     useEffect(() => {
         if (status === "authenticated") {
@@ -53,19 +54,6 @@ export default function NavbarComponent() {
         return <div>Loading...</div>;
     }
 
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "My Settings",
-        "Team Settings",
-        "Help & Feedback",
-        "Log Out",
-    ];
-
     return (
         <Navbar
             isBordered
@@ -73,27 +61,20 @@ export default function NavbarComponent() {
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
         >
-            <NavbarContent className="sm:hidden" justify="start">
-                <NavbarMenuToggle
-                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                />
+            <NavbarContent className="md:hidden pr-3" justify="center">
+                <NavbarBrand as={Link} href={"/"}>
+                    <AcmeLogo />
+                    <p className="font-bold text-inherit">LSP</p>
+                </NavbarBrand>
             </NavbarContent>
-
-            <NavbarContent className="sm:hidden pr-3" justify="center">
+            <NavbarContent className="hidden md:flex gap-4" justify="center">
                 <NavbarBrand as={Link} href={"/"}>
                     <AcmeLogo />
                     <p className="font-bold text-inherit">LSP</p>
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarBrand as={Link} href={"/"}>
-                    <AcmeLogo />
-                    <p className="font-bold text-inherit">LSP</p>
-                </NavbarBrand>
-            </NavbarContent>
-
-            <NavbarContent justify="end">
+            <NavbarContent justify="end" className="hidden md:flex">
                 {navLinks.map((list, idx) => (
                     <NavbarItem key={idx} className="mx-2.5">
                         <Dropdown>
@@ -145,14 +126,62 @@ export default function NavbarComponent() {
                 )}
             </NavbarContent>
 
-            <NavbarMenu>
-                {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link className="w-full" href="#">
-                            {item}
-                        </Link>
+            <NavbarContent className="md:hidden" justify="end">
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                />
+            </NavbarContent>
+
+            <NavbarMenu className="!gap-8">
+                {navLinks.map((list, idx) => (
+                    <NavbarMenuItem key={idx} className="mx-2.5">
+                        <Dropdown>
+                            <DropdownTrigger className="flex justify-between items-center rounded-md">
+                                <Link href={list.href} className="p-2 bg-slate-100">
+                                    {list.menu}{" "}
+                                    <span>
+                                        <IoIosArrowDown className="text-xl font-bold" />
+                                    </span>
+                                </Link>
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Static Actions">
+                                {list.subCategories.map((item, index) => (
+                                    <DropdownItem
+                                        endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                        key={index}
+                                    >
+                                        {item.subMenu}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
                     </NavbarMenuItem>
                 ))}
+
+                {isStatus ? (
+                    <NavbarMenuItem>
+                        <button
+                            className="flex items-center rounded-md py-2 px-4 bg-primary text-white gap-3.5 font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+                            onClick={handleLogout}
+                        >
+                            Log Out
+                        </button>
+                    </NavbarMenuItem>
+                ) : (
+                    <>
+                        <NavbarMenuItem className="hidden lg:flex">
+                            <Link href="/api/auth/signin">Login</Link>
+                        </NavbarMenuItem>
+                        <NavbarMenuItem>
+                            <button
+                                onClick={handleLogout}
+                                className="rounded-md py-2 px-4 bg-primary text-white"
+                            >
+                                Sign Up
+                            </button>
+                        </NavbarMenuItem>
+                    </>
+                )}
             </NavbarMenu>
         </Navbar>
     );

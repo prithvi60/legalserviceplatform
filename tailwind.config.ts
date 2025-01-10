@@ -8,7 +8,7 @@ export default {
     "./services/**/*.{js,ts,jsx,tsx,mdx}",
     "./features/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|dropdown|navbar|ripple|spinner|menu|divider|popover).js"
+    "./node_modules/@nextui-org/theme/dist/components/(button|card|date-picker|dropdown|input|navbar|progress|radio|scroll-shadow|popover|ripple|spinner|calendar|date-input|form|menu|divider).js"
   ],
   theme: {
     extend: {

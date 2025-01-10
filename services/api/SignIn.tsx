@@ -30,12 +30,13 @@ export const SignIn = () => {
         resolver: zodResolver(schema),
         mode: "onBlur",
     });
-
+    const fromUrl = typeof window !== 'undefined' ? window.location.pathname : '/';
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
         try {
             const result = await signIn("credentials", {
                 redirect: false,
                 ...data,
+                callbackUrl: fromUrl,
             });
 
             if (result?.error) {
@@ -53,8 +54,8 @@ export const SignIn = () => {
                         secondary: "#FFFAEE",
                     },
                 });
-            } else {
-                router.push("/dashboard");
+            } else if (result) {
+                router.push(result.url ?? fromUrl);
                 toast.success("Logged in successfully", {
                     position: "top-right",
                     duration: 3000,
@@ -76,13 +77,13 @@ export const SignIn = () => {
         }
     };
 
-    useEffect(() => {
-        if (status === "authenticated") {
-            router.push("/dashboard");
-        } else {
-            router.push("/api/auth/signin");
-        }
-    }, [status, router]);
+    // useEffect(() => {
+    //     if (status === "authenticated") {
+    //         router.push("/dashboard");
+    //     } else {
+    //         router.push("/api/auth/signin");
+    //     }
+    // }, [status, router]);
 
     if (status === "loading") {
         return <div>Loading...</div>;
