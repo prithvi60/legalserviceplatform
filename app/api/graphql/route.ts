@@ -7,8 +7,8 @@ import { resolvers } from "@/constants/Resolvers";
 import { getUserFromToken } from "@/constants/GetUserInfo";
 
 const allowedOrigins = [
-  "https://legalserviceplatform.vercel.app/",
-  "http://localhost:3000/",
+  "https://legalserviceplatform.vercel.app",
+  "http://localhost:3000",
 ];
 
 const context = async (req: NextRequest) => {
@@ -32,49 +32,74 @@ const server = new ApolloServer({
 });
 
 // Create Next.js handler for Apollo Server with CORS headers
-const handler = startServerAndCreateNextHandler<NextRequest>(server, {
+const baseHandler = startServerAndCreateNextHandler<NextRequest>(server, {
   context,
 });
 
 // Middleware to add CORS headers
-const corsMiddleware = async (req: NextRequest) => {
+async function handler(req: NextRequest) {
   const origin = req.headers.get("origin") || "";
 
-  // Handle Apollo server response
-  const res = await handler(req);
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    // Properly typed headers object
+    const headers: Record<string, string> = {
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Max-Age": "86400",
+    };
 
-  // Clone response to modify headers
-  const modifiedRes = new NextResponse(res.body, res);
+    // Conditionally add CORS origin
+    if (allowedOrigins.includes(origin)) {
+      headers["Access-Control-Allow-Origin"] = origin;
+    }
 
-  // Add CORS headers if origin is allowed
-  if (allowedOrigins.includes(origin)) {
-    modifiedRes.headers.set("Access-Control-Allow-Origin", origin);
+    return new NextResponse(null, { headers });
   }
 
-  modifiedRes.headers.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-  modifiedRes.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
-  );
+  // Handle actual requests
+  try {
+    const response = await baseHandler(req);
+    const newResponse = new NextResponse(response.body, response);
 
-  return modifiedRes;
-};
+    if (allowedOrigins.includes(origin)) {
+      newResponse.headers.set("Access-Control-Allow-Origin", origin);
+    }
+    newResponse.headers.set("Access-Control-Allow-Credentials", "true");
+    newResponse.headers.set(
+      "Access-Control-Allow-Methods",
+      "POST, GET, OPTIONS"
+    );
+    newResponse.headers.set(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
 
-// Handle Preflight OPTIONS requests
-export const OPTIONS = async (req: NextRequest) => {
-  const origin = req.headers.get("origin") || "";
+    return newResponse;
+  } catch (error) {
+    console.error("GraphQL request error:", error);
 
-  const headers: Record<string, string> = {
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  };
+    // Define headers for error response
+    const errorHeaders: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
 
-  if (allowedOrigins.includes(origin)) {
-    headers["Access-Control-Allow-Origin"] = origin;
+    if (allowedOrigins.includes(origin)) {
+      errorHeaders["Access-Control-Allow-Origin"] = origin;
+    }
+
+    return new NextResponse(
+      JSON.stringify({
+        errors: [{ message: "Internal server error" }],
+      }),
+      {
+        status: 500,
+        headers: errorHeaders,
+      }
+    );
   }
+}
 
-  return new NextResponse(null, { headers });
-};
-
-export const GET = corsMiddleware;
-export const POST = corsMiddleware;
+export const GET = handler;
+export const POST = handler;
+export const OPTIONS = handler;

@@ -310,8 +310,7 @@ const FlexibleHoursForm: React.FC = () => {
             <div
                 ref={targetRef}
                 id="letter-preview"
-                className={`p-6 bg-white rounded-lg shadow ${isFormComplete() && "blur-sm"
-                    }`}
+                className={`p-6 bg-white rounded-lg shadow`}
             >
                 <div className="mb-4">
                     <p>Dear HR Manager,</p>
@@ -348,7 +347,8 @@ const FlexibleHoursForm: React.FC = () => {
                     </p>
                 </div>
                 {/* ${ === "" ? "______" : } */}
-                <div className="mb-4">
+                <div className={`mb-4 ${isFormComplete() && "blur-sm"
+                    }`}>
                     <p>
                         This arrangement would commence from{" "}
                         {formData.startDate

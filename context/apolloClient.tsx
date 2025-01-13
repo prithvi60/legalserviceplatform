@@ -16,6 +16,7 @@ const getGraphqlUri = () =>
 
 const httpLink = new HttpLink({
     uri: getGraphqlUri(),
+    credentials: "include",
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -31,7 +32,8 @@ const authLink = setContext(async (_, { headers }) => {
         return {
             headers: {
                 ...headers,
-                authorization: `Bearer ${token}`,
+                ...(token && { authorization: `Bearer ${token}` }),
+                "Content-Type": "application/json",
             },
         };
     } catch (error) {
@@ -44,7 +46,15 @@ const createApolloClient = () =>
     new ApolloClient({
         link: ApolloLink.from([authLink, httpLink]),
         cache: new InMemoryCache(),
-        credentials: "same-origin",
+        defaultOptions: {
+            watchQuery: {
+                fetchPolicy: 'network-only',
+            },
+            query: {
+                fetchPolicy: 'network-only',
+                errorPolicy: 'all',
+            },
+        }
     });
 
 const useApolloClient = () => useMemo(createApolloClient, []);
