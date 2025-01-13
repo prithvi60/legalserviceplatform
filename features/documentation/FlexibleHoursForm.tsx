@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, JSX, useEffect } from "react";
+import React, { useState, ChangeEvent, JSX, useEffect, useRef } from "react";
 import { Card, CardBody } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
@@ -15,32 +15,82 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { FieldGroup, FormData } from "@/types/Types";
 import { decryptText, encryptText } from "@/services/encryption";
 import { Loader } from "@/components/UI/Loader";
+import { useRouter } from "next/navigation";
 
 const SENSITIVE_CONTENT = `I am open to discussing how this arrangement can be structured to
                         suit both the team's needs and my professional
                         responsibilities. I would be happy to provide any additional
                         information and discuss this further at your convenience.`;
 
+const STORAGE_KEY = "flexible-hours-form-data";
 const FlexibleHoursForm: React.FC = () => {
     const [step, setStep] = useState<number>(1);
     const [progress, setProgress] = useState<number>(0);
     const [encryptedContent, setEncryptedContent] = useState<string>("");
     const [isDecrypted, setIsDecrypted] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [formData, setFormData] = useState<FormData>({
-        entityType: "company",
-        employeeName: "",
-        designation: "",
-        department: "",
-        currentStartTime: "",
-        currentEndTime: "",
-        proposedStartTime: "",
-        proposedEndTime: "",
-        startDate: null,
-        endDate: null,
-        trialPeriod: "",
-        reason: "",
+    const router = useRouter();
+    const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+    const hasDownloadedRef = useRef(false);
+    const [isDownloading, setIsDownloading] = useState(false);
+    const [formData, setFormData] = useState<FormData>(() => {
+        if (typeof window !== "undefined") {
+            const savedData = sessionStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                const parsedData = JSON.parse(savedData);
+                // Convert date strings back to DateValue objects
+                return {
+                    ...parsedData,
+                    startDate: parsedData.startDate
+                        ? new Date(parsedData.startDate)
+                        : null,
+                    endDate: parsedData.endDate ? new Date(parsedData.endDate) : null,
+                };
+            }
+        }
+        return {
+            entityType: "company",
+            employeeName: "",
+            designation: "",
+            department: "",
+            currentStartTime: "",
+            currentEndTime: "",
+            proposedStartTime: "",
+            proposedEndTime: "",
+            startDate: null,
+            endDate: null,
+            trialPeriod: "",
+            reason: "",
+        };
     });
+
+    // Only initialize searchParams on the client-side
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        setPaymentStatus(searchParams.get("paymentStatus"));
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const toDate = (date: { year: number; month: number; day: number }) => {
+                if (date.year && date.month && date.day) {
+                    return new Date(date.year, date.month - 1, date.day);
+                }
+                return null;
+            };
+
+            const dataToSave = {
+                ...formData,
+                startDate: formData.startDate
+                    ? toDate(formData.startDate)?.toISOString() || formData.startDate
+                    : formData.startDate,
+                endDate: formData.endDate
+                    ? toDate(formData.endDate)?.toISOString() || formData.endDate
+                    : formData.endDate,
+            };
+
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+        }
+    }, [formData.startDate, formData.endDate, formData]);
 
     const { toPDF, targetRef } = usePDF({
         filename: "flexible-working-hours-request.pdf",
@@ -141,22 +191,85 @@ const FlexibleHoursForm: React.FC = () => {
         }
     };
 
+    // const handleDownload = async () => {
+    //     setIsLoading(true);
+    //     try {
+    //         setShowPayment(true);
+    //         setIsDecrypted(true);
+    //         await new Promise((resolve) => setTimeout(resolve, 200));
+    //         await toPDF();
+    //     } catch (error) {
+    //         console.error("Error generating PDF:", error);
+    //         setIsDecrypted(false);
+    //     } finally {
+    //         setIsLoading(false);
+    //         setIsDecrypted(false);
+    //     }
+    // };
+
     const handleDownload = async () => {
-        setIsLoading(true);
-        try {
-            setIsDecrypted(true);
-            await new Promise((resolve) => setTimeout(resolve, 200));
-            await toPDF();
-        } catch (error) {
-            console.error("Error generating PDF:", error);
-            setIsDecrypted(false);
-        } finally {
-            setIsLoading(false);
-            setIsDecrypted(false);
-        }
+        const currentPath = window.location.pathname;
+        const paymentUrl = `/payment?amount=5.99&redirect=${encodeURIComponent(
+            currentPath
+        )}`;
+        router.push(paymentUrl);
     };
 
-    console.log(isDecrypted);
+    useEffect(() => {
+        // let isMounted = true;
+
+        const performDownload = async () => {
+            if (
+                paymentStatus === "success" &&
+                !hasDownloadedRef.current &&
+                !isDownloading
+            ) {
+                hasDownloadedRef.current = true;
+                setIsDownloading(true);
+
+                try {
+                    setIsDecrypted(true);
+                    await new Promise((resolve) => setTimeout(resolve, 200));
+                    await toPDF();
+
+                    // Clear session storage after successful download
+                    if (typeof window !== "undefined") {
+                        sessionStorage.removeItem(STORAGE_KEY);
+                    }
+
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete("paymentStatus");
+                    window.history.replaceState({}, "", url);
+
+                    // Redirect after successful download and cleanup
+                    setIsDownloading(false);
+                    setIsDecrypted(false);
+                    window.location.replace("/documentation");
+                } catch (error) {
+                    console.error("Error generating PDF:", error);
+                    hasDownloadedRef.current = false;
+                    setIsDecrypted(false);
+                    setIsDownloading(false);
+                }
+            }
+            if (paymentStatus === "success") {
+                performDownload();
+            }
+        };
+
+        performDownload();
+
+        // return () => {
+        //     isMounted = false;
+        // };
+    }, [paymentStatus]);
+
+    // Clear download state when leaving the page
+    useEffect(() => {
+        return () => {
+            hasDownloadedRef.current = false;
+        };
+    }, []);
 
     const renderStep = (): JSX.Element | null => {
         switch (step) {
@@ -347,8 +460,7 @@ const FlexibleHoursForm: React.FC = () => {
                     </p>
                 </div>
                 {/* ${ === "" ? "______" : } */}
-                <div className={`mb-4 ${isFormComplete() && "blur-sm"
-                    }`}>
+                <div className={`mb-4 ${isFormComplete() && "blur-sm"}`}>
                     <p>
                         This arrangement would commence from{" "}
                         {formData.startDate
@@ -377,7 +489,10 @@ const FlexibleHoursForm: React.FC = () => {
                             </p>
                         </Tooltip>
                     ) : (
-                        <p className={`py-4 max-w-xl line-clamp-3 ${!isDecrypted ? "blur-sm" : ""}`}>
+                        <p
+                            className={`py-4 max-w-xl line-clamp-3 ${!isDecrypted ? "blur-sm" : ""
+                                }`}
+                        >
                             {sensitiveContent}
                         </p>
                     )}
@@ -396,7 +511,9 @@ const FlexibleHoursForm: React.FC = () => {
 
     return (
         <div className="container mx-auto p-4 max-w-6xl">
-            <div className={`flex flex-col lg:flex-row justify-center items-start gap-10`}>
+            <div
+                className={`flex flex-col lg:flex-row justify-center items-start gap-10`}
+            >
                 {" "}
                 {!isFormComplete() && (
                     <div className="w-full basis-full lg:basis-2/5">
@@ -438,12 +555,15 @@ const FlexibleHoursForm: React.FC = () => {
                             <LetterPreview />
                             {isFormComplete() && (
                                 <Button
-                                    onClick={handleDownload}
+                                    onPress={handleDownload}
                                     className="mt-4 w-full"
                                     color="primary"
-                                    endContent={!isLoading && <IoMdDownload className="text-xl ml-5" />}
+                                    disabled={isDownloading}
+                                    endContent={
+                                        !isDownloading && <IoMdDownload className="text-xl ml-5" />
+                                    }
                                 >
-                                    {isLoading ? (<Loader />) : "Download PDF"}
+                                    {isDownloading ? <Loader /> : "Download PDF"}
                                 </Button>
                             )}
                         </CardBody>

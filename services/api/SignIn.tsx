@@ -33,6 +33,8 @@ export const SignIn = () => {
     });
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
+        console.log(data);
+
         const returnUrl =
             typeof window !== "undefined"
                 ? localStorage.getItem("returnUrl") || "/"
@@ -87,7 +89,11 @@ export const SignIn = () => {
     };
 
     if (status === "loading") {
-        return <div>Loading...</div>;
+        return (
+            <div className="w-full h-[80vh] flex justify-center items-center">
+                Loading...
+            </div>
+        );
     }
 
     return (

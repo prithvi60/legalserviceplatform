@@ -6,7 +6,7 @@ export const SIGN_UP = gql`
   mutation sigUp(
     $username: String!
     $email: String!
-    $company_name: String!
+    $company_name: String
     $phone_number: String!
     $address: String!
     $password: String!

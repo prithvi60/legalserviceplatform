@@ -137,17 +137,17 @@ export default function NavbarComponent() {
                     </NavbarItem>
                 ) : (
                     <>
-                        <NavbarItem className="hidden lg:flex">
+                        <NavbarItem className="hidden lg:flex rounded-md py-2 px-4 bg-primary text-white">
                             <Link href="/api/auth/signin">Login</Link>
                         </NavbarItem>
-                        <NavbarItem>
+                        {/* <NavbarItem>
                             <Link
                                 href="/auth/signup"
                                 className="rounded-md py-2 px-4 bg-primary text-white"
                             >
                                 Sign Up
                             </Link>
-                        </NavbarItem>
+                        </NavbarItem> */}
                     </>
                 )}
             </NavbarContent>
@@ -214,17 +214,17 @@ export default function NavbarComponent() {
                     </NavbarMenuItem>
                 ) : (
                     <>
-                        <NavbarMenuItem className="hidden lg:flex">
+                        <NavbarMenuItem onClick={() => setIsMenuOpen(false)} className="flex lg:hidden w-max mx-auto rounded-md py-2 px-10 bg-primary text-white">
                             <Link href="/api/auth/signin">Login</Link>
                         </NavbarMenuItem>
-                        <NavbarMenuItem>
+                        {/* <NavbarMenuItem>
                             <button
                                 onClick={handleLogout}
                                 className="rounded-md py-2 px-4 bg-primary text-white"
                             >
                                 Sign Up
                             </button>
-                        </NavbarMenuItem>
+                        </NavbarMenuItem> */}
                     </>
                 )}
             </NavbarMenu>

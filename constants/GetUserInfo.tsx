@@ -6,28 +6,25 @@ if (!JWT_SECRET) {
     throw new Error("NEXTAUTH_SECRET is not defined in environment variables");
 }
 
-export const getUserFromToken = (token: string) => {
+export const getUserFromToken = (token?: string | null): JwtPayload | null => {
     try {
-        // Check if token exists and is prefixed with "Bearer "
-        const tokenWithoutBearer = token?.startsWith("Bearer ")
-            ? token.slice(7)
-            : token;
-
-        if (!tokenWithoutBearer) {
-            console.warn("Token is empty or improperly formatted.");
+        if (!token) {
+            console.warn("Token is missing.");
             return null;
         }
 
-        // Verify and decode the token
+        const tokenWithoutBearer = token.startsWith("Bearer ")
+            ? token.slice(7)
+            : token;
+
         const decoded = jwt.verify(tokenWithoutBearer, JWT_SECRET) as JwtPayload;
 
-        // Ensure decoded token contains an ID property
-        if (decoded && typeof decoded === 'object' && decoded.id) {
-            return decoded;
+        if (!decoded || typeof decoded !== 'object' || !decoded.id) {
+            console.warn("Invalid or incomplete token data.");
+            return null;
         }
 
-        console.warn("Decoded token does not contain a valid ID.");
-        return null;
+        return decoded;
 
     } catch (error: any) {
         console.error("Error verifying token:", error.message || error);

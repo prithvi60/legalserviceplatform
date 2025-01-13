@@ -22,7 +22,7 @@ const httpLink = new HttpLink({
 const authLink = setContext(async (_, { headers }) => {
     try {
         const session = await getSession();
-        const token = session?.accessToken;
+        const token = session?.user?.accessToken;
 
         if (!token) {
             console.warn("No access token found. Sending request without token.");
