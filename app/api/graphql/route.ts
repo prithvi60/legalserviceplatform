@@ -64,13 +64,13 @@ async function corsMiddleware(
 
     if (allowedOrigins.includes(origin)) {
       newHeaders.set("Access-Control-Allow-Origin", origin);
-      newHeaders.set("Access-Control-Allow-Credentials", "true");
-      newHeaders.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-      newHeaders.set(
-        "Access-Control-Allow-Headers",
-        "Content-Type, Authorization"
-      );
     }
+    newHeaders.set("Access-Control-Allow-Credentials", "true");
+    newHeaders.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+    newHeaders.set(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
 
     return new NextResponse(response.body, {
       status: response.status,
