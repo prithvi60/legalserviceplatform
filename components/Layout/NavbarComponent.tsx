@@ -72,13 +72,13 @@ export default function NavbarComponent() {
             <NavbarContent className="md:hidden pr-3" justify="center">
                 <NavbarBrand as={Link} href={"/"}>
                     <AcmeLogo />
-                    <p className="font-bold text-inherit">LSP</p>
+                    <p className="font-bold text-inherit">XY</p>
                 </NavbarBrand>
             </NavbarContent>
             <NavbarContent className="hidden md:flex gap-4" justify="center">
                 <NavbarBrand as={Link} href={"/"}>
                     <AcmeLogo />
-                    <p className="font-bold text-inherit">LSP</p>
+                    <p className="font-bold text-inherit">XY</p>
                 </NavbarBrand>
             </NavbarContent>
 
@@ -101,8 +101,8 @@ export default function NavbarComponent() {
                                             as={Button}
                                             onPress={() => handleClick(item.href)}
                                             key={index}
-                                            className="bg-transparent"
-                                            endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                            className="bg-transparent text-[#1E318D]"
+                                            endContent={<MdKeyboardArrowRight className="text-xl text-[#1E318D]" />}
                                         >
                                             {item.subMenu}
                                         </DropdownItem>
@@ -115,7 +115,8 @@ export default function NavbarComponent() {
                                             as={Link}
                                             href={item.href}
                                             key={index}
-                                            endContent={<MdKeyboardArrowRight className="text-xl" />}
+                                            endContent={<MdKeyboardArrowRight className="text-xl text-[#1E318D]" />}
+                                            className="text-[#1E318D]"
                                         >
                                             {item.subMenu}
                                         </DropdownItem>
@@ -129,7 +130,7 @@ export default function NavbarComponent() {
                 {isStatus ? (
                     <NavbarItem>
                         <button
-                            className="flex items-center rounded-md py-2 px-4 bg-primary text-white gap-3.5 font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+                            className="flex items-center rounded-md py-2 px-4 bg-primary text-[#1E318D] gap-3.5 font-semibold duration-300 ease-in-out  lg:text-base"
                             onClick={handleLogout}
                         >
                             Log Out
@@ -137,7 +138,7 @@ export default function NavbarComponent() {
                     </NavbarItem>
                 ) : (
                     <>
-                        <NavbarItem className="hidden lg:flex rounded-md py-2 px-4 bg-primary text-white">
+                        <NavbarItem className="hidden lg:flex rounded-md py-2 px-4 bg-primary text-[#1E318D] font-semibold">
                             <Link href="/api/auth/signin">Login</Link>
                         </NavbarItem>
                         {/* <NavbarItem>
@@ -206,7 +207,7 @@ export default function NavbarComponent() {
                 {isStatus ? (
                     <NavbarMenuItem>
                         <button
-                            className="flex items-center rounded-md py-2 px-4 bg-primary text-white gap-3.5 font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+                            className="flex items-center rounded-md py-2 px-4 bg-primary text-white gap-3.5 font-medium duration-300 ease-in-out  lg:text-base"
                             onClick={handleLogout}
                         >
                             Log Out
@@ -214,7 +215,7 @@ export default function NavbarComponent() {
                     </NavbarMenuItem>
                 ) : (
                     <>
-                        <NavbarMenuItem onClick={() => setIsMenuOpen(false)} className="flex lg:hidden w-max mx-auto rounded-md py-2 px-10 bg-primary text-white">
+                        <NavbarMenuItem onClick={() => setIsMenuOpen(false)} className="flex lg:hidden w-max mx-auto rounded-md py-2 px-10 bg-primary text-[#1E318D] font-semibold">
                             <Link href="/api/auth/signin">Login</Link>
                         </NavbarMenuItem>
                         {/* <NavbarMenuItem>

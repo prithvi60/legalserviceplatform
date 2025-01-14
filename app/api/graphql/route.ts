@@ -6,12 +6,14 @@ import { typeDefs } from "@/constants/TypeDefs";
 import { resolvers } from "@/constants/Resolvers";
 import { getUserFromToken } from "@/constants/GetUserInfo";
 
-const allowedOrigins = [
-  "https://legalserviceplatform.vercel.app",
-  "http://localhost:3000",
-];
+// Initialize Apollo Server
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-const context = async (req: NextRequest) => {
+// Context for Apollo Server
+const createContext = async (req: NextRequest) => {
   try {
     const token = req.headers.get("authorization") || "";
     const user = getUserFromToken(token);
@@ -25,81 +27,80 @@ const context = async (req: NextRequest) => {
   }
 };
 
-// Initialize Apollo Server
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
-
-// Create Next.js handler for Apollo Server with CORS headers
+// Create base handler with explicit typing
 const baseHandler = startServerAndCreateNextHandler<NextRequest>(server, {
-  context,
+  context: createContext,
 });
 
-// Middleware to add CORS headers
-async function handler(req: NextRequest) {
+// CORS middleware with corrected typing
+async function corsMiddleware(
+  req: NextRequest,
+  handlerFn: typeof baseHandler
+): Promise<NextResponse> {
   const origin = req.headers.get("origin") || "";
+  const allowedOrigins = [
+    "https://legalserviceplatform.vercel.app",
+    "http://localhost:3000",
+  ];
 
   // Handle preflight requests
   if (req.method === "OPTIONS") {
-    // Properly typed headers object
-    const headers: Record<string, string> = {
+    const headers = {
+      "Access-Control-Allow-Origin": allowedOrigins.includes(origin)
+        ? origin
+        : "",
       "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
       "Access-Control-Max-Age": "86400",
+      "Access-Control-Allow-Credentials": "true",
     };
-
-    // Conditionally add CORS origin
-    if (allowedOrigins.includes(origin)) {
-      headers["Access-Control-Allow-Origin"] = origin;
-    }
-
     return new NextResponse(null, { headers });
   }
 
-  // Handle actual requests
+  // Handle actual request
   try {
-    const response = await baseHandler(req);
-    const newResponse = new NextResponse(response.body, response);
+    const response = await handlerFn(req);
+    const newHeaders = new Headers(response.headers);
 
     if (allowedOrigins.includes(origin)) {
-      newResponse.headers.set("Access-Control-Allow-Origin", origin);
+      newHeaders.set("Access-Control-Allow-Origin", origin);
+      newHeaders.set("Access-Control-Allow-Credentials", "true");
+      newHeaders.set("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+      newHeaders.set(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization"
+      );
     }
-    newResponse.headers.set("Access-Control-Allow-Credentials", "true");
-    newResponse.headers.set(
-      "Access-Control-Allow-Methods",
-      "POST, GET, OPTIONS"
-    );
-    newResponse.headers.set(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization"
-    );
 
-    return newResponse;
+    return new NextResponse(response.body, {
+      status: response.status,
+      headers: newHeaders,
+    });
   } catch (error) {
-    console.error("GraphQL request error:", error);
-
-    // Define headers for error response
+    console.error("Request error:", error);
     const errorHeaders: Record<string, string> = {
       "Content-Type": "application/json",
     };
-
     if (allowedOrigins.includes(origin)) {
       errorHeaders["Access-Control-Allow-Origin"] = origin;
+      errorHeaders["Access-Control-Allow-Credentials"] = "true";
     }
-
     return new NextResponse(
-      JSON.stringify({
-        errors: [{ message: "Internal server error" }],
-      }),
-      {
-        status: 500,
-        headers: errorHeaders,
-      }
+      JSON.stringify({ errors: [{ message: "Internal server error" }] }),
+      { status: 500, headers: errorHeaders }
     );
   }
 }
 
-export const GET = handler;
-export const POST = handler;
-export const OPTIONS = handler;
+// Route handlers with corrected implementation
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  return corsMiddleware(req, baseHandler);
+}
+
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  return corsMiddleware(req, baseHandler);
+}
+
+export async function OPTIONS(req: NextRequest): Promise<NextResponse> {
+  return corsMiddleware(req, baseHandler);
+}

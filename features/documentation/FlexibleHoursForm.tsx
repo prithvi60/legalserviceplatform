@@ -9,22 +9,28 @@ import { Radio, RadioGroup } from "@nextui-org/radio";
 import { DatePicker } from "@nextui-org/date-picker";
 import { usePDF } from "react-to-pdf";
 import { format } from "date-fns";
-import { DateValue } from "@react-types/calendar";
 import { IoMdDownload } from "react-icons/io";
 import { Tooltip } from "@nextui-org/tooltip";
 import { FieldGroup, FormData } from "@/types/Types";
 import { decryptText, encryptText } from "@/services/encryption";
 import { Loader } from "@/components/UI/Loader";
 import { useRouter } from "next/navigation";
+import {
+    CalendarDate,
+    getLocalTimeZone,
+    parseDate,
+} from "@internationalized/date";
 
 const SENSITIVE_CONTENT = `I am open to discussing how this arrangement can be structured to
-                        suit both the team's needs and my professional
-                        responsibilities. I would be happy to provide any additional
-                        information and discuss this further at your convenience.`;
+                            suit both the team's needs and my professional
+                            responsibilities. I would be happy to provide any additional
+                            information and discuss this further at your convenience.`;
 
 const STORAGE_KEY = "flexible-hours-form-data";
+
 const FlexibleHoursForm: React.FC = () => {
     const [step, setStep] = useState<number>(1);
+    const [isFinished, setIsFinished] = useState(false);
     const [progress, setProgress] = useState<number>(0);
     const [encryptedContent, setEncryptedContent] = useState<string>("");
     const [isDecrypted, setIsDecrypted] = useState(false);
@@ -37,13 +43,12 @@ const FlexibleHoursForm: React.FC = () => {
             const savedData = sessionStorage.getItem(STORAGE_KEY);
             if (savedData) {
                 const parsedData = JSON.parse(savedData);
-                // Convert date strings back to DateValue objects
                 return {
                     ...parsedData,
                     startDate: parsedData.startDate
-                        ? new Date(parsedData.startDate)
+                        ? parseDate(parsedData.startDate)
                         : null,
-                    endDate: parsedData.endDate ? new Date(parsedData.endDate) : null,
+                    endDate: parsedData.endDate ? parseDate(parsedData.endDate) : null,
                 };
             }
         }
@@ -63,37 +68,91 @@ const FlexibleHoursForm: React.FC = () => {
         };
     });
 
-    // Only initialize searchParams on the client-side
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
         setPaymentStatus(searchParams.get("paymentStatus"));
     }, []);
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const toDate = (date: { year: number; month: number; day: number }) => {
-                if (date.year && date.month && date.day) {
-                    return new Date(date.year, date.month - 1, date.day);
-                }
-                return null;
-            };
+        const savedStep = sessionStorage.getItem("completedStep");
+        if (savedStep) {
+            setStep(parseInt(savedStep, 10));
+        }
+    }, []);
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
             const dataToSave = {
                 ...formData,
-                startDate: formData.startDate
-                    ? toDate(formData.startDate)?.toISOString() || formData.startDate
-                    : formData.startDate,
-                endDate: formData.endDate
-                    ? toDate(formData.endDate)?.toISOString() || formData.endDate
-                    : formData.endDate,
+                startDate: formData.startDate ? formData.startDate.toString() : null,
+                endDate: formData.endDate ? formData.endDate.toString() : null,
             };
-
             sessionStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
         }
-    }, [formData.startDate, formData.endDate, formData]);
+    }, [formData]);
+
+    useEffect(() => {
+        const encrypted = encryptText(SENSITIVE_CONTENT);
+        console.log(encrypted);
+        setEncryptedContent(encrypted);
+    }, []);
+
+    useEffect(() => {
+        const newProgress = calculateProgress();
+        setProgress(newProgress);
+    }, [formData, step]);
+
+    useEffect(() => {
+        const performDownload = async () => {
+            if (
+                paymentStatus === "success" &&
+                !hasDownloadedRef.current &&
+                !isDownloading
+            ) {
+                hasDownloadedRef.current = true;
+                setIsDownloading(true);
+
+                try {
+                    setIsDecrypted(true);
+                    await new Promise((resolve) => setTimeout(resolve, 200));
+                    await toPDF();
+
+                    // Clear session storage after successful download
+                    sessionStorage.removeItem(STORAGE_KEY);
+                    sessionStorage.removeItem("completedStep");
+
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete("paymentStatus");
+                    window.history.replaceState({}, "", url);
+
+                    // Redirect after successful download and cleanup
+                    setIsDownloading(false);
+                    setIsDecrypted(false);
+                    window.location.replace("/documentation");
+                } catch (error) {
+                    console.error("Error generating PDF:", error);
+                    hasDownloadedRef.current = false;
+                    setIsDecrypted(false);
+                    setIsDownloading(false);
+                }
+            }
+            if (paymentStatus === "success") {
+                performDownload();
+            }
+        };
+
+        performDownload();
+    }, [paymentStatus]);
+
+    // Clear download state when leaving the page
+    useEffect(() => {
+        return () => {
+            hasDownloadedRef.current = false;
+        };
+    }, []);
 
     const { toPDF, targetRef } = usePDF({
-        filename: "flexible-working-hours-request.pdf",
+        filename: "sample.pdf",
         page: {
             margin: 20,
             format: "a4",
@@ -105,17 +164,16 @@ const FlexibleHoursForm: React.FC = () => {
         },
     });
 
-    const isFormComplete = (): boolean => {
-        return progress === 100;
+    const formatDisplayDate = (date: CalendarDate | null) => {
+        if (!date) return "dd/mm/yyyy";
+        return format(date.toDate(getLocalTimeZone()), "dd-MM-yyyy");
     };
 
-    useEffect(() => {
-        const encrypted = encryptText(SENSITIVE_CONTENT);
-        console.log(encrypted);
-        setEncryptedContent(encrypted);
-    }, []);
+    const isFormComplete = (): boolean => {
+        // return progress === 100;
+        return isFinished;
+    };
 
-    // Define field groups for each step
     const fieldGroups: FieldGroup[] = [
         {
             step: 1,
@@ -141,7 +199,6 @@ const FlexibleHoursForm: React.FC = () => {
         0
     );
 
-    // Calculate progress based on filled fields
     const calculateProgress = (): number => {
         const filledFields = Object.entries(formData).filter(([key, value]) => {
             // Check if the field belongs to current or previous steps
@@ -154,14 +211,6 @@ const FlexibleHoursForm: React.FC = () => {
         return Math.floor((filledFields / totalFields) * 100);
     };
 
-    // Update progress when form data changes
-    useEffect(() => {
-        const newProgress = calculateProgress();
-        setProgress(newProgress);
-    }, [formData, step]);
-
-    // Check if current step is complete
-
     const isCurrentStepComplete = (): boolean => {
         const currentGroup = fieldGroups.find((group) => group.step === step);
         if (!currentGroup) return false;
@@ -171,7 +220,7 @@ const FlexibleHoursForm: React.FC = () => {
 
     const handleInputChange = (
         name: keyof FormData,
-        value: string | DateValue | null
+        value: string | CalendarDate | null
     ): void => {
         setFormData((prev) => ({
             ...prev,
@@ -181,31 +230,19 @@ const FlexibleHoursForm: React.FC = () => {
 
     const handleNext = (): void => {
         if (step < fieldGroups.length && isCurrentStepComplete()) {
-            setStep((prev) => prev + 1);
+            const nextStep = step + 1;
+            setStep(nextStep);
+            sessionStorage.setItem("completedStep", nextStep.toString());
         }
     };
 
     const handleBack = (): void => {
         if (step > 1) {
-            setStep((prev) => prev - 1);
+            const PrevStep = step - 1;
+            setStep(PrevStep);
+            sessionStorage.setItem("completedStep", PrevStep.toString());
         }
     };
-
-    // const handleDownload = async () => {
-    //     setIsLoading(true);
-    //     try {
-    //         setShowPayment(true);
-    //         setIsDecrypted(true);
-    //         await new Promise((resolve) => setTimeout(resolve, 200));
-    //         await toPDF();
-    //     } catch (error) {
-    //         console.error("Error generating PDF:", error);
-    //         setIsDecrypted(false);
-    //     } finally {
-    //         setIsLoading(false);
-    //         setIsDecrypted(false);
-    //     }
-    // };
 
     const handleDownload = async () => {
         const currentPath = window.location.pathname;
@@ -214,62 +251,6 @@ const FlexibleHoursForm: React.FC = () => {
         )}`;
         router.push(paymentUrl);
     };
-
-    useEffect(() => {
-        // let isMounted = true;
-
-        const performDownload = async () => {
-            if (
-                paymentStatus === "success" &&
-                !hasDownloadedRef.current &&
-                !isDownloading
-            ) {
-                hasDownloadedRef.current = true;
-                setIsDownloading(true);
-
-                try {
-                    setIsDecrypted(true);
-                    await new Promise((resolve) => setTimeout(resolve, 200));
-                    await toPDF();
-
-                    // Clear session storage after successful download
-                    if (typeof window !== "undefined") {
-                        sessionStorage.removeItem(STORAGE_KEY);
-                    }
-
-                    const url = new URL(window.location.href);
-                    url.searchParams.delete("paymentStatus");
-                    window.history.replaceState({}, "", url);
-
-                    // Redirect after successful download and cleanup
-                    setIsDownloading(false);
-                    setIsDecrypted(false);
-                    window.location.replace("/documentation");
-                } catch (error) {
-                    console.error("Error generating PDF:", error);
-                    hasDownloadedRef.current = false;
-                    setIsDecrypted(false);
-                    setIsDownloading(false);
-                }
-            }
-            if (paymentStatus === "success") {
-                performDownload();
-            }
-        };
-
-        performDownload();
-
-        // return () => {
-        //     isMounted = false;
-        // };
-    }, [paymentStatus]);
-
-    // Clear download state when leaving the page
-    useEffect(() => {
-        return () => {
-            hasDownloadedRef.current = false;
-        };
-    }, []);
 
     const renderStep = (): JSX.Element | null => {
         switch (step) {
@@ -369,7 +350,7 @@ const FlexibleHoursForm: React.FC = () => {
                                 <DatePicker
                                     labelPlacement="outside"
                                     value={formData.startDate}
-                                    onChange={(value: DateValue | null) =>
+                                    onChange={(value: CalendarDate | null) =>
                                         handleInputChange("startDate", value)
                                     }
                                     aria-label="Start Date"
@@ -382,7 +363,7 @@ const FlexibleHoursForm: React.FC = () => {
                                 <DatePicker
                                     labelPlacement="outside"
                                     value={formData.endDate}
-                                    onChange={(value: DateValue | null) =>
+                                    onChange={(value: CalendarDate | null) =>
                                         handleInputChange("endDate", value)
                                     }
                                     aria-label="End Date"
@@ -433,11 +414,11 @@ const FlexibleHoursForm: React.FC = () => {
                         {`I, ${formData.employeeName === "" ? "______" : formData.employeeName
                             } , currently working as ${formData.designation === "" ? "______" : formData.designation
                             }
-                    in the ${formData.department === ""
+                        in the ${formData.department === ""
                                 ? "______"
                                 : formData.department
                             } department, am
-                    writing to request flexible working hours.`}
+                        writing to request flexible working hours.`}
                     </p>
                 </div>
                 <div className="mb-4">
@@ -449,8 +430,8 @@ const FlexibleHoursForm: React.FC = () => {
                                 ? "______"
                                 : formData.currentEndTime
                             }
-                    . I would like to propose changing my working
-                    hours to ${formData.proposedStartTime === ""
+                        . I would like to propose changing my working
+                        hours to ${formData.proposedStartTime === ""
                                 ? "______"
                                 : formData.proposedStartTime
                             } to ${formData.proposedEndTime === ""
@@ -464,12 +445,12 @@ const FlexibleHoursForm: React.FC = () => {
                     <p>
                         This arrangement would commence from{" "}
                         {formData.startDate
-                            ? format(new Date(formData.startDate.toString()), "dd-MM-yyyy")
+                            ? formatDisplayDate(formData.startDate)
                             : "dd/mm/yyyy"}{" "}
                         until{" "}
                         {formData.endDate
-                            ? format(new Date(formData.endDate.toString()), "dd-MM-yyyy")
-                            : "dd/mm/yyyyy"}
+                            ? formatDisplayDate(formData.endDate)
+                            : "dd/mm/yyyy"}
                         .
                         {`I am open to a trial period of ${formData.trialPeriod === "" ? "_____ " : formData.trialPeriod
                             }.`}
@@ -514,10 +495,9 @@ const FlexibleHoursForm: React.FC = () => {
             <div
                 className={`flex flex-col lg:flex-row justify-center items-start gap-10`}
             >
-                {" "}
                 {!isFormComplete() && (
                     <div className="w-full basis-full lg:basis-2/5">
-                        <Card className=" lg:max-w-md">
+                        <Card className="lg:max-w-md">
                             <CardBody>
                                 <Progress
                                     value={progress}
@@ -528,21 +508,30 @@ const FlexibleHoursForm: React.FC = () => {
                                 {renderStep()}
                                 <div className="flex justify-between mt-4">
                                     <Button
-                                        onClick={handleBack}
+                                        onPress={handleBack}
                                         disabled={step === 1}
                                         variant="bordered"
+                                        className="text-[#1E318D]"
                                     >
                                         Back
                                     </Button>
-                                    <Button
-                                        onClick={handleNext}
-                                        disabled={
-                                            step === fieldGroups.length || !isCurrentStepComplete()
-                                        }
-                                        color="primary"
-                                    >
-                                        Next
-                                    </Button>
+                                    {step < fieldGroups.length ? (
+                                        <Button
+                                            onPress={handleNext}
+                                            color="primary"
+                                            className="text-[#1E318D]"
+                                        >
+                                            Next
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            onPress={() => setIsFinished(true)}
+                                            color="primary"
+                                            className="text-[#1E318D] animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
+                                        >
+                                            Finish!
+                                        </Button>
+                                    )}
                                 </div>
                             </CardBody>
                         </Card>
@@ -551,7 +540,9 @@ const FlexibleHoursForm: React.FC = () => {
                 <div className={`w-full basis-full lg:basis-3/5 select-none`}>
                     <Card className="w-full">
                         <CardBody>
-                            <h3 className="text-lg font-semibold mb-4">Preview</h3>
+                            <h3 className="text-lg font-semibold mb-4 text-[#1E318D]">
+                                Preview
+                            </h3>
                             <LetterPreview />
                             {isFormComplete() && (
                                 <Button

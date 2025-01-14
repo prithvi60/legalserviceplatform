@@ -128,31 +128,13 @@ export const SignUp = () => {
     };
 
     return (
-        <div className="rounded-md border-4 border-secondary bg-white shadow-xl m-4">
+        <div className="rounded-md border-4 border-[#ECEFF1] bg-white shadow-xl m-4">
             <div className="flex flex-wrap items-start relative">
-                {/* <div className="hidden w-full xl:block xl:w-1/2 lg:sticky lg:top-0 py-4 sm:py-12.5 xl:py-17.5">
-                    <div className="p-4 sm:px-16 sm:py-0 space-y-5 text-center flex justify-center items-center flex-col">
-                        <div className="w-64 h-14 relative items-center flex justify-center mb-8">
-                            <Image alt="logo" src={"/logo/newlogo.png"} fill />
-                        </div>
-                        <h2 className="text-2xl font-bold text-secondary sm:text-2xl w-full text-center">
-                            Our Prestigious Clients
-                        </h2>
-                        <span className="mt-15 inline-block">
-                            <Image
-                                src="/cover/ensiletaclients.png"
-                                alt="clients"
-                                width={450}
-                                height={250}
-                            />
-                        </span>
-                    </div>
-                </div> */}
 
                 <div className="w-full p-4 sm:px-6 border-2">
-                    <div className="w-full px-4 py-4 sm:p-12.5 xl:p-17.5 text-[#0E132A]">
+                    <div className="w-full px-4 py-4 sm:p-12.5 xl:p-17.5 text-[#1E318D]">
                         {/* <span className="mb-1.5 block font-medium text-sm md:text-base">Start for free</span> */}
-                        <h2 className="mb-6 text-lg font-bold text-[#0E132A] md:text-2xl">
+                        <h2 className="mb-6 text-lg font-bold text-[#1E318D] md:text-2xl">
                             Create a New Account
                         </h2>
 
@@ -162,14 +144,14 @@ export const SignUp = () => {
                         >
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
                                         Name
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type="text"
                                             placeholder="Enter your full name"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("username")}
                                         />
 
@@ -203,52 +185,16 @@ export const SignUp = () => {
                                 )}
                             </div>
 
-                            {/* <div className="relative">
-                                <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
-                                        Company
-                                    </label>
-                                    <div className="relative flex-grow">
-                                        <input
-                                            type="text"
-                                            placeholder="Enter your Company Name"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
-                                            {...register("company_name")}
-                                        />
-
-                                        <span className="hidden sm:block absolute right-4 top-2">
-                                            <svg
-                                                className="fill-current"
-                                                width="22"
-                                                height="22"
-                                                viewBox="0 0 50 50"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <g opacity="0.5">
-                                                    <path d="M8 2L8 6L4 6L4 48L46 48L46 14L30 14L30 6L26 6L26 2 Z M 10 4L24 4L24 8L28 8L28 46L19 46L19 39L15 39L15 46L6 46L6 8L10 8 Z M 10 10L10 12L12 12L12 10 Z M 14 10L14 12L16 12L16 10 Z M 18 10L18 12L20 12L20 10 Z M 22 10L22 12L24 12L24 10 Z M 10 15L10 19L12 19L12 15 Z M 14 15L14 19L16 19L16 15 Z M 18 15L18 19L20 19L20 15 Z M 22 15L22 19L24 19L24 15 Z M 30 16L44 16L44 46L30 46 Z M 32 18L32 20L34 20L34 18 Z M 36 18L36 20L38 20L38 18 Z M 40 18L40 20L42 20L42 18 Z M 10 21L10 25L12 25L12 21 Z M 14 21L14 25L16 25L16 21 Z M 18 21L18 25L20 25L20 21 Z M 22 21L22 25L24 25L24 21 Z M 32 22L32 24L34 24L34 22 Z M 36 22L36 24L38 24L38 22 Z M 40 22L40 24L42 24L42 22 Z M 32 26L32 28L34 28L34 26 Z M 36 26L36 28L38 28L38 26 Z M 40 26L40 28L42 28L42 26 Z M 10 27L10 31L12 31L12 27 Z M 14 27L14 31L16 31L16 27 Z M 18 27L18 31L20 31L20 27 Z M 22 27L22 31L24 31L24 27 Z M 32 30L32 32L34 32L34 30 Z M 36 30L36 32L38 32L38 30 Z M 40 30L40 32L42 32L42 30 Z M 10 33L10 37L12 37L12 33 Z M 14 33L14 37L16 37L16 33 Z M 18 33L18 37L20 37L20 33 Z M 22 33L22 37L24 37L24 33 Z M 32 34L32 36L34 36L34 34 Z M 36 34L36 36L38 36L38 34 Z M 40 34L40 36L42 36L42 34 Z M 32 38L32 40L34 40L34 38 Z M 36 38L36 40L38 40L38 38 Z M 40 38L40 40L42 40L42 38 Z M 10 39L10 44L12 44L12 39 Z M 22 39L22 44L24 44L24 39 Z M 32 42L32 44L34 44L34 42 Z M 36 42L36 44L38 44L38 42 Z M 40 42L40 44L42 44L42 42Z" />
-                                                </g>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                {errors.company_name && (
-                                    <div className="absolute -bottom-8 sm:-bottom-6 left-0 w-full text-xs md:text-sm text-red-500 font-semibold text-center mt-1">
-                                        {errors.company_name.message}
-                                    </div>
-                                )}
-                            </div> */}
-
                             <div className="relative">
                                 <div className="flex gap-3 items-center ">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
                                         Email
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type="email"
                                             placeholder="Enter your email"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("email")}
                                         />
 
@@ -281,14 +227,14 @@ export const SignUp = () => {
                             {/* Phone Number */}
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
                                         Phone Number
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type="text"
                                             placeholder="Enter Your Ph.No."
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("phone_number")}
                                         />
                                         <span className="hidden sm:block absolute right-4 top-2">
@@ -305,14 +251,14 @@ export const SignUp = () => {
                             {/* Address */}
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
                                         Address
                                     </label>
                                     <div className="relative flex-grow">
                                         <textarea
                                             placeholder="Enter Your address"
                                             rows={3}
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("address")}
                                         />
                                         <span className="hidden sm:block absolute right-4 top-8">
@@ -328,14 +274,14 @@ export const SignUp = () => {
                             </div>
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
                                         Password
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             placeholder="6+ Characters, 1 Capital letter"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("password")}
                                         />
 
@@ -349,7 +295,7 @@ export const SignUp = () => {
                                                     height="22"
                                                     viewBox="0 0 22 22"
                                                     fill="none"
-                                                    stroke="#878995"
+                                                    stroke="#ECEFF1"
                                                     strokeOpacity={"0.4"}
                                                     xmlns="http://www.w3.org/2000/svg"
                                                 >
@@ -370,7 +316,7 @@ export const SignUp = () => {
                                                     height="22"
                                                     viewBox="0 0 22 22"
                                                     fill="none"
-                                                    stroke="#878995"
+                                                    stroke="#ECEFF1"
                                                     strokeOpacity={"0.4"}
                                                     xmlns="http://www.w3.org/2000/svg"
                                                 >
@@ -398,14 +344,14 @@ export const SignUp = () => {
 
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#0E132A] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
                                         Re-type Password
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type={showConfirmPassword ? "text" : "password"}
                                             placeholder="Re-enter your password"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("confirmPassword")}
                                         />
 
@@ -421,7 +367,7 @@ export const SignUp = () => {
                                                     height="22"
                                                     viewBox="0 0 22 22"
                                                     fill="none"
-                                                    stroke="#878995"
+                                                    stroke="#ECEFF1"
                                                     strokeOpacity={"0.4"}
                                                     xmlns="http://www.w3.org/2000/svg"
                                                 >
@@ -442,7 +388,7 @@ export const SignUp = () => {
                                                     height="22"
                                                     viewBox="0 0 22 22"
                                                     fill="none"
-                                                    stroke="#878995"
+                                                    stroke="#ECEFF1"
                                                     strokeOpacity={"0.4"}
                                                     xmlns="http://www.w3.org/2000/svg"
                                                 >
@@ -472,7 +418,7 @@ export const SignUp = () => {
                                 <button
                                     disabled={!isValid || isSubmitting}
                                     type="submit"
-                                    className={`w-full cursor-pointer  p-4 text-black transition  bg-blue-500 mb-5 ${!isValid || isSubmitting
+                                    className={`w-full cursor-pointer rounded-md p-4 text-[#1E318D] transition  bg-primary font-semibold mb-5 ${!isValid || isSubmitting
                                         ? "bg-opacity-40 cursor-not-allowed"
                                         : "hover:bg-opacity-90"
                                         }`}

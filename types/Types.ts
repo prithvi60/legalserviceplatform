@@ -1,4 +1,5 @@
-import { DateValue } from "@react-types/calendar";
+import { CalendarDate } from "@internationalized/date";
+
 export interface FormData {
   entityType: "company" | "organization";
   employeeName: string;
@@ -8,8 +9,8 @@ export interface FormData {
   currentEndTime: string;
   proposedStartTime: string;
   proposedEndTime: string;
-  startDate: DateValue | null;
-  endDate: DateValue | null;
+  startDate: CalendarDate | null;
+  endDate: CalendarDate | null;
   trialPeriod: string;
   reason: string;
 }

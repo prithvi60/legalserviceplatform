@@ -33,7 +33,6 @@ export const SignIn = () => {
     });
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
-        console.log(data);
 
         const returnUrl =
             typeof window !== "undefined"
@@ -97,7 +96,7 @@ export const SignIn = () => {
     }
 
     return (
-        <div className="rounded-md border-4 border-secondary bg-white shadow-xl m-4">
+        <div className="rounded-md border-4 border-[#ECEFF1] bg-white shadow-xl m-4">
             <div className="block p-4 md:p-7">
                 {/* <div className="hidden w-full xl:block xl:w-1/2">
 
@@ -123,10 +122,10 @@ export const SignIn = () => {
                             <Image alt="logo" src={"/logo/newlogo.png"} fill />
                         </div>
                     </div> */}
-                    <div className="w-full  text-[#0E132A] space-y-6">
+                    <div className="w-full  text-[#1E318D] space-y-6">
                         {/* <span className="mb-1.5 block font-medium ">Start for free</span> */}
 
-                        <h2 className="text-2xl font-bold text-[#0E132A] sm:text-2xl w-full text-center">
+                        <h2 className="text-2xl font-bold text-[#1E318D] sm:text-2xl w-full text-center">
                             Welcome to Legal Service Platform
                         </h2>
 
@@ -137,14 +136,14 @@ export const SignIn = () => {
                             className="px-4 sm:px-12.5 xl:px-17.5 space-y-7 relative"
                         >
                             <div className="mb-4 relative">
-                                <label className="mb-2.5 block font-medium text-[#0E132A]">
+                                <label className="mb-2.5 block font-medium text-[#1E318D]">
                                     Email
                                 </label>
                                 <div className="relative">
                                     <input
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-[#0E132A] outline-none focus:border-primary focus-visible:shadow-none"
+                                        className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                         {...register("email")}
                                     />
 
@@ -174,14 +173,14 @@ export const SignIn = () => {
                             </div>
 
                             <div className="mb-6 relative">
-                                <label className="mb-2.5 block font-medium text-[#0E132A]">
+                                <label className="mb-2.5 block font-medium text-[#1E318D]">
                                     Password
                                 </label>
                                 <div className="relative">
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         placeholder="6+ Characters, 1 Capital letter"
-                                        className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-[#0E132A] outline-none focus:border-primary focus-visible:shadow-none"
+                                        className="w-full border border-stroke bg-transparent py-2 pl-6 pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                         {...register("password")}
                                     />
 
@@ -244,7 +243,7 @@ export const SignIn = () => {
                             <button
                                 disabled={isSubmitting}
                                 type="submit"
-                                className={`w-full cursor-pointer p-4 text-black transition  bg-blue-400 ${isSubmitting
+                                className={`w-full cursor-pointer rounded-md p-4 text-[#1E318D] transition  bg-primary font-semibold ${isSubmitting
                                     ? "bg-opacity-40 cursor-not-allowed"
                                     : "hover:bg-opacity-90"
                                     }`}
@@ -263,7 +262,7 @@ export const SignIn = () => {
                                 No account?{" "}
                                 <Link
                                     href="/auth/signup"
-                                    className="text-primary text-sm md:text-base hover:text-primary/70"
+                                    className="text-primary font-semibold font-sans tracking-wide text-sm md:text-base hover:text-primary/70"
                                 >
                                     Create one!
                                 </Link>
