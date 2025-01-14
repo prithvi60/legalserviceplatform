@@ -43,19 +43,19 @@ async function corsMiddleware(
     "http://localhost:3000",
   ];
 
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    const headers = {
-      "Access-Control-Allow-Origin": allowedOrigins.includes(origin)
-        ? origin
-        : "",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      "Access-Control-Max-Age": "86400",
-      "Access-Control-Allow-Credentials": "true",
-    };
-    return new NextResponse(null, { headers });
-  }
+  // // Handle preflight requests
+  // if (req.method === "OPTIONS") {
+  //   const headers = {
+  //     "Access-Control-Allow-Origin": allowedOrigins.includes(origin)
+  //       ? origin
+  //       : "",
+  //     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+  //     "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  //     "Access-Control-Max-Age": "86400",
+  //     "Access-Control-Allow-Credentials": "true",
+  //   };
+  //   return new NextResponse(null, { headers });
+  // }
 
   // Handle actual request
   try {
