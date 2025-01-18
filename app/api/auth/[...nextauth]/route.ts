@@ -72,7 +72,8 @@ const handler = NextAuth({
       },
       authorize: async (credentials) => {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          console.error("Authorization failed: Missing email or password");
+          throw new Error("Email and password are required");
         }
 
         const user = await authenticateUser(
@@ -81,6 +82,7 @@ const handler = NextAuth({
         );
 
         if (!user) {
+          console.error("Authorization failed: Invalid email or password for", credentials.email);
           throw new Error("Invalid email or password");
         }
 

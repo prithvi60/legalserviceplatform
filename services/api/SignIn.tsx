@@ -38,6 +38,7 @@ export const SignIn = () => {
             typeof window !== "undefined"
                 ? localStorage.getItem("returnUrl") || "/"
                 : "/";
+                console.log("returnUrl",returnUrl)
         try {
             const result = await signIn("credentials", {
                 redirect: false,
