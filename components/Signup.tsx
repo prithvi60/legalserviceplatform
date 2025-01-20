@@ -108,10 +108,11 @@ export const SignUp = () => {
                     },
                 });
             }
-        } catch (error: any) {
+        } catch (error) {
             console.error("An unexpected error occurred:", error);
-            setError("root", { message: error.message });
-            toast.error(error.message, {
+            const errorMessage = (error as Error).message;
+            setError("root", { message: errorMessage });
+            toast.error(errorMessage, {
                 position: "top-right",
                 duration: 3000,
                 style: {

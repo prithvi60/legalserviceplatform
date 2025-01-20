@@ -81,10 +81,11 @@ export const SignIn = () => {
                     },
                 });
             }
-        } catch (error: any) {
+        } catch (error) {
             console.error("An unexpected error occurred:", error);
-            setError("root", { message: error.message });
-            toast.error(error.message);
+            const errorMessage = (error as Error).message;
+            setError("root", { message: errorMessage });
+            toast.error(errorMessage);
         }
     };
 
