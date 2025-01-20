@@ -349,7 +349,7 @@ const FlexibleHoursForm: React.FC = () => {
                             <div className="w-full max-w-sm flex flex-row gap-4">
                                 <DatePicker
                                     labelPlacement="outside"
-                                    value={formData.startDate}
+                                    value={formData.startDate as null}
                                     onChange={(value: CalendarDate | null) =>
                                         handleInputChange("startDate", value)
                                     }
@@ -362,7 +362,7 @@ const FlexibleHoursForm: React.FC = () => {
                             <div className="w-full max-w-sm flex flex-row gap-4">
                                 <DatePicker
                                     labelPlacement="outside"
-                                    value={formData.endDate}
+                                    value={formData.endDate as null}
                                     onChange={(value: CalendarDate | null) =>
                                         handleInputChange("endDate", value)
                                     }
