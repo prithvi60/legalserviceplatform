@@ -9,6 +9,9 @@ const prismaClientSingleton = () => {
 
   const pool = new Pool({ connectionString });
   const adapter = new PrismaNeon(pool);
+  //   const adapter = new PrismaNeon(pool, {
+  //     schema: "myPostgresSchema",
+  //   });
   const prisma = new PrismaClient({ adapter });
 
   return prisma;
