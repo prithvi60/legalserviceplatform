@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Providers";
 import NavbarComponent from "@/components/Layout/NavbarComponent";
+import localFont from "next/font/local";
 
-const geistSans = Inter({
-  variable: "--font-geist-sans",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
 });
 
+const lorin = localFont({
+  src: "./fonts/LorinRegular.ttf",
+  display: "swap",
+  weight: "400",
+  variable: "--font-lorin",
+});
 
 export const metadata: Metadata = {
   title: "Legal Service Platform",
@@ -24,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} antialiased`}
+        className={`${archivo.variable} ${lorin.variable} antialiased`}
       >
         <Providers>
           <NavbarComponent />
