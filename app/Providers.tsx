@@ -2,7 +2,7 @@
 
 import { ApolloProvider } from "@apollo/client";
 import { SessionProvider } from "next-auth/react";
-import { NextUIProvider } from "@nextui-org/system";
+import { HeroUIProvider } from "@heroui/system";
 import useApolloClient from "@/context/apolloClient";
 
 interface ProvidersProps {
@@ -12,9 +12,9 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
     return (
         <SessionProvider>
-            <NextUIProvider>
+            <HeroUIProvider>
                 <ApolloProvider client={useApolloClient()}>{children}</ApolloProvider>
-            </NextUIProvider>
+            </HeroUIProvider>
         </SessionProvider>
     );
 }

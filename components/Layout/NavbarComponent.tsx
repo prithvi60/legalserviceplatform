@@ -7,7 +7,7 @@ import {
     NavbarMenu,
     NavbarContent,
     NavbarItem,
-} from "@nextui-org/navbar";
+} from "@heroui/navbar";
 import Link from "next/link";
 import { navLinks } from "@/constants/Data";
 import {
@@ -15,13 +15,13 @@ import {
     DropdownTrigger,
     DropdownMenu,
     DropdownItem,
-} from "@nextui-org/dropdown";
+} from "@heroui/dropdown";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 
 export const AcmeLogo = () => {
     return (

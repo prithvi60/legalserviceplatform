@@ -1,4 +1,4 @@
-import { nextui } from "@nextui-org/theme";
+import { heroui } from "@heroui/theme";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -8,7 +8,7 @@ export default {
     "./services/**/*.{js,ts,jsx,tsx,mdx}",
     "./features/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|card|date-picker|dropdown|input|navbar|progress|radio|scroll-shadow|popover|ripple|spinner|calendar|date-input|form|menu|divider).js",
+    "./node_modules/@heroui/theme/dist/components/(button|card|date-picker|dropdown|input|navbar|popover|progress|radio|scroll-shadow|ripple|spinner|calendar|date-input|form|menu|divider).js"
   ],
   theme: {
     extend: {
@@ -19,7 +19,7 @@ export default {
     },
   },
   plugins: [
-    nextui({
+    heroui({
       themes: {
         light: {
           colors: {

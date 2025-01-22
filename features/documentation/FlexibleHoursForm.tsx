@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useState, ChangeEvent, JSX, useEffect, useRef } from "react";
-import { Card, CardBody } from "@nextui-org/card";
-import { Input } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
-import { Progress } from "@nextui-org/progress";
-import { Radio, RadioGroup } from "@nextui-org/radio";
-import { DatePicker } from "@nextui-org/date-picker";
+import { Card, CardBody } from "@heroui/card";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
+import { Progress } from "@heroui/progress";
+import { Radio, RadioGroup } from "@heroui/radio";
+import { DatePicker } from "@heroui/date-picker";
 import { usePDF } from "react-to-pdf";
 import { format } from "date-fns";
 import { IoMdDownload } from "react-icons/io";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 import { FieldGroup, FormData } from "@/types/Types";
 import { decryptText, encryptText } from "@/services/encryption";
 import { Loader } from "@/components/UI/Loader";
@@ -491,7 +491,8 @@ const FlexibleHoursForm: React.FC = () => {
     };
 
     return (
-        <div className="container mx-auto p-4 max-w-6xl">
+        <div className="container mx-auto p-4 max-w-6xl space-y-12 py-16">
+            <h3 className='text-2xl text-center md:text-start md:text-3xl tracking-wider font-semibold text-[#1E318D] capitalize'>Letter Requesting Remote Work</h3>
             <div
                 className={`flex flex-col lg:flex-row justify-center items-start gap-10`}
             >

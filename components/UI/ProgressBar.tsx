@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Progress } from "@nextui-org/progress";
+// import { Progress } from "@heroui/progress";
 const ProgressBar = () => {
     return (
         <section className='w-full flex px-10 py-10 max-w-7xl mx-auto gap-6 md:gap-0 flex-col md:flex-row md:justify-between '>

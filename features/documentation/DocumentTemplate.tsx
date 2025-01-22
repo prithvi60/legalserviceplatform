@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 const DocumentTemplate = () => {
     return (
         <section className="w-full max-w-7xl mx-auto h-full flex gap-20">

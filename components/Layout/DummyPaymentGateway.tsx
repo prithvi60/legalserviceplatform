@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
-import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
 import { CreditCard, CheckCircle2 } from 'lucide-react';
 import { Loader } from '../UI/Loader';
 

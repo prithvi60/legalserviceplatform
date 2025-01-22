@@ -18,7 +18,7 @@ export const navLinks = [
     {
         menu: "Documentation",
         subCategories: [
-            { href: "/documentation", subMenu: "Business Contracts" },
+            { href: "/documentation/business_contracts", subMenu: "Business Contracts" },
             { href: "/documentation", subMenu: "Personal & Family" },
             { href: "/documentation", subMenu: "Real Estate" },
         ],
