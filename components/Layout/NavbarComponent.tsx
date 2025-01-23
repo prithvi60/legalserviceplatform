@@ -69,7 +69,8 @@ export default function NavbarComponent() {
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
             classNames={{
-                base: "bg-[#1E318DEE] text-white font-Archivo"
+                base: "bg-primary text-white font-Archivo",
+                menu: "!backdrop-blur-0 !bg-primary overflow-hidden"
             }}
         >
             <NavbarContent className="md:hidden pr-3" justify="center">
@@ -85,12 +86,12 @@ export default function NavbarComponent() {
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent justify="end" className="hidden md:flex">
+            <NavbarContent justify="end" className="hidden lg:flex">
                 {navLinks.map((list, idx) => (
                     <NavbarItem key={idx} className="mx-2.5">
                         <Dropdown>
                             <DropdownTrigger className="flex items-center gap-4 rounded-md">
-                                <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" && "bg-warning font-medium text-black"}`}>
+                                <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" && "bg-warning font-medium text-lg lg:text-xl text-black"}`}>
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
@@ -135,7 +136,6 @@ export default function NavbarComponent() {
                         </Dropdown>
                     </NavbarItem>
                 ))}
-
                 {isStatus ? (
                     <NavbarItem>
                         <button
@@ -150,6 +150,55 @@ export default function NavbarComponent() {
                         <NavbarItem className="hidden lg:flex rounded-md py-1 hover:bg-warning px-4 border-2 border-white font-semibold">
                             <Link href="/api/auth/signin">Login</Link>
                         </NavbarItem>
+                    </>
+                )}
+            </NavbarContent>
+
+            <NavbarContent className="lg:hidden" justify="end">
+                {navLinks.map((list, idx) => (
+                    <NavbarItem key={idx} className="hidden sm:block">
+                        <Dropdown>
+                            <DropdownTrigger className="flex items-center gap-4 rounded-md">
+                                <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" ? "bg-warning font-medium text-lg lg:text-xl text-black" : "hidden"}`}>
+                                    {list.menu}{" "}
+                                    <span>
+                                        <IoIosArrowDown className="text-xl font-bold" />
+                                    </span>
+                                </div>
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Static Actions">
+                                {list.subCategories.map((item, index) => (
+                                    <DropdownItem
+                                        classNames={{
+                                            base: "data-[hover=true]:bg-warning"
+                                        }}
+                                        as={Link}
+                                        href={item.href}
+                                        key={index}
+                                        endContent={<MdKeyboardArrowRight className="text-xl text-[#1E318D]" />}
+                                        className="text-[#1E318D]"
+                                    >
+                                        {item.subMenu}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                        </Dropdown>
+                    </NavbarItem>
+                ))}
+                {isStatus ? (
+                    <NavbarItem className="mr-2 sm:mr-8">
+                        <button
+                            className="flex items-center rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white gap-3.5 font-semibold duration-300 ease-in-out text-sm lg:text-base"
+                            onClick={handleLogout}
+                        >
+                            Log Out
+                        </button>
+                    </NavbarItem>
+                ) : (
+                    <>
+                        <NavbarItem className="flex mr-2 sm:mr-8 rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white font-semibold text-sm lg:text-base">
+                            <Link href="/api/auth/signin">Login</Link>
+                        </NavbarItem>
                         {/* <NavbarItem>
                             <Link
                                 href="/auth/signup"
@@ -160,9 +209,6 @@ export default function NavbarComponent() {
                         </NavbarItem> */}
                     </>
                 )}
-            </NavbarContent>
-
-            <NavbarContent className="md:hidden" justify="end">
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 />
@@ -173,7 +219,7 @@ export default function NavbarComponent() {
                     <NavbarMenuItem key={idx} className="mx-2.5">
                         <Dropdown>
                             <DropdownTrigger className="flex justify-between items-center rounded-md">
-                                <div className={`p-2 border border-[#1E318DEE] ${list.menu === "Consult an Expert" && "bg-warning font-medium text-black"}`}>
+                                <div className={`p-2 ${list.menu === "Consult an Expert" ? "sm:hidden bg-warning font-medium text-black" : "border border-white text-white"}`}>
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
@@ -212,31 +258,6 @@ export default function NavbarComponent() {
                         </Dropdown>
                     </NavbarMenuItem>
                 ))}
-
-                {isStatus ? (
-                    <NavbarMenuItem>
-                        <button
-                            className="flex items-center rounded-md py-2 px-4 border border-[#1E318D] text-white gap-3.5 font-medium duration-300 ease-in-out  lg:text-base"
-                            onClick={handleLogout}
-                        >
-                            Log Out
-                        </button>
-                    </NavbarMenuItem>
-                ) : (
-                    <>
-                        <NavbarMenuItem onClick={() => setIsMenuOpen(false)} className="flex lg:hidden w-max mx-auto rounded-md py-2 px-10 border border-[#1E318D] text-[#1E318D] font-semibold">
-                            <Link href="/api/auth/signin">Login</Link>
-                        </NavbarMenuItem>
-                        {/* <NavbarMenuItem>
-                            <button
-                                onClick={handleLogout}
-                                className="rounded-md py-2 px-4 bg-primary text-white"
-                            >
-                                Sign Up
-                            </button>
-                        </NavbarMenuItem> */}
-                    </>
-                )}
             </NavbarMenu>
         </Navbar>
     );

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Providers";
 import NavbarComponent from "@/components/Layout/NavbarComponent";
 import localFont from "next/font/local";
+import Footer from "@/components/Layout/Footer";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -16,6 +17,13 @@ const lorin = localFont({
   display: "swap",
   weight: "400",
   variable: "--font-lorin",
+});
+
+const inter = Inter({
+  display: "swap",
+  weight: "400",
+  variable: "--font-inter",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -31,11 +39,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${archivo.variable} ${lorin.variable} antialiased`}
+        className={`${archivo.variable} ${lorin.variable} ${inter.variable} antialiased`}
       >
         <Providers>
           <NavbarComponent />
           {children}
+          <Footer />
           <Toaster />
         </Providers>
       </body>

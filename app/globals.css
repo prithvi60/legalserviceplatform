@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .padding {
+    @apply px-[40px] py-[40px] md:px-[80px] md:py-[70px] xl:px-[144px];
+  }
+  .linear-blue_1 {
+    @apply bg-gradient-to-b from-[#3857EEEE] via-[#1E318DEE] to-[#080E27EE];
+  }
+  .linear-blue_2 {
+    @apply bg-gradient-to-b from-[#FCFBF7] via-[#5260A6] to-[#1E318D];
+  }
+  .linear-yellow_1 {
+    @apply bg-gradient-to-t from-[#FFC720] to-[#FFE494];
+  }
+  .linear-yellow_2 {
+    @apply bg-gradient-to-t from-[#FFC107] via-[#FECD37] to-[#FEFBF0];
+  }
+}
+
 .no_scrollbar::-webkit-scrollbar {
   display: none;
 }
