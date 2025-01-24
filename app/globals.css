@@ -13,7 +13,7 @@
     @apply bg-gradient-to-b from-[#FCFBF7] via-[#5260A6] to-[#1E318D];
   }
   .linear-yellow_1 {
-    @apply bg-gradient-to-t from-[#FFC720] to-[#FFE494];
+    @apply bg-gradient-to-b from-[#FFC720] to-[#FFE494];
   }
   .linear-yellow_2 {
     @apply bg-gradient-to-t from-[#FFC107] via-[#FECD37] to-[#FEFBF0];

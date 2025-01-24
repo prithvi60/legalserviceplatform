@@ -18,11 +18,43 @@ const SENSITIVE_CONTENT = `
                 `;
 
 const STORAGE_KEY = "nda-form-data";
-
+// 7 * 24 * 60 * 60 * 1000
 const NDAPreview: React.FC = () => {
-    const [step, setStep] = useState<number>(1);
+    const [step, setStep] = useState<number>(() => {
+        if (typeof window !== "undefined") {
+            const existingData = localStorage.getItem(STORAGE_KEY);
+            const currentData = JSON.parse(existingData || "{}");
+            // return currentData.step || 1;
+            if (
+                currentData.timestamp &&
+                Date.now() - currentData.timestamp <= 60 * 1000
+            ) {
+                return currentData.step || 1;
+            } else {
+                // Remove expired data
+                localStorage.removeItem(STORAGE_KEY);
+            }
+        }
+        return 1;
+    });
     const [isFinished, setIsFinished] = useState(false);
-    const [progress, setProgress] = useState<number>(0);
+    const [progress, setProgress] = useState<number>(() => {
+        if (typeof window !== "undefined") {
+            const existingData = localStorage.getItem(STORAGE_KEY);
+            const currentData = JSON.parse(existingData || "{}");
+            // return currentData.step || 1;
+            if (
+                currentData.timestamp &&
+                Date.now() - currentData.timestamp <= 60 * 1000
+            ) {
+                return currentData.progress || 0;
+            } else {
+                // Remove expired data
+                localStorage.removeItem(STORAGE_KEY);
+            }
+        }
+        return 0;
+    });
     const [encryptedContent, setEncryptedContent] = useState<string>("");
     const [isDecrypted, setIsDecrypted] = useState(false);
     const router = useRouter();
@@ -32,9 +64,21 @@ const NDAPreview: React.FC = () => {
     const [currentYear, setCurrentYear] = useState<number | null>(null);
     const [formData, setFormData] = useState<FormData2>(() => {
         if (typeof window !== "undefined") {
-            const savedData = sessionStorage.getItem(STORAGE_KEY);
-            if (savedData) {
-                return JSON.parse(savedData);
+            const storedItem = localStorage.getItem(STORAGE_KEY);
+
+            if (storedItem) {
+                const parsedData = JSON.parse(storedItem);
+
+                // Check if data is within 7 days
+                if (
+                    parsedData.timestamp &&
+                    Date.now() - parsedData.timestamp <= 60 * 1000
+                ) {
+                    return parsedData.formData;
+                } else {
+                    // Remove expired data
+                    localStorage.removeItem(STORAGE_KEY);
+                }
             }
         }
         return {
@@ -57,18 +101,24 @@ const NDAPreview: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const savedStep = sessionStorage.getItem("ndacompletedStep");
-        if (savedStep) {
-            setStep(parseInt(savedStep, 10));
-        }
-    }, []);
-
-    useEffect(() => {
         if (typeof window !== "undefined") {
-            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+            const existingData = localStorage.getItem(STORAGE_KEY);
+            const currentData = JSON.parse(existingData || "{}");
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify({
+                    ...currentData,
+                    formData: formData,
+                    step: step,
+                    progress: progress,
+                    timestamp: Date.now(),
+                })
+            );
+
             setCurrentYear(new Date().getFullYear());
         }
-    }, [formData]);
+    }, [formData, step, progress]);
 
     useEffect(() => {
         const encrypted = encryptText(SENSITIVE_CONTENT);
@@ -79,7 +129,6 @@ const NDAPreview: React.FC = () => {
         const newProgress = calculateProgress();
         setProgress(newProgress);
     }, [formData, step]);
-
 
     useEffect(() => {
         const performDownload = async () => {
@@ -94,8 +143,7 @@ const NDAPreview: React.FC = () => {
                     setIsDownloading(true);
                     await new Promise((resolve) => setTimeout(resolve, 1000));
                     await toPDF();
-                    sessionStorage.removeItem(STORAGE_KEY);
-                    sessionStorage.removeItem("ndacompletedStep");
+                    localStorage.removeItem(STORAGE_KEY);
 
                     const url = new URL(window.location.href);
                     url.searchParams.delete("paymentStatus");
@@ -133,8 +181,8 @@ const NDAPreview: React.FC = () => {
             orientation: "portrait",
         },
         canvas: {
-            mimeType: "image/png",
-            qualityRatio: 1,
+            mimeType: "image/jpeg",
+            qualityRatio: 0.6,
         },
     });
 
@@ -203,15 +251,35 @@ const NDAPreview: React.FC = () => {
         if (step < fieldGroups.length && isCurrentStepComplete()) {
             const nextStep = step + 1;
             setStep(nextStep);
-            sessionStorage.setItem("ndacompletedStep", nextStep.toString());
+            const existingData = localStorage.getItem(STORAGE_KEY);
+            const currentData = JSON.parse(existingData || "{}");
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify({
+                    ...currentData,
+                    step: nextStep,
+                    timestamp: Date.now(),
+                })
+            );
         }
     };
 
     const handleBack = (): void => {
         if (step > 1) {
-            const PrevStep = step - 1;
-            setStep(PrevStep);
-            sessionStorage.setItem("ndacompletedStep", PrevStep.toString());
+            const prevStep = step - 1;
+            setStep(prevStep);
+            const existingData = localStorage.getItem(STORAGE_KEY);
+            const currentData = JSON.parse(existingData || "{}");
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify({
+                    ...currentData,
+                    step: prevStep,
+                    timestamp: Date.now(),
+                })
+            );
         }
     };
 
@@ -524,27 +592,28 @@ const NDAPreview: React.FC = () => {
                                     >
                                         Back
                                     </Button>
-                                    {step < fieldGroups.length ? (
-                                        <Button
-                                            onPress={handleNext}
-                                            color="primary"
-                                            className="text-[#1E318D]"
-                                        >
-                                            Next
-                                        </Button>
-                                    ) : (
-                                        <>
-                                            {progress === 100 && (
-                                                <Button
-                                                    onPress={() => setIsFinished(true)}
-                                                    color="primary"
-                                                    className="text-[#1E318D] animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
-                                                >
-                                                    Finish!
-                                                </Button>
-                                            )}
-                                        </>
-                                    )}
+                                    {JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}").step <
+                                        fieldGroups.length && (
+                                            <Button
+                                                onPress={handleNext}
+                                                color="primary"
+                                                className="text-[#1E318D]"
+                                                disabled={!isCurrentStepComplete()}
+                                            >
+                                                Next
+                                            </Button>
+                                        )}
+                                    {JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}")
+                                        .step === fieldGroups.length &&
+                                        progress === 100 && (
+                                            <Button
+                                                onPress={() => setIsFinished(true)}
+                                                color="primary"
+                                                className="text-[#1E318D] animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
+                                            >
+                                                Finish!
+                                            </Button>
+                                        )}
                                 </div>
                             </CardBody>
                         </Card>
