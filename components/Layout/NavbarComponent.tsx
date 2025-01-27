@@ -156,7 +156,15 @@ export default function NavbarComponent() {
 
             <NavbarContent className="lg:hidden" justify="end">
                 {navLinks.map((list, idx) => (
-                    <NavbarItem key={idx} className="hidden sm:block">
+                    <NavbarItem key={idx} className="hidden sm:flex">
+                        {/* <div>
+                            <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" ? "bg-warning font-medium text-lg lg:text-xl text-black" : "hidden"}`}>
+                                {list.menu}{" "}
+                                <span>
+                                    <IoIosArrowDown className="text-xl font-bold" />
+                                </span>
+                            </div>
+                        </div> */}
                         <Dropdown>
                             <DropdownTrigger className="flex items-center gap-4 rounded-md">
                                 <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" ? "bg-warning font-medium text-lg lg:text-xl text-black" : "hidden"}`}>

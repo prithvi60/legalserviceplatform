@@ -2,6 +2,7 @@ import { Button } from '@heroui/button'
 import Image from 'next/image'
 import React from 'react'
 import { FaLongArrowAltRight } from "react-icons/fa";
+import CalendlyComponent from './CalendlyComponent';
 
 const Information = () => {
     return (
@@ -18,7 +19,7 @@ const Information = () => {
             <h2 className="font-Archivo font-bold text-center tracking-wide text-2xl md:text-4xl xl:text-6xl">
                 Access Legal Advice Instantly - Fast, Easy, and Hassle-Free!
             </h2>
-            <div className='w-full text-center'>
+            <div className='w-full text-center space-y-10'>
                 <Button
                     radius="none"
                     size="md"
@@ -30,6 +31,8 @@ const Information = () => {
                 >
                     Get a Demo
                 </Button>
+                <CalendlyComponent
+                />
             </div>
 
         </section>

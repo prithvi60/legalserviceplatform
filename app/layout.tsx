@@ -6,6 +6,7 @@ import { Providers } from "./Providers";
 import NavbarComponent from "@/components/Layout/NavbarComponent";
 import localFont from "next/font/local";
 import Footer from "@/components/Layout/Footer";
+import Information from "@/components/Layout/Information";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Providers>
           <NavbarComponent />
           {children}
+          <Information />
           <Footer />
           <Toaster />
         </Providers>
