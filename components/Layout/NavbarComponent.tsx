@@ -42,6 +42,7 @@ export default function NavbarComponent() {
     const router = useRouter();
     const [isStatus, setIsStatus] = useState(false);
     const handleLogout = () => {
+        sessionStorage.clear();
         signOut({ redirect: true, callbackUrl: "/" });
     };
     useEffect(() => {

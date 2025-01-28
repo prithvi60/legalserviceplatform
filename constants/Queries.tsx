@@ -37,3 +37,65 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const GET_USER = gql`
+  query GetUser($email: String!) {
+    getUser(email: $email) {
+      address
+      company_name
+      email
+      id
+      phone_number
+      username
+      BusinessForms {
+        id
+        userId
+        DocType
+        DocNumber
+        formData
+      }
+    }
+  }
+`;
+
+// Form Details
+
+export const GET_BUSINESS_FORM = gql`
+  query GetBusinessForms($userId: Int!, $DocType: String!,$orderBy: BusinessFormOrderByInput) {
+    getBusinessForms(userId: $userId, DocType: $DocType, orderBy: $orderBy) {
+        id
+        userId
+        DocType
+        DocNumber
+        formData
+    }
+}
+`;
+
+export const CREATE_BUSINESS_FORM = gql`
+  mutation CreateBusinessForm($input: CreateBusinessFormInput!) {
+    createBusinessForm(input: $input) {
+        id
+        userId
+        DocType
+        formData
+    }
+}
+`;
+
+export const UPDATE_BUSINESS_FORM = gql`
+  mutation UpdateBusinessForm($input: UpdateBusinessFormInput!) {
+    updateBusinessForm(input: $input) {
+        id
+        DocType
+        DocNumber
+        formData
+    }
+}
+`;
+
+export const DELETE_BUSINESS_FORM = gql`
+    mutation DeleteBusinessForm($input: DeleteBusinessFormInput!) {
+        deleteBusinessForm(input: $input)
+    }
+`;

@@ -4,12 +4,12 @@ const Calendly = dynamic(() => import("../UI/CalendlyButton"), {
     ssr: false
 });
 
-const CalendlyComponent = () => {
+const CalendlyComponent = ({text}:{text:string}) => {
     return (
         <div>
             <Calendly
                 url="https://calendly.com/gokulgandhi2301"
-                text="Schedule a Call"
+                text={text}
             />
         </div>
     )

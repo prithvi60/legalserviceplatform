@@ -22,7 +22,7 @@ declare global {
 
 const CalendlyLink = ({
     url,
-    text = "Schedule time with me",
+    text
     // className = "text-blue-500 hover:text-blue-700 underline"
 }: CalendlyLinkProps) => {
     return (
@@ -35,26 +35,13 @@ const CalendlyLink = ({
                 src="https://assets.calendly.com/assets/external/widget.js"
                 strategy="lazyOnload"
             />
-
-            {/* <a
-                href="#"
-                className={className}
-                onClick={(e) => {
-                    e.preventDefault()
-                    if (window.Calendly) {
-                        window.Calendly.initPopupWidget({ url })
-                    }
-                }}
-            >
-                {text}
-            </a> */}
             <Button
-                radius="none"
-                size="md"
                 color="warning"
+                radius="md"
+                size={text === "Get Started" ? "md" : "lg"}
                 className="font-Inter font-medium"
                 endContent={
-                    <FaLongArrowAltRight className='text-base' />
+                    text === "Get a Demo" && <FaLongArrowAltRight className='text-base' />
                 }
                 onClick={(e) => {
                     e.preventDefault()

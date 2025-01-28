@@ -1,18 +1,61 @@
 export const typeDefs = `#graphql
 
+scalar JSON
+
 type User {
-    id: Int
-    username: String
-    email: String
+    id: Int!
+    username: String!
+    email: String!
     phone_number: String
     company_name: String
     address: String
+    BusinessForms: [BusinessForm]!
   }
+
+  type BusinessForm {
+    id: ID!
+    userId: Int!
+    DocType: String!
+    DocNumber: Int!
+    formData: JSON!
+    createdAt: String
+    updatedAt: String
+}
+
+input BusinessFormOrderByInput {
+  DocNumber: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input CreateBusinessFormInput {
+  userId: Int!
+  DocType: String!
+  DocNumber: Int
+  formData: JSON!
+}
+
+input UpdateBusinessFormInput {
+    userId: Int!
+    DocType: String!
+    DocNumber: Int!
+    formData: JSON
+}
+
+input DeleteBusinessFormInput {
+    userId: Int!
+    DocType: String!
+    DocNumber: Int!
+}
 
   type Query {
     user: User
     users: [User]
     getUser(email: String!): User
+    getBusinessForms(userId: Int!, DocType: String!, orderBy: BusinessFormOrderByInput): [BusinessForm!]!
     }
 
   type Mutation {
@@ -27,5 +70,9 @@ type User {
     ): User
     login(email: String!, password: String!): User!
     logout: Boolean!
+    getUser(email: String!): User
+    createBusinessForm(input: CreateBusinessFormInput!): BusinessForm!
+    updateBusinessForm(input: UpdateBusinessFormInput!): BusinessForm!
+    deleteBusinessForm(input: DeleteBusinessFormInput!): Boolean!
   }
 `;

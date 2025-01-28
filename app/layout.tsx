@@ -7,6 +7,7 @@ import NavbarComponent from "@/components/Layout/NavbarComponent";
 import localFont from "next/font/local";
 import Footer from "@/components/Layout/Footer";
 import Information from "@/components/Layout/Information";
+import NavBar2 from "@/components/Layout/NavBar2";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -43,7 +44,8 @@ export default function RootLayout({
         className={`${archivo.variable} ${lorin.variable} ${inter.variable} antialiased`}
       >
         <Providers>
-          <NavbarComponent />
+          {/* <NavbarComponent /> */}
+          <NavBar2 />
           {children}
           <Information />
           <Footer />

@@ -12,6 +12,7 @@ declare module "next-auth" {
       name?: string;
       email?: string;
       accessToken?: string;
+      id?: string;
     };
     accessToken?: string;
   }
@@ -82,7 +83,10 @@ const handler = NextAuth({
         );
 
         if (!user) {
-          console.error("Authorization failed: Invalid email or password for", credentials.email);
+          console.error(
+            "Authorization failed: Invalid email or password for",
+            credentials.email
+          );
           throw new Error("Invalid email or password");
         }
 
@@ -108,6 +112,7 @@ const handler = NextAuth({
     async session({ session, token }: { session: Session; token: JWT }) {
       session.accessToken = token.accessToken;
       session.user.accessToken = token.accessToken;
+      // session.user.id = user?.id;
       return session;
     },
   },

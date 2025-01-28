@@ -117,12 +117,14 @@ const DummyPaymentGateway: React.FC<DummyPaymentGatewayProps> = ({
                 <CardFooter className="flex justify-between">
                     <Button
                         variant="bordered"
+                        className='text-primary'
                         onPress={onCancel}
                         disabled={isProcessing}
                     >
                         Cancel
                     </Button>
                     <Button
+                        className='text-white'
                         color="primary"
                         onClick={(e) => handleSubmit(e as unknown as FormEvent<HTMLFormElement>)}
                         disabled={isProcessing}

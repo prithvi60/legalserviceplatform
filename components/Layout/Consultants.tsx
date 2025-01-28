@@ -1,8 +1,8 @@
-import { Button } from "@heroui/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { RiArrowDownSLine } from "react-icons/ri";
+import CalendlyComponent from "./CalendlyComponent";
 
 const Consultants = () => {
     return (
@@ -46,14 +46,15 @@ const Consultants = () => {
                             </ul>
                         </CardBody>
                         <CardFooter className="justify-center items-center">
-                            <Button
+                            <CalendlyComponent text='Book Now' />
+                            {/* <Button
                                 color="warning"
                                 radius="md"
                                 size="lg"
                                 className="font-Inter"
                             >
                                 Book Now
-                            </Button>
+                            </Button> */}
                         </CardFooter>
                     </Card>
                 ))}

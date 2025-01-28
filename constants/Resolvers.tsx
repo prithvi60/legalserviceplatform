@@ -1,4 +1,10 @@
 import prisma from "@/prisma/db";
+import {
+  Context,
+  CreateBusinessFormInput,
+  DeleteBusinessFormInput,
+  UpdateBusinessFormInput,
+} from "@/types/Types";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -42,7 +48,7 @@ const comparePassword = async (
 
 export const resolvers = {
   Query: {
-    user: async (_: unknown, __: unknown, { userId }: any) => {
+    user: async (_: unknown, __: unknown, { userId }: Context) => {
       if (!userId) {
         throw new Error("Unauthorized");
       }
@@ -68,10 +74,25 @@ export const resolvers = {
       }
     },
     getUser: async (_: unknown, { email }: { email: string }) => {
-      const emailId = prisma.users.findUnique({ where: { email } });
+      const emailId = prisma.users.findUnique({
+        where: { email },
+        include: {
+          BusinessForms: true,
+        },
+      });
 
       return emailId;
     },
+    getBusinessForms: async (_: unknown, { userId, DocNumber }: { userId: number; DocNumber: number }) => {
+      try {
+        return await prisma.businessForm.findMany({
+          where: { userId, DocNumber },
+        });
+      } catch (error) {
+        console.error("Error fetching business forms:", error);
+        throw new Error("Failed to fetch business forms.");
+      }
+    }
   },
   Mutation: {
     signUp: async (
@@ -153,5 +174,102 @@ export const resolvers = {
         throw new Error("Failed to log in");
       }
     },
+    createBusinessForm: async (
+      _: unknown,
+      { input }: { input: CreateBusinessFormInput }
+    ) => {
+      const { userId, DocType, formData } = input;
+
+      try {
+        // Find the current max DocNumber for the given DocType and userId
+        const maxDocNumber = await prisma.businessForm.aggregate({
+          _max: {
+            DocNumber: true,
+          },
+          where: {
+            userId,
+            DocType,
+          },
+        });
+
+        // If no forms exist for the DocType, start from 1
+        const newDocNumber = (maxDocNumber._max.DocNumber || 0) + 1;
+
+        // Create the new business form
+        const newForm = await prisma.businessForm.create({
+          data: {
+            userId,
+            DocType,
+            DocNumber: newDocNumber,
+            formData,
+          },
+        });
+
+        return newForm;
+      } catch (error) {
+        console.error("Error creating business form:", error);
+        throw new Error("Failed to create business form");
+      }
+    },
+    updateBusinessForm: async (
+      _: unknown,
+      { input }: { input: UpdateBusinessFormInput }
+    ) => {
+      try {
+        const { userId, DocNumber, ...updates } = input;
+
+        const updatedForm = await prisma.businessForm.updateMany({
+          where: { userId, DocNumber },
+          data: updates,
+        });
+
+        if (updatedForm.count === 0) {
+          throw new Error("No matching business form found to update.");
+        }
+
+        return prisma.businessForm.findFirst({ where: { userId, DocNumber } });
+      } catch (error) {
+        console.error("Error updating business form:", error);
+        throw new Error("Failed to update business form.");
+      }
+    },
+    deleteBusinessForm: async (
+      _: unknown,
+      { input }: { input: DeleteBusinessFormInput }
+    ): Promise<boolean> => {
+      try {
+        const { userId, DocType, DocNumber } = input;
+        console.log(input);
+
+        // Check if the form exists
+        const existingForm = await prisma.businessForm.findFirst({
+          where: {
+            userId,
+            DocType,
+            DocNumber,
+          },
+        });
+
+        if (!existingForm) {
+          console.error("No matching business form found to delete.");
+          return false; // Return `false` if no form is found
+        }
+
+        // Delete the form
+        const deletedForm = await prisma.businessForm.deleteMany({
+          where: {
+            userId,
+            DocType,
+            DocNumber,
+          },
+        });
+
+        // Return true if at least one record was deleted, otherwise false
+        return deletedForm.count > 0;
+      } catch (error) {
+        console.error("Error deleting business form:", error);
+        return false; // Return `false` if there's an error
+      }
+    }
   },
 };

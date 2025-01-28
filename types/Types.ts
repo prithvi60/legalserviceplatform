@@ -1,4 +1,5 @@
 import { CalendarDate } from "@internationalized/date";
+import { Prisma } from "@prisma/client";
 
 export interface FormData {
   entityType: "company" | "organization";
@@ -28,6 +29,47 @@ export interface FormData2 {
   disclosingPartyRegisteredOffice: string;
 }
 
+export interface Context {
+  userId?: number;
+}
+
+export interface NDAPreviewProps {
+  RoleBased: GetUserResponse | undefined;
+  loading: boolean;
+}
+
+export interface User {
+  address: string;
+  company_name: string;
+  email: string;
+  id: number;
+  phone_number: string;
+  username: string;
+  BusinessForms: CreateBusinessFormInput[];
+}
+
+export interface GetUserResponse {
+  getUser: User;
+}
+
+export interface GetBFResponse {
+  getBusinessForms: GetBusinessFormInput[];
+}
+
+export interface GetBusinessFormInput {
+  id: number;
+  userId: number;
+  DocType: string;
+  DocNumber: number;
+  formData: DocumentData;
+}
+
+type DocumentData = {
+  step: number;
+  formData: FormData2;
+  progress: number;
+};
+
 export interface FieldGroup {
   step: number;
   fields: (keyof FormData)[];
@@ -49,4 +91,26 @@ export interface PaymentSession {
   currency: string;
   redirectUrl: string;
   status: PaymentStatus;
+}
+
+export interface CreateBusinessFormInput {
+  id: number;
+  userId: number;
+  DocType: string;
+  DocNumber: number;
+  formData: Prisma.InputJsonValue;
+}
+
+export interface UpdateBusinessFormInput {
+  id: number;
+  userId: number;
+  DocType: string;
+  DocNumber: number;
+  formData: Prisma.InputJsonValue;
+}
+
+export interface DeleteBusinessFormInput {
+  userId: number;
+  DocType: string;
+  DocNumber: number;
 }

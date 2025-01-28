@@ -1,6 +1,6 @@
-import { Button } from "@heroui/button";
 import Image from "next/image";
 import React from "react";
+import CalendlyComponent from "./CalendlyComponent";
 
 const LetsBegin = () => {
     return (
@@ -22,14 +22,15 @@ const LetsBegin = () => {
                     At Vakilsearch, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>
-                <Button
+                <CalendlyComponent text='Get Started' />
+                {/* <Button
                     radius="none"
                     size="md"
                     color="warning"
                     className="font-Inter font-medium"
                 >
                     Get Started
-                </Button>
+                </Button> */}
             </div>
         </section>
     );
