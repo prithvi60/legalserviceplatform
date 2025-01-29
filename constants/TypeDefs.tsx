@@ -18,8 +18,10 @@ type User {
     DocType: String!
     DocNumber: Int!
     formData: JSON!
-    createdAt: String
-    updatedAt: String
+    status: String!
+    url: String!
+    createdAt: String!
+    updatedAt: String!
 }
 
 input BusinessFormOrderByInput {
@@ -36,6 +38,8 @@ input CreateBusinessFormInput {
   DocType: String!
   DocNumber: Int
   formData: JSON!
+  status: String!
+  url: String!
 }
 
 input UpdateBusinessFormInput {
@@ -43,6 +47,7 @@ input UpdateBusinessFormInput {
     DocType: String!
     DocNumber: Int!
     formData: JSON
+    status: String!
 }
 
 input DeleteBusinessFormInput {
@@ -56,6 +61,7 @@ input DeleteBusinessFormInput {
     users: [User]
     getUser(email: String!): User
     getBusinessForms(userId: Int!, DocType: String!, orderBy: BusinessFormOrderByInput): [BusinessForm!]!
+    getBusinessForm(userId: Int!, DocType: String!, DocNumber: Int!): BusinessForm
     }
 
   type Mutation {

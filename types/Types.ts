@@ -56,12 +56,20 @@ export interface GetBFResponse {
   getBusinessForms: GetBusinessFormInput[];
 }
 
+export interface GetOBFResponse {
+  getBusinessForm: GetBusinessFormInput;
+}
+
 export interface GetBusinessFormInput {
   id: number;
   userId: number;
   DocType: string;
   DocNumber: number;
   formData: DocumentData;
+  status: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 type DocumentData = {
@@ -99,6 +107,8 @@ export interface CreateBusinessFormInput {
   DocType: string;
   DocNumber: number;
   formData: Prisma.InputJsonValue;
+  status: string;
+  url: string;
 }
 
 export interface UpdateBusinessFormInput {
@@ -107,6 +117,7 @@ export interface UpdateBusinessFormInput {
   DocType: string;
   DocNumber: number;
   formData: Prisma.InputJsonValue;
+  status: string;
 }
 
 export interface DeleteBusinessFormInput {

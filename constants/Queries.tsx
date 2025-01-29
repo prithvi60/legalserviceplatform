@@ -60,7 +60,7 @@ export const GET_USER = gql`
 
 // Form Details
 
-export const GET_BUSINESS_FORM = gql`
+export const GET_BUSINESS_FORMS = gql`
   query GetBusinessForms($userId: Int!, $DocType: String!,$orderBy: BusinessFormOrderByInput) {
     getBusinessForms(userId: $userId, DocType: $DocType, orderBy: $orderBy) {
         id
@@ -68,8 +68,28 @@ export const GET_BUSINESS_FORM = gql`
         DocType
         DocNumber
         formData
+        status
+        url
+        createdAt
+        updatedAt
     }
 }
+`;
+
+export const GET_BUSINESS_FORM = gql`
+  query GetBusinessForm($userId: Int!, $DocType: String!, $DocNumber: Int!) {
+    getBusinessForm(userId: $userId, DocType: $DocType, DocNumber: $DocNumber) {
+      id
+      userId
+      DocType
+      DocNumber
+      formData
+      status
+      createdAt
+      updatedAt
+      url
+    }
+  }
 `;
 
 export const CREATE_BUSINESS_FORM = gql`
@@ -79,6 +99,9 @@ export const CREATE_BUSINESS_FORM = gql`
         userId
         DocType
         formData
+        status
+        url
+        createdAt
     }
 }
 `;
@@ -90,6 +113,9 @@ export const UPDATE_BUSINESS_FORM = gql`
         DocType
         DocNumber
         formData
+        status
+        url
+        updatedAt
     }
 }
 `;

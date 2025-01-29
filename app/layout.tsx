@@ -44,8 +44,8 @@ export default function RootLayout({
         className={`${archivo.variable} ${lorin.variable} ${inter.variable} antialiased`}
       >
         <Providers>
-          {/* <NavbarComponent /> */}
-          <NavBar2 />
+          <NavbarComponent />
+          {/* <NavBar2 /> */}
           {children}
           <Information />
           <Footer />

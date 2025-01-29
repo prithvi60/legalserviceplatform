@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+
+
 const STORAGE_KEY = "nda-form-data";
 
 export const getStorageData = () => {
@@ -11,3 +14,7 @@ export const getStorageData = () => {
     }
     return null;
 };
+
+export function formatTimestamp(timestamp: string): string {
+    return format(new Date(parseInt(timestamp, 10)), "MMM dd, hh.mm a");
+}

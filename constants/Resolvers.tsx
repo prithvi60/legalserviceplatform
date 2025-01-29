@@ -92,7 +92,27 @@ export const resolvers = {
         console.error("Error fetching business forms:", error);
         throw new Error("Failed to fetch business forms.");
       }
-    }
+    },
+    getBusinessForm: async (_: unknown, { userId, DocType, DocNumber }: { userId: number, DocType: string, DocNumber: number }) => {
+      try {
+        const form = await prisma.businessForm.findFirst({
+          where: {
+            userId,
+            DocType,
+            DocNumber,
+          },
+        });
+
+        if (!form) {
+          throw new Error("Business form not found.");
+        }
+
+        return form;
+      } catch (error) {
+        console.error("Error fetching business form:", error);
+        throw new Error("Failed to fetch business form.");
+      }
+    },
   },
   Mutation: {
     signUp: async (
@@ -178,7 +198,7 @@ export const resolvers = {
       _: unknown,
       { input }: { input: CreateBusinessFormInput }
     ) => {
-      const { userId, DocType, formData } = input;
+      const { userId, DocType, formData, status, url } = input;
 
       try {
         // Find the current max DocNumber for the given DocType and userId
@@ -202,6 +222,8 @@ export const resolvers = {
             DocType,
             DocNumber: newDocNumber,
             formData,
+            status,
+            url,
           },
         });
 
@@ -230,7 +252,11 @@ export const resolvers = {
         return prisma.businessForm.findFirst({ where: { userId, DocNumber } });
       } catch (error) {
         console.error("Error updating business form:", error);
-        throw new Error("Failed to update business form.");
+        if (error instanceof Error) {
+          throw new Error(`Failed to update business form: ${error.message}`);
+        } else {
+          throw new Error("Failed to update business form");
+        }
       }
     },
     deleteBusinessForm: async (

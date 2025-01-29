@@ -2,6 +2,7 @@ import { navLinks } from '@/constants/Data';
 import React from 'react'
 import DesktopMenu from '../UI/DesktopMenu';
 import MobMenu from '../UI/MobMenu';
+import Link from 'next/link';
 
 
 const AcmeLogo = () => {
@@ -37,7 +38,7 @@ const NavBar2 = () => {
                         aria-label="sign-in"
                         className="bg-white/5 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center"
                     >
-                        Sign In
+                        <Link href="/api/auth/signin">Login</Link>
                     </button>
                     <div className="lg:hidden">
                         <MobMenu Menus={navLinks} />
