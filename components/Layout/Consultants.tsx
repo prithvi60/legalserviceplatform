@@ -12,22 +12,26 @@ const Consultants = () => {
             </h3>
             <div className="flex flex-col md:flex-row justify-center md:flex-wrap xl:flex-nowrap gap-4">
                 {consultantLists.map((item, idx) => (
-                    <Card key={idx} className="py-4 px-6 linear-blue_2 max-w-80 mx-auto md:max-w-96">
-                        <CardHeader className="pb-0 pt-2 px-4 flex-col gap-2 items-start">
+                    <Card key={idx} className="linear-blue_1 border-2 border-primary max-w-80 mx-auto md:max-w-96">
+                        {/* <CardHeader className="pb-0 pt-2 px-4 flex-col gap-2 items-start">
                             <h4 className="text-lg font-Archivo font-bold tracking-wider">
                                 {item.title}
                             </h4>
                             <p className="text-base font-Lorin font-medium">{item.summary}</p>
-                        </CardHeader>
-                        <CardBody className="overflow-visible gap-5 justify-center py-2">
-                            <div className="relative overflow-hidden w-48 h-52 mx-auto">
-                                <Image
-                                    alt={item.alt}
-                                    className="object-cover rounded-xl"
-                                    src={item.img}
-                                    fill
-                                />
-                            </div>
+                        </CardHeader> */}
+                        <div className="relative overflow-hidden w-full h-72">
+                            <Image
+                                alt={item.alt}
+                                className="object-cover"
+                                src={item.img}
+                                fill
+                            />
+                        </div>
+                        <CardBody className="overflow-visible text-white gap-5 justify-center py-4 px-6">
+                            <h4 className="text-lg font-Archivo font-bold tracking-wider">
+                                {item.title}
+                            </h4>
+                            <p className="text-base font-Lorin font-medium">{item.summary}</p>
                             <ul className="space-y-4">
                                 {item.lists.map((list, id) => (
                                     <li
@@ -69,7 +73,7 @@ const consultantLists = [
     {
         title: "SJ Anakha",
         summary: "Solves check bouce, money recovery & DRT",
-        img: "/avatar.png",
+        img: "/advocate.png",
         alt: "consultant image",
         lists: [
             "Private limited company",
@@ -82,7 +86,7 @@ const consultantLists = [
     {
         title: "SJ Anakha",
         summary: "Solves check bouce, money recovery & DRT",
-        img: "/avatar.png",
+        img: "/advocate.png",
         alt: "consultant image",
         lists: [
             "Private limited company",
@@ -95,7 +99,7 @@ const consultantLists = [
     {
         title: "SJ Anakha",
         summary: "Solves check bouce, money recovery & DRT",
-        img: "/avatar.png",
+        img: "/advocate.png",
         alt: "consultant image",
         lists: [
             "Private limited company",

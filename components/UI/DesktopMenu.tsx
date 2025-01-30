@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import Link from "next/link";
 
 interface Menu {
   menu: string;
@@ -12,13 +13,22 @@ interface Menu {
 interface SubMenu {
   subMenu: string;
   href: string;
+  subDividion?: Array<SubLink>;
+}
+
+interface SubLink {
+  subLink: string;
+  href: string;
 }
 
 export default function DesktopMenu({ menu }: { menu: Menu }) {
   const [isHover, toggleHover] = useState(false);
+  const [isSubMenuHover, toggleSubMenuHover] = useState<number | null>(0 || null);
   const toggleHoverMenu = () => {
     toggleHover(!isHover);
   };
+
+  console.log(isSubMenuHover);
 
   const subMenuAnimate = {
     enter: {
@@ -65,28 +75,43 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
         >
-          <div className={`grid gap-7 grid-cols-1`}>
+          <div className={`grid gap-4 grid-cols-1`}>
             {hasSubMenu &&
               menu.subCategories?.map((submenu, i) => (
                 <div className="relative cursor-pointer" key={i}>
-                  {/* {menu.gridCols > 1 && menu?.subMenuHeading?.[i] && (
-                    <p className="text-sm mb-4 text-gray-500">
-                      {menu?.subMenuHeading?.[i]}
-                    </p>
-                  )} */}
-                  <div className="flex-center gap-x-4 group/menubox">
-                    {/* <div className="bg-white/5 w-fit p-2 rounded-md group-hover/menubox:bg-white group-hover/menubox:text-gray-900 duration-300">
-                      {submenu.icon && <submenu.icon />}
-                    </div> */}
-                    <div>
-                      <h6 className="font-semibold flex items-center gap-2">
+                  <div className="grid grid-cols-2 gap-x-4">
+                    <div
+                      className={`w-full p-1.5 ${isSubMenuHover === i ? "bg-warning/60 rounded-md" : ""
+                        }`}
+                    >
+                      <h6
+                        onMouseEnter={() => toggleSubMenuHover(i)}
+                        className={`font-semibold flex w-full items-center gap-2 group/menubox`}
+                      >
                         <span>
                           <IoDocumentTextOutline className=" w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
                         </span>
                         {submenu.subMenu}
                       </h6>
-                      {/* <p className="text-sm text-gray-400">{submenu.desc}</p> */}
                     </div>
+                    {submenu.subDividion?.length && (
+                      <div
+                        className={`w-full block space-y-2`}
+                      >
+                        {submenu.subDividion
+                          .filter((_, index) => index === isSubMenuHover)
+                          .map((subdiv, id) => (
+                            <div key={id} className="block space-y-2">
+                              <Link
+                                href={subdiv.href}
+                                className={`font-semibold w-full`}
+                              >
+                                {subdiv.subLink}
+                              </Link>
+                            </div>
+                          ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

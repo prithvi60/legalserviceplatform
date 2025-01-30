@@ -419,7 +419,7 @@ export const SignUp = () => {
                                 <button
                                     disabled={!isValid || isSubmitting}
                                     type="submit"
-                                    className={`w-full cursor-pointer rounded-md p-4 text-[#1E318D] transition  bg-primary font-semibold mb-5 ${!isValid || isSubmitting
+                                    className={`w-full cursor-pointer rounded-md p-4 text-black transition bg-warning font-semibold mb-5 ${!isValid || isSubmitting
                                         ? "bg-opacity-40 cursor-not-allowed"
                                         : "hover:bg-opacity-90"
                                         }`}
@@ -431,7 +431,7 @@ export const SignUp = () => {
                             <div className="text-center !-mt-2 ">
                                 <p>
                                     Already have an account?{" "}
-                                    <Link href="/api/auth/signin" className="text-primary text-sm md:text-base hover:text-primary/70">
+                                    <Link href="/api/auth/signin" className="text-primary text-sm md:text-base font-semibold underline underline-offset-4 hover:text-primary/70">
                                         Sign in
                                     </Link>
                                 </p>

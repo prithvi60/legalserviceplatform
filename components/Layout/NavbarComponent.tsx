@@ -163,8 +163,10 @@ export default function NavbarComponent() {
                                     <p className="font-semibold">Signed in as</p>
                                     <p className="font-semibold">zoey@example.com</p>
                                 </DropdownItem>
-                                <DropdownItem as={Link} href="/profile" key="help_and_feedback">
-                                    My Profile
+                                <DropdownItem key="My_Profile">
+                                    <Link href="/profile" className="w-full block">
+                                        My Profile
+                                    </Link>
                                 </DropdownItem>
                                 <DropdownItem
                                     key="logout"
@@ -246,8 +248,10 @@ export default function NavbarComponent() {
                                     <p className="font-semibold">Signed in as</p>
                                     <p className="font-semibold">zoey@example.com</p>
                                 </DropdownItem>
-                                <DropdownItem as={Link} href="/profile" key="help_and_feedback">
-                                    My Profile
+                                <DropdownItem key="My_Profile">
+                                    <Link href="/profile" className="w-full block">
+                                        My Profile
+                                    </Link>
                                 </DropdownItem>
                                 <DropdownItem
                                     key="logout"

@@ -7,7 +7,7 @@
     @apply px-[40px] py-[40px] md:px-[80px] md:py-[70px] xl:px-[144px];
   }
   .linear-blue_1 {
-    @apply bg-gradient-to-b from-[#3857EEEE] via-[#1E318DEE] to-[#080E27EE];
+    @apply bg-gradient-to-b from-[#415DE1] to-[#1A203D];
   }
   .linear-blue_2 {
     @apply bg-gradient-to-b from-[#FCFBF7] via-[#5260A6] to-[#1E318D];

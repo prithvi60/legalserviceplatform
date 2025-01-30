@@ -9,6 +9,7 @@ import { z } from "zod";
 import toast from "react-hot-toast";
 import { Loader } from "@/components/UI/Loader";
 import Link from "next/link";
+import { LoaderPinwheel } from "lucide-react";
 
 const schema = z.object({
     email: z.string().email("Invalid email address"),
@@ -38,7 +39,7 @@ export const SignIn = () => {
             typeof window !== "undefined"
                 ? localStorage.getItem("returnUrl") || "/"
                 : "/";
-                console.log("returnUrl",returnUrl)
+        console.log("returnUrl", returnUrl)
         try {
             const result = await signIn("credentials", {
                 redirect: false,
@@ -91,9 +92,12 @@ export const SignIn = () => {
 
     if (status === "loading") {
         return (
-            <div className="w-full h-[80vh] flex justify-center items-center">
-                Loading...
+            <div className="w-full padding h-[80vh] flex justify-center items-center">
+                <LoaderPinwheel className="animate-spin w-10 h-10 text-primary" />
             </div>
+            // <div className="w-full h-[80vh] flex justify-center items-center">
+            //     Loading...
+            // </div>
         );
     }
 
@@ -245,7 +249,7 @@ export const SignIn = () => {
                             <button
                                 disabled={isSubmitting}
                                 type="submit"
-                                className={`w-full cursor-pointer rounded-md p-4 text-[#1E318D] transition  bg-primary font-semibold ${isSubmitting
+                                className={`w-full cursor-pointer rounded-md p-4 text-black transition bg-warning font-semibold ${isSubmitting
                                     ? "bg-opacity-40 cursor-not-allowed"
                                     : "hover:bg-opacity-90"
                                     }`}
@@ -264,7 +268,7 @@ export const SignIn = () => {
                                 No account?{" "}
                                 <Link
                                     href="/auth/signup"
-                                    className="text-primary font-semibold font-sans tracking-wide text-sm md:text-base hover:text-primary/70"
+                                    className="text-primary font-sans tracking-wide text-sm font-semibold underline underline-offset-4 md:text-base hover:text-primary/70"
                                 >
                                     Create one!
                                 </Link>

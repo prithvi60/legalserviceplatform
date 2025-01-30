@@ -10,6 +10,7 @@ import { Avatar } from "@heroui/avatar";
 import { FaEnvelope } from "react-icons/fa6";
 import { Button } from "@heroui/button";
 import { LoaderPinwheel } from "lucide-react";
+import ProfileEditForm from "./ProfileEditForm";
 
 
 const ProfilePage = () => {
@@ -36,7 +37,7 @@ const ProfilePage = () => {
     if (loading || getDocLoading)
         return (
             <div className="w-full padding h-[80vh] flex justify-center items-center">
-                <LoaderPinwheel className="animate-spin w-32 h-32 text-primary" />
+                <LoaderPinwheel className="animate-spin w-24 h-24 text-primary" />
             </div>
             // <p className="w-full padding h-screen flex justify-center items-center text-2xl md:text-4xl font-Lorin font-bold tracking-widest animate-pulse">
             //     Loading...
@@ -106,6 +107,7 @@ const ProfilePage = () => {
                     <>
                         <RecentActivity data={filteredDataOfRA ?? []} />
                         <MyDocs data={filteredDataOfMD ?? []} />
+                        <ProfileEditForm />
                     </>
                 )}
             </div>
