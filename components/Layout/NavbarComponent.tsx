@@ -22,6 +22,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@heroui/button";
+import { Avatar } from "@heroui/avatar";
 
 export const AcmeLogo = () => {
     return (
@@ -71,7 +72,7 @@ export default function NavbarComponent() {
             onMenuOpenChange={setIsMenuOpen}
             classNames={{
                 base: "bg-primary text-white font-Archivo",
-                menu: "!backdrop-blur-0 !bg-primary overflow-hidden"
+                menu: "!backdrop-blur-0 !bg-primary overflow-hidden",
             }}
         >
             <NavbarContent className="md:hidden pr-3" justify="center">
@@ -92,7 +93,11 @@ export default function NavbarComponent() {
                     <NavbarItem key={idx} className="mx-2.5">
                         <Dropdown>
                             <DropdownTrigger className="flex items-center gap-4 rounded-md">
-                                <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" && "bg-warning font-medium text-lg lg:text-xl text-black"}`}>
+                                <div
+                                    className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" &&
+                                        "bg-warning font-medium text-lg lg:text-xl text-black"
+                                        }`}
+                                >
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
@@ -104,13 +109,15 @@ export default function NavbarComponent() {
                                     {list.subCategories.map((item, index) => (
                                         <DropdownItem
                                             classNames={{
-                                                base: "data-[hover=true]:bg-warning"
+                                                base: "data-[hover=true]:bg-warning",
                                             }}
                                             as={Button}
                                             onPress={() => handleClick(item.href)}
                                             key={index}
                                             className="bg-transparent !text-xl text-[#1E318D]"
-                                            endContent={<MdKeyboardArrowRight className="text-xl text-[#1E318D]" />}
+                                            endContent={
+                                                <MdKeyboardArrowRight className="text-xl text-[#1E318D]" />
+                                            }
                                         >
                                             {item.subMenu}
                                         </DropdownItem>
@@ -121,12 +128,14 @@ export default function NavbarComponent() {
                                     {list.subCategories.map((item, index) => (
                                         <DropdownItem
                                             classNames={{
-                                                base: "data-[hover=true]:bg-warning"
+                                                base: "data-[hover=true]:bg-warning",
                                             }}
                                             as={Link}
                                             href={item.href}
                                             key={index}
-                                            endContent={<MdKeyboardArrowRight className="text-xl text-[#1E318D]" />}
+                                            endContent={
+                                                <MdKeyboardArrowRight className="text-xl text-[#1E318D]" />
+                                            }
                                             className="text-[#1E318D]"
                                         >
                                             {item.subMenu}
@@ -139,12 +148,39 @@ export default function NavbarComponent() {
                 ))}
                 {isStatus ? (
                     <NavbarItem>
-                        <button
+                        <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar
+                                    size="md"
+                                    as="button"
+                                    color="warning"
+                                    className="transition-transform p-0.5"
+                                    src="/avatar.png"
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                <DropdownItem key="profile" className="h-14 gap-2">
+                                    <p className="font-semibold">Signed in as</p>
+                                    <p className="font-semibold">zoey@example.com</p>
+                                </DropdownItem>
+                                <DropdownItem as={Link} href="/profile" key="help_and_feedback">
+                                    My Profile
+                                </DropdownItem>
+                                <DropdownItem
+                                    key="logout"
+                                    onClick={handleLogout}
+                                    color="danger"
+                                >
+                                    Log Out
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                        {/* <button
                             className="flex items-center rounded-md py-1 hover:bg-warning px-4 border-2 border-white gap-3.5 font-semibold duration-300 ease-in-out  lg:text-base"
                             onClick={handleLogout}
                         >
                             Log Out
-                        </button>
+                        </button> */}
                     </NavbarItem>
                 ) : (
                     <>
@@ -158,17 +194,14 @@ export default function NavbarComponent() {
             <NavbarContent className="lg:hidden" justify="end">
                 {navLinks.map((list, idx) => (
                     <NavbarItem key={idx} className="hidden sm:flex">
-                        {/* <div>
-                            <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" ? "bg-warning font-medium text-lg lg:text-xl text-black" : "hidden"}`}>
-                                {list.menu}{" "}
-                                <span>
-                                    <IoIosArrowDown className="text-xl font-bold" />
-                                </span>
-                            </div>
-                        </div> */}
                         <Dropdown>
                             <DropdownTrigger className="flex items-center gap-4 rounded-md">
-                                <div className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert" ? "bg-warning font-medium text-lg lg:text-xl text-black" : "hidden"}`}>
+                                <div
+                                    className={`p-2 text-xl cursor-pointer ${list.menu === "Consult an Expert"
+                                        ? "bg-warning font-medium text-lg lg:text-xl text-black"
+                                        : "hidden"
+                                        }`}
+                                >
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
@@ -179,12 +212,14 @@ export default function NavbarComponent() {
                                 {list.subCategories.map((item, index) => (
                                     <DropdownItem
                                         classNames={{
-                                            base: "data-[hover=true]:bg-warning"
+                                            base: "data-[hover=true]:bg-warning",
                                         }}
                                         as={Link}
                                         href={item.href}
                                         key={index}
-                                        endContent={<MdKeyboardArrowRight className="text-xl text-[#1E318D]" />}
+                                        endContent={
+                                            <MdKeyboardArrowRight className="text-xl text-[#1E318D]" />
+                                        }
                                         className="text-[#1E318D]"
                                     >
                                         {item.subMenu}
@@ -196,12 +231,39 @@ export default function NavbarComponent() {
                 ))}
                 {isStatus ? (
                     <NavbarItem className="mr-2 sm:mr-8">
-                        <button
+                        <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar
+                                    size="md"
+                                    isBordered
+                                    as="button"
+                                    className="transition-transform"
+                                    src="/avatar.png"
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                <DropdownItem key="profile" className="h-14 gap-2">
+                                    <p className="font-semibold">Signed in as</p>
+                                    <p className="font-semibold">zoey@example.com</p>
+                                </DropdownItem>
+                                <DropdownItem as={Link} href="/profile" key="help_and_feedback">
+                                    My Profile
+                                </DropdownItem>
+                                <DropdownItem
+                                    key="logout"
+                                    onClick={handleLogout}
+                                    color="danger"
+                                >
+                                    Log Out
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                        {/* <button
                             className="flex items-center rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white gap-3.5 font-semibold duration-300 ease-in-out text-sm lg:text-base"
                             onClick={handleLogout}
                         >
                             Log Out
-                        </button>
+                        </button> */}
                     </NavbarItem>
                 ) : (
                     <>
@@ -228,7 +290,12 @@ export default function NavbarComponent() {
                     <NavbarMenuItem key={idx} className="mx-2.5">
                         <Dropdown>
                             <DropdownTrigger className="flex justify-between items-center rounded-md">
-                                <div className={`p-2 ${list.menu === "Consult an Expert" ? "sm:hidden bg-warning font-medium text-black" : "border border-white text-white"}`}>
+                                <div
+                                    className={`p-2 ${list.menu === "Consult an Expert"
+                                        ? "sm:hidden bg-warning font-medium text-black"
+                                        : "border border-white text-white"
+                                        }`}
+                                >
                                     {list.menu}{" "}
                                     <span>
                                         <IoIosArrowDown className="text-xl font-bold" />
