@@ -788,22 +788,21 @@ const NDAPreview: React.FC = () => {
                             <div className="no_scrollbar max-h-[490px] overflow-y-scroll">
                                 <LetterPreview />
                             </div>
-                            {isFormComplete() &&
-                                GetDoc?.getBusinessForm.status === "IsComplete" && (
-                                    <Button
-                                        onPress={handleDownload}
-                                        className="mt-4 w-full text-white"
-                                        color="primary"
-                                        disabled={isDownloading}
-                                        endContent={
-                                            !isDownloading && (
-                                                <IoMdDownload className="text-xl ml-5" />
-                                            )
-                                        }
-                                    >
-                                        {isDownloading ? <Loader /> : "Download PDF"}
-                                    </Button>
-                                )}
+                            {(isFormComplete() || GetDoc?.getBusinessForm.status === "IsComplete") && (
+                                <Button
+                                    onPress={handleDownload}
+                                    className="mt-4 w-full text-white"
+                                    color="primary"
+                                    disabled={isDownloading}
+                                    endContent={
+                                        !isDownloading && (
+                                            <IoMdDownload className="text-xl ml-5" />
+                                        )
+                                    }
+                                >
+                                    {isDownloading ? <Loader /> : "Download PDF"}
+                                </Button>
+                            )}
                         </CardBody>
                     </Card>
                 </div>
