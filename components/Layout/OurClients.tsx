@@ -10,7 +10,7 @@ interface LogoItem {
 
 const OurClients = () => {
     return (
-        <section className="padding !pt-0 !pb-4 md:!pb-8 w-full bg-primary text-white space-y-8">
+        <section className="padding !pt-0 !pb-4 md:!pb-8 w-full bg-warning space-y-7 md:space-y-14">
             <div className="w-full">
                 <div className="flex relative justify-center items-center gap-2 sm:gap-6">
                     <div className="w-32 h-20 md:w-48 md:h-28 overflow-hidden relative">
@@ -42,6 +42,8 @@ const OurClients = () => {
 export default OurClients;
 
 const clientsLogo: LogoItem[] = [
-    { img: "/client-Logo 1.svg", alt: "icon" },
-    { img: "/client-Logo 2.svg", alt: "icon" },
+    { img: "/client-icon.svg", alt: "icon" },
+    { img: "/client-icon.svg", alt: "icon" },
+    { img: "/client-icon.svg", alt: "icon" },
+    { img: "/client-icon.svg", alt: "icon" },
 ];

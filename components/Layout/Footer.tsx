@@ -27,7 +27,7 @@ const Footer = () => {
     // console.log(submitted?.email);
 
     return (
-        <footer className="padding w-full font-Inter bg-primary text-white flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-12 lg:gap-8">
+        <footer className="padding w-full font-Inter bg-primary/90 text-white flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-12 lg:gap-8">
             <div className="block space-y-8">
                 <Link href={"/"} className="flex justify-center lg:justify-start items-center gap-2">
                     <AcmeLogo />
@@ -108,17 +108,19 @@ const Footer = () => {
 export default Footer;
 
 const footerLinks1 = [
-    { menu: "About us", href: "#" },
+    { menu: "About us", href: "/about" },
     { menu: "Blog", href: "#" },
-    { menu: "Contact us", href: "#" },
+    { menu: "Contact us", href: "/contact" },
     { menu: "Pricing", href: "#" },
+    { menu: "Testimonials", href: "#" },
 ];
 
 const footerLinks2 = [
     { menu: "Help center", href: "#" },
-    { menu: "Terms of service", href: "#" },
+    { menu: "Terms of service", href: "/termsAndConditions" },
     { menu: "Legal", href: "#" },
-    { menu: "Privacy policy", href: "#" },
+    { menu: "Privacy policy", href: "/privacyPolicy" },
+    { menu: "Status", href: "#" },
 ];
 
 const socialLinks = [

@@ -5,7 +5,7 @@ import CalendlyComponent from "./CalendlyComponent";
 const LetsBegin = () => {
     return (
         <section className="padding w-full h-full flex items-center flex-col md:flex-row overflow-hidden gap-5">
-            <div className="w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] lg:w-[480px] lg:h-[480px]  md:basis-2/5 overflow-hidden relative">
+            <div className="w-[100px] h-[150px] sm:w-[280px] sm:h-[280px] lg:w-[480px] lg:h-[480px]  md:basis-2/5 overflow-hidden relative">
                 <Image
                     className="object-contain object-center"
                     alt="bg image"

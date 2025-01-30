@@ -3,11 +3,11 @@ import React from "react";
 
 const Achievements = () => {
     return (
-        <section className="padding w-full h-full linear-yellow_2 flex items-center flex-col md:flex-row overflow-hidden  gap-5">
+        <section className="padding w-full h-full bg-gradient-to-t from-[#1E318D] to-[#FFFBEE] flex items-center flex-col md:flex-row overflow-hidden  gap-5">
             <div className="block space-y-4 w-full md:w-3/5 text-center md:text-start">
                 <h2 className="font-Archivo font-bold tracking-wide text-xl md:text-2xl xl:text-4xl">
                     Helping a local{" "}
-                    <span className="text-primary">business reinvent itself</span>
+                    <span className="text-white">business reinvent itself</span>
                 </h2>
                 <p className="text-sm md:text-base font-Inter">
                     We reached here with our hard work and dedication
@@ -15,8 +15,8 @@ const Achievements = () => {
             </div>
             <div className="basis-full grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5 md:basis-2/5">
                 {achievementsList.map((list, id) => (
-                    <div key={id} className="flex gap-3">
-                        <div className="size-10 md:size-8 overflow-hidden relative">
+                    <div key={id} className="flex gap-4">
+                        <div className="size-10 md:size-12 overflow-hidden relative">
                             <Image
                                 priority
                                 className="object-contain object-center"

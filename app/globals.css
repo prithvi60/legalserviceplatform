@@ -10,7 +10,7 @@
     @apply bg-gradient-to-b from-[#415DE1] to-[#1A203D];
   }
   .linear-blue_2 {
-    @apply bg-gradient-to-b from-[#FCFBF7] via-[#5260A6] to-[#1E318D];
+    @apply bg-gradient-to-b from-[#1E318D] to-[#FFFBEE];
   }
   .linear-yellow_1 {
     @apply bg-gradient-to-b from-[#FFC720] to-[#FFE494];

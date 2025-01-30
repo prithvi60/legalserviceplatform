@@ -2,8 +2,8 @@ export const navLinks = [
     {
         menu: "Consult an Expert",
         subCategories: [
-            { href: "#", subMenu: "Talk to a Lawyer", },
-            { href: "#", subMenu: "Talk to a Chartered Accountant" },
+            { href: "/consultAExpert/talkToALawyer", subMenu: "Talk to a Lawyer", },
+            { href: "/consultAExpert/talkToACA", subMenu: "Talk to a Chartered Accountant" },
             // { href: "#", subMenu: "Talk to a Company Secretary" },
         ],
     },

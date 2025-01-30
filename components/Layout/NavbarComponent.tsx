@@ -23,6 +23,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@heroui/button";
 import { Avatar } from "@heroui/avatar";
+import { GetUserResponse } from "@/types/Types";
+import { GET_USER } from "@/constants/Queries";
+import { LoaderPinwheel } from "lucide-react";
+import { useQuery } from "@apollo/client";
 
 export const AcmeLogo = () => {
     return (
@@ -42,6 +46,10 @@ export default function NavbarComponent() {
     const { status } = useSession();
     const router = useRouter();
     const [isStatus, setIsStatus] = useState(false);
+    const { data: sessionData } = useSession();
+    const { data: RoleBased, loading } = useQuery<GetUserResponse>(GET_USER, {
+        variables: { email: sessionData?.user?.email },
+    });
     const handleLogout = () => {
         sessionStorage.clear();
         signOut({ redirect: true, callbackUrl: "/" });
@@ -104,14 +112,34 @@ export default function NavbarComponent() {
                                     </span>
                                 </div>
                             </DropdownTrigger>
-                            {list.menu === "Documentation" ? (
-                                <DropdownMenu aria-label="Static Actions">
+                            <DropdownMenu>
+                                {list.subCategories.map((item, index) => (
+                                    <DropdownItem
+                                        classNames={{
+                                            base: "data-[hover=true]:bg-warning",
+                                        }}
+                                        as={Link}
+                                        href={item.href}
+                                        onPress={() => handleClick(item.href)}
+                                        key={index}
+                                        className="bg-transparent !text-xl text-[#1E318D]"
+                                        endContent={
+                                            <MdKeyboardArrowRight className="text-xl text-[#1E318D]" />
+                                        }
+                                    >
+                                        {item.subMenu}
+                                    </DropdownItem>
+                                ))}
+                            </DropdownMenu>
+                            {/* {list.menu === "Documentation" ? (
+                                <DropdownMenu>
                                     {list.subCategories.map((item, index) => (
                                         <DropdownItem
                                             classNames={{
                                                 base: "data-[hover=true]:bg-warning",
                                             }}
-                                            as={Button}
+                                            as={Link}
+                                            href={item.href}
                                             onPress={() => handleClick(item.href)}
                                             key={index}
                                             className="bg-transparent !text-xl text-[#1E318D]"
@@ -124,7 +152,7 @@ export default function NavbarComponent() {
                                     ))}
                                 </DropdownMenu>
                             ) : (
-                                <DropdownMenu aria-label="Static Actions">
+                                <DropdownMenu >
                                     {list.subCategories.map((item, index) => (
                                         <DropdownItem
                                             classNames={{
@@ -142,7 +170,7 @@ export default function NavbarComponent() {
                                         </DropdownItem>
                                     ))}
                                 </DropdownMenu>
-                            )}
+                            )} */}
                         </Dropdown>
                     </NavbarItem>
                 ))}
@@ -160,10 +188,21 @@ export default function NavbarComponent() {
                             </DropdownTrigger>
                             <DropdownMenu aria-label="Profile Actions" variant="flat">
                                 <DropdownItem key="profile" className="h-14 gap-2">
-                                    <p className="font-semibold">Signed in as</p>
-                                    <p className="font-semibold">zoey@example.com</p>
+                                    <p className="font-semibold text-xs">Signed in as</p>
+                                    {loading ? (
+                                        <div className="w-full mx-auto flex justify-center items-center">
+                                            <LoaderPinwheel className="animate-spin size-6 text-center text-primary" />
+                                        </div>
+                                    ) : (
+                                        <p className="font-semibold text-primary">{RoleBased?.getUser?.email}</p>
+                                    )}
                                 </DropdownItem>
-                                <DropdownItem key="My_Profile">
+                                <DropdownItem
+                                    key="My_Profile"
+                                    classNames={{
+                                        base: "data-[hover=true]:!bg-warning/80",
+                                    }}
+                                >
                                     <Link href="/profile" className="w-full block">
                                         My Profile
                                     </Link>
@@ -245,10 +284,21 @@ export default function NavbarComponent() {
                             </DropdownTrigger>
                             <DropdownMenu aria-label="Profile Actions" variant="flat">
                                 <DropdownItem key="profile" className="h-14 gap-2">
-                                    <p className="font-semibold">Signed in as</p>
-                                    <p className="font-semibold">zoey@example.com</p>
+                                    <p className="font-semibold text-sm">Signed in as</p>
+                                    {loading ? (
+                                        <div className="w-full mx-auto flex justify-center items-center">
+                                            <LoaderPinwheel className="animate-spin size-6 text-center text-primary" />
+                                        </div>
+                                    ) : (
+                                        <p className="font-semibold text-primary">{RoleBased?.getUser?.email}</p>
+                                    )}
                                 </DropdownItem>
-                                <DropdownItem key="My_Profile">
+                                <DropdownItem
+                                    key="My_Profile"
+                                    classNames={{
+                                        base: "data-[hover=true]:!bg-warning/80",
+                                    }}
+                                >
                                     <Link href="/profile" className="w-full block">
                                         My Profile
                                     </Link>

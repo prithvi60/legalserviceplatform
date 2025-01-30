@@ -59,10 +59,10 @@ const ProfilePage = () => {
                             />
                             <div className="block space-y-1">
                                 <h5 className="font-Archivo font-medium tracking-wider text-lg md:text-xl">
-                                    Alexa Rawles
+                                    {RoleBased?.getUser?.username}
                                 </h5>
                                 <p className="text-sm md:text-base font-Lorin opacity-60">
-                                    alexarawles@gmail.com
+                                    {RoleBased?.getUser?.email}
                                 </p>
                             </div>
                         </div>
@@ -99,17 +99,9 @@ const ProfilePage = () => {
                         </Button>
                     </div>
                 </div>
-                {status === "unauthenticated" ? (
-                    <p className="font-Archivo font-base md:text-lg text-center font-medium">
-                        Please sign in to view your profile.
-                    </p>
-                ) : (
-                    <>
-                        <RecentActivity data={filteredDataOfRA ?? []} />
-                        <MyDocs data={filteredDataOfMD ?? []} />
-                        <ProfileEditForm />
-                    </>
-                )}
+                <RecentActivity data={filteredDataOfRA ?? []} />
+                <MyDocs data={filteredDataOfMD ?? []} />
+                <ProfileEditForm />
             </div>
         </section>
     );

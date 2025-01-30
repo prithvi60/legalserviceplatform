@@ -10,7 +10,7 @@ const CustomerFeedback = () => {
                 <Image
                     className="object-contain object-center"
                     alt="bg image"
-                    src={"/avatar.png"}
+                    src={"/avatar-2.jpg"}
                     fill
                     priority
                 />

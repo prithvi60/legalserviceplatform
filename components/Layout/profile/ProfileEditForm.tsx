@@ -1,6 +1,5 @@
 import { Avatar } from '@heroui/avatar';
 import { Button } from '@heroui/button';
-import { Input } from '@heroui/input'
 import { FaEnvelope } from 'react-icons/fa';
 
 
@@ -18,43 +17,41 @@ const ProfileEditForm = () => {
     return (
         <div className="w-full space-y-6 md:space-y-12">
             <form className="w-full flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between font-Lorin">
-                <div className='space-y-16 w-full md:w-1/2'>
-                    <Input
-                        isRequired
-                        labelPlacement="outside"
-                        label="Full Name"
-                        // errorMessage="Please enter a valid email"
-                        placeholder="XXX XXX XXX"
-                        type="text"
-                        name="fullName"
-                        classNames={{
-                            input: "placeholder:!text-gray/60",
-                            label: "text-black",
-                            // innerWrapper: "bg-[#F2F1F1]",
-                            inputWrapper: "!bg-[#F2F1F1] !cursor-text",
-                            helperWrapper: "!text-[#f26161]",
-                            errorMessage: "!text-[#f26161]"
-                        }}
-                        className="rounded-md"
-                    />
-                    <Input
-                        isRequired
-                        labelPlacement="outside"
-                        label="Phone Number"
-                        // errorMessage="Please enter a valid email"
-                        placeholder="777-888-9012"
-                        type="text"
-                        name="fullName"
-                        classNames={{
-                            input: "placeholder:!text-gray/60",
-                            label: "text-black",
-                            // innerWrapper: "bg-[#F2F1F1]",
-                            inputWrapper: "!bg-[#F2F1F1] !cursor-text",
-                            helperWrapper: "!text-[#f26161]",
-                            errorMessage: "!text-[#f26161]"
-                        }}
-                        className="rounded-md"
-                    />
+                <div className='space-y-8 w-full md:w-1/2'>
+                    {/* First Name */}
+                    <div className="mb-4">
+                        <label className="mb-2.5 block capitalize font-Archivo">
+                            Full Name
+                        </label>
+                        <div className="relative">
+                            <input
+                                type="text"
+                                name="fullName"
+                                // value={formData.fullName || ""}
+                                // onChange={handleChange}
+                                required
+                                placeholder="XXX XXX XXX"
+                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                            />
+                        </div>
+                    </div>
+                    {/* Phone No. */}
+                    <div className="mb-4">
+                        <label className="mb-2.5 block capitalize font-Archivo">
+                            Phone Number
+                        </label>
+                        <div className="relative">
+                            <input
+                                type="text"
+                                name="phoneNo"
+                                // value={formData.phoneNo || ""}
+                                // onChange={handleChange}
+                                required
+                                placeholder="777-888-9012"
+                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                            />
+                        </div>
+                    </div>
                     <div className='space-y-6'>
                         <div className="flex items-center gap-5">
                             <Avatar
@@ -90,3 +87,23 @@ const ProfileEditForm = () => {
 }
 
 export default ProfileEditForm
+
+
+{/* <Input
+isRequired
+labelPlacement="outside"
+label="Phone Number"
+// errorMessage="Please enter a valid email"
+placeholder="777-888-9012"
+type="text"
+name="fullName"
+classNames={{
+    input: "placeholder:!text-gray/60",
+    label: "text-black",
+    // innerWrapper: "bg-[#F2F1F1]",
+    inputWrapper: "!bg-[#F2F1F1] !cursor-text",
+    helperWrapper: "!text-[#f26161]",
+    errorMessage: "!text-[#f26161]"
+}}
+className="rounded-md"
+/> */}
