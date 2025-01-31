@@ -35,17 +35,16 @@ export const SignIn = () => {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
 
-        const returnUrl =
-            typeof window !== "undefined"
-                ? localStorage.getItem("returnUrl") || "/"
-                : "/";
-        console.log("returnUrl", returnUrl)
+        const returnUrl = typeof window !== "undefined" ? localStorage.getItem("returnUrl") || "/" : "/";
+
+        // console.log("returnUrl", returnUrl)
         try {
             const result = await signIn("credentials", {
                 redirect: false,
                 ...data,
-                callbackUrl: returnUrl,
+                callbackUrl: returnUrl
             });
+            // console.log("url", result?.url);
 
             if (result?.error) {
                 setError("root", { message: result.error });
@@ -62,12 +61,11 @@ export const SignIn = () => {
                         secondary: "#FFFAEE",
                     },
                 });
-            } else if (result) {
-                // Clear the stored return URL
-                localStorage.removeItem("returnUrl");
+            } else if (result?.ok) {
                 reset();
+                localStorage.removeItem("returnUrl");
                 // Redirect to the stored return URL
-                router.push(result.url ?? returnUrl);
+                await router.push(result.url ?? returnUrl);
                 toast.success("Logged in successfully", {
                     position: "top-right",
                     duration: 3000,

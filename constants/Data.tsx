@@ -49,7 +49,7 @@ export const navLinks = [
                 href: "/documentation",
                 subMenu: "Personal & Family",
                 subDividion: [
-                    { href: "/documentation/business_contracts/POA", subLink: "Power of Attorney" },
+                    { href: "/documentation", subLink: "Power of Attorney" },
                     { href: "/documentation/business_contracts/WA", subLink: "Will Registration" },
                     { href: "/documentation/business_contracts/POW", subLink: "Probate of Will" },
                 ],

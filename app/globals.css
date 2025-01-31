@@ -29,7 +29,10 @@
 
 @layer components {
   .sub-menu {
-    @apply absolute top-[4.2rem] p-[15px] rounded-[6px] origin-[50%_-170px] backdrop-blur bg-white text-primary;
+    @apply absolute top-[85px] right-14 p-[15px] rounded-[6px] -translate-x-1/2 -translate-y-1/2 origin-[50%_-170px] backdrop-blur bg-white text-primary;
+  }
+  .sub-menu_1 {
+    @apply absolute top-[64px] right-0 p-[15px] rounded-[6px] -translate-x-1/2 -translate-y-1/2 w-max origin-[50%_-170px] backdrop-blur bg-white text-primary;
   }
 }
 

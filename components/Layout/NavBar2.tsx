@@ -1,8 +1,16 @@
+"use client"
 import { navLinks } from '@/constants/Data';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DesktopMenu from '../UI/DesktopMenu';
 import MobMenu from '../UI/MobMenu';
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import { useQuery } from '@apollo/client';
+import { GetUserResponse } from '@/types/Types';
+import { GET_USER } from '@/constants/Queries';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown';
+import { Avatar } from '@heroui/avatar';
+import { LoaderPinwheel } from 'lucide-react';
 
 
 const AcmeLogo = () => {
@@ -19,27 +27,97 @@ const AcmeLogo = () => {
 };
 
 const NavBar2 = () => {
+    const { status } = useSession();
+    const [isStatus, setIsStatus] = useState(false);
+    const { data: sessionData } = useSession();
+    const { data: RoleBased, loading } = useQuery<GetUserResponse>(GET_USER, {
+        variables: { email: sessionData?.user?.email },
+    });
+    const handleLogout = () => {
+        sessionStorage.clear();
+        signOut({ redirect: true, callbackUrl: "/" });
+    };
+    useEffect(() => {
+        if (status === "authenticated") {
+            setIsStatus(true);
+        } else {
+            setIsStatus(false);
+        }
+    }, [status]);
+
     return (
-        <header className="h-16 text-[15px] z-50 fixed inset-0 flex-center text-white bg-primary">
-            <nav className=" px-3.5 flex-center-between w-full max-w-7xl mx-auto">
-                <div className="flex-center gap-x-3 z-[999] relative">
+        <header className="px-[40px] py-[20px] text-[15px] z-50 sticky inset-0 flex-center text-white bg-primary">
+            <nav className="flex-center-between w-full">
+                <div className="z-[999] relative">
                     {/* <Image src={AcmeLogo} alt="" width={20} height={20} /> */}
-                    <AcmeLogo />
-                    <h3 className="text-lg font-semibold">Framer</h3>
+                    <Link href={"/"} className='flex-center gap-x-2 '>
+                        <AcmeLogo />
+                        <h3 className="text-lg font-semibold">Framer</h3>
+                    </Link>
                 </div>
 
-                <ul className="gap-x-1 lg:flex-center hidden">
-                    {navLinks.map((menu, idx) => (
-                        <DesktopMenu key={idx} menu={menu} />
-                    ))}
-                </ul>
                 <div className="flex-center gap-x-5">
-                    <button
-                        aria-label="sign-in"
-                        className="bg-white/5 z-[999] relative px-3 py-1.5 shadow rounded-xl flex-center"
-                    >
-                        <Link href="/api/auth/signin">Login</Link>
-                    </button>
+                    <ul className="gap-x-1 lg:flex-center hidden">
+                        {navLinks.map((menu, idx) => (
+                            <DesktopMenu key={idx} menu={menu} />
+                        ))}
+                    </ul>
+                    {isStatus ? (
+                        <div>
+                            <Dropdown placement="bottom-end">
+                                <DropdownTrigger>
+                                    <Avatar
+                                        size="md"
+                                        as="button"
+                                        color="warning"
+                                        className="transition-transform p-0.5"
+                                        src="/avatar.png"
+                                    />
+                                </DropdownTrigger>
+                                <DropdownMenu aria-label="Profile Actions" variant="flat">
+                                    <DropdownItem key="profile" className="h-14 gap-2">
+                                        <p className="font-semibold text-xs">Signed in as</p>
+                                        {loading ? (
+                                            <div className="w-full mx-auto flex justify-center items-center">
+                                                <LoaderPinwheel className="animate-spin size-6 text-center text-primary" />
+                                            </div>
+                                        ) : (
+                                            <p className="font-semibold text-primary">{RoleBased?.getUser?.email}</p>
+                                        )}
+                                    </DropdownItem>
+                                    <DropdownItem
+                                        key="My_Profile"
+                                        classNames={{
+                                            base: "data-[hover=true]:!bg-warning/80",
+                                        }}
+                                    >
+                                        <Link href="/profile" className="w-full block">
+                                            My Profile
+                                        </Link>
+                                    </DropdownItem>
+                                    <DropdownItem
+                                        key="logout"
+                                        onClick={handleLogout}
+                                        color="danger"
+                                    >
+                                        Log Out
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            {/* <button
+                            className="flex items-center rounded-md py-1 hover:bg-warning px-4 border-2 border-white gap-3.5 font-semibold duration-300 ease-in-out  lg:text-base"
+                            onClick={handleLogout}
+                        >
+                            Log Out
+                        </button> */}
+                        </div>
+                    ) : (
+                        <>
+                            <div className="flex rounded-md py-1 hover:bg-warning px-4 border-2 border-white font-semibold">
+                                <Link href="/api/auth/signin">Login</Link>
+                            </div>
+                        </>
+                    )}
                     <div className="lg:hidden">
                         <MobMenu Menus={navLinks} />
                     </div>
