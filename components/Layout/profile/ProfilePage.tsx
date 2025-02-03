@@ -12,7 +12,6 @@ import { Button } from "@heroui/button";
 import ProfileEditForm from "./ProfileEditForm";
 import { Spinner } from "@heroui/spinner";
 
-
 const ProfilePage = () => {
     const { data: sessionData } = useSession();
     const { data: RoleBased, loading } = useQuery<GetUserResponse>(GET_USER, {
@@ -37,9 +36,16 @@ const ProfilePage = () => {
     if (loading || getDocLoading)
         return (
             <div className="w-full padding h-[80vh] flex justify-center items-center">
-                <Spinner size="lg" classNames={{
-                    label: "animate-pulse text-base md:text-2xl font-archivo font-semibold tracking-wider"
-                }} color="primary" labelColor="primary" label="Loading..." />
+                <Spinner
+                    size="lg"
+                    classNames={{
+                        label:
+                            "animate-pulse text-base md:text-2xl font-archivo font-semibold tracking-wider",
+                    }}
+                    color="primary"
+                    labelColor="primary"
+                    label="Loading..."
+                />
             </div>
         );
 
@@ -67,7 +73,9 @@ const ProfilePage = () => {
                         </div>
                         <div className="flex gap-10">
                             <div className="space-y-2">
-                                <h5 className="text-lg font-Lorin tracking-wider">Subscription Status</h5>
+                                <h5 className="text-lg font-Lorin tracking-wider">
+                                    Subscription Status
+                                </h5>
                                 <div className="flex items-center gap-5">
                                     <Avatar
                                         className="w-10 h-10"
@@ -87,13 +95,19 @@ const ProfilePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Button className="font-Archivo hidden lg:block text-primary font-medium bg-[#1E318D] bg-opacity-10" size="lg">
+                            <Button
+                                className="font-Archivo hidden lg:block text-primary font-medium bg-[#1E318D] bg-opacity-10"
+                                size="lg"
+                            >
                                 {"Upgrade plan now  >"}
                             </Button>
                         </div>
                     </div>
                     <div className="w-full flex justify-start md:justify-center items-center lg:hidden">
-                        <Button className="font-Archivo text-primary font-medium bg-[#1E318D] bg-opacity-10" size="lg">
+                        <Button
+                            className="font-Archivo text-primary font-medium bg-[#1E318D] bg-opacity-10"
+                            size="lg"
+                        >
                             {"Upgrade plan now  >"}
                         </Button>
                     </div>
@@ -110,6 +124,6 @@ export default ProfilePage;
 
 {
     /* <p className="font-Archivo font-base md:text-lg text-center font-medium">
-                          Currently, no pending document form is available.
-                      </p> */
+                            Currently, no pending document form is available.
+                        </p> */
 }
