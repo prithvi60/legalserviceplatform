@@ -33,10 +33,10 @@ export default function MobMenu({ Menus }: { Menus: Menu[] }) {
   const handleClick = (val: string) => {
     if (status === "authenticated") {
       router.push(val);
-
     } else {
-      localStorage.setItem("returnUrl", val);
-      router.push("/api/auth/signin");
+      localStorage.setItem('returnUrl', val);
+      // Navigate to sign in
+      router.push('/api/auth/signin');
     }
   };
 
@@ -65,7 +65,7 @@ export default function MobMenu({ Menus }: { Menus: Menu[] }) {
       </button>
 
       <motion.div
-        className="fixed !z-50 left-0 right-0 top-16 overflow-y-auto h-full bg-[#18181A] backdrop-blur text-white p-6 pb-20"
+        className="fixed !z-50 left-0 right-0 top-16 overflow-y-auto h-full bg-[#FFFBEE] backdrop-blur text-primary p-6 pb-20"
         initial={{ x: "-100%" }}
         animate={{ x: isOpen ? "0%" : "-100%" }}
       >

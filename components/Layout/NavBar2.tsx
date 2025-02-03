@@ -46,13 +46,13 @@ const NavBar2 = () => {
     }, [status]);
 
     return (
-        <header className="px-[40px] py-[20px] text-[15px] z-50 sticky inset-0 flex-center text-white bg-primary">
+        <header className="px-5 md:px-[40px] py-[20px] text-[15px] z-50 sticky inset-0 flex-center text-white bg-primary">
             <nav className="flex-center-between w-full">
                 <div className="z-[999] relative">
                     {/* <Image src={AcmeLogo} alt="" width={20} height={20} /> */}
                     <Link href={"/"} className='flex-center gap-x-2 '>
                         <AcmeLogo />
-                        <h3 className="text-lg font-semibold">Framer</h3>
+                        <h3 className="text-lg font-Archivo font-semibold">XY</h3>
                     </Link>
                 </div>
 

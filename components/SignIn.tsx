@@ -1,7 +1,6 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -19,7 +18,6 @@ type FormFields = z.infer<typeof schema>;
 
 export const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
     const { status } = useSession();
 
     const {
@@ -35,16 +33,16 @@ export const SignIn = () => {
 
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
 
-        const returnUrl = typeof window !== "undefined" ? localStorage.getItem("returnUrl") || "/" : "/";
+        const returnUrl = typeof window !== 'undefined'
+            ? localStorage.getItem('returnUrl') || '/'
+            : '/';
 
         // console.log("returnUrl", returnUrl)
         try {
             const result = await signIn("credentials", {
                 redirect: false,
-                ...data,
-                callbackUrl: returnUrl
+                ...data
             });
-            // console.log("url", result?.url);
 
             if (result?.error) {
                 setError("root", { message: result.error });
@@ -63,9 +61,15 @@ export const SignIn = () => {
                 });
             } else if (result?.ok) {
                 reset();
-                localStorage.removeItem("returnUrl");
-                // Redirect to the stored return URL
-                await router.push(result.url ?? returnUrl);
+                // Wait for the session to be updated
+                await new Promise((resolve) => setTimeout(resolve, 100));
+
+                if (returnUrl) {
+                    localStorage.removeItem("returnUrl");
+                    window.location.href = returnUrl;
+                } else {
+                    window.location.href = "/";
+                }
                 toast.success("Logged in successfully", {
                     position: "top-right",
                     duration: 3000,
@@ -86,6 +90,7 @@ export const SignIn = () => {
             setError("root", { message: errorMessage });
             toast.error(errorMessage);
         }
+        return null;
     };
 
     if (status === "loading") {
@@ -100,8 +105,8 @@ export const SignIn = () => {
     }
 
     return (
-        <div className="rounded-md border-4 border-[#ECEFF1] bg-white shadow-xl m-4">
-            <div className="block p-4 md:p-7">
+        <div className="rounded-md border-4 mt-14 border-[#ECEFF1] mx-5 bg-white shadow-xl md:m-4">
+            <div className="block py-2 md:p-7">
                 {/* <div className="hidden w-full xl:block xl:w-1/2">
 
                     <div className="p-4 sm:px-16 sm:py-0 space-y-1 text-center flex justify-center flex-col">

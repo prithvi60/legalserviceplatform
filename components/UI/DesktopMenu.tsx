@@ -8,6 +8,7 @@ import { Button } from "@heroui/button";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { navActiveLinks } from "@/constants/Data";
 
 interface Menu {
   menu: string;
@@ -25,24 +26,25 @@ interface SubLink {
   href: string;
 }
 
-export default function DesktopMenu({ menu, }: { menu: Menu }) {
+export default function DesktopMenu({ menu }: { menu: Menu }) {
   const [isHover, toggleHover] = useState(false);
   const { status } = useSession();
   const router = useRouter();
   // Set default value of hoveredSubMenuIndex to 0
-  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<number>(0);
+  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<string>("");
 
   const toggleHoverMenu = () => {
     toggleHover(!isHover);
   };
 
   const handleClick = (val: string) => {
+
     if (status === "authenticated") {
       router.push(val);
-
     } else {
-      localStorage.setItem("returnUrl", val);
-      router.push("/api/auth/signin");
+      localStorage.setItem('returnUrl', val);
+      // Navigate to sign in
+      router.push('/api/auth/signin');
     }
   };
 
@@ -69,9 +71,14 @@ export default function DesktopMenu({ menu, }: { menu: Menu }) {
 
   const hasSubMenu = menu?.subCategories?.length;
 
+  const FilteredData = navActiveLinks.find(
+    (val) => val.menu === hoveredSubMenuIndex
+  );
+
   return (
     <motion.li
-      className={`group/link px-5 ${menu.menu === "Consult an Expert" ? "relative" : ""}`}
+      className={`group/link px-2 xl:px-5 ${menu.menu === "Consult an Expert" ? "relative" : ""
+        }`}
       onHoverStart={toggleHoverMenu}
       onHoverEnd={toggleHoverMenu}
       key={menu.menu}
@@ -99,52 +106,83 @@ export default function DesktopMenu({ menu, }: { menu: Menu }) {
 
       {hasSubMenu && (
         <motion.div
-          className={`${menu.menu === "Consult an Expert" ? "sub-menu_1" : "sub-menu"}`}
+          className={`${menu.menu === "Consult an Expert" ? "sub-menu_1" : "sub-menu"
+            }`}
           initial="exit"
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
         >
-          <div className={`grid gap-4 grid-cols-1`}>
+          <div className={`grid gap-4 grid-cols-1 relative`}>
             {hasSubMenu &&
               menu.subCategories?.map((submenu, i) => (
                 <div
                   className="relative cursor-pointer w-full"
                   key={i}
-                  onMouseEnter={() => setHoveredSubMenuIndex(i)}
-                  onMouseLeave={() => setHoveredSubMenuIndex(0)} // Reset to 0 on mouse leave
+                  onMouseEnter={() => setHoveredSubMenuIndex(submenu.subMenu)}
+                // onMouseLeave={() => setHoveredSubMenuIndex(0)}
                 >
-                  <div className={`${menu.menu === "Consult an Expert" ? "grid grid-cols-1 w-full" : "grid grid-cols-2 w-[540px]"} gap-x-4 h-fit`}>
+                  <div
+                    className={`${menu.menu === "Consult an Expert"
+                      ? "grid grid-cols-1 w-full"
+                      : "grid grid-cols-2 w-[540px]"
+                      } relative gap-x-4 h-fit`}
+                  >
                     <div
-                      className={`w-full h-20 flex justify-center items-center p-1.5 ${hoveredSubMenuIndex === i ? "bg-warning/60 rounded-md" : ""}`}
+                      className={`w-full h-20 flex justify-center items-center p-1.5 ${hoveredSubMenuIndex === submenu.subMenu
+                        ? "bg-warning/60 rounded-md"
+                        : ""
+                        }`}
                     >
-                      <h6 className={`font-semibold flex w-full items-center gap-2 group/menubox`}>
-                        <span>
-                          <IoDocumentTextOutline className=" w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
-                        </span>
-                        {submenu.subMenu}
-                        <span >
-                          <MdOutlineKeyboardArrowRight className="text-xl text-black" />
-                        </span>
-                      </h6>
+                      {menu.menu === "Consult an Expert" ? (
+                        <Link
+                          href={submenu.href}
+                          className={`font-semibold flex w-full items-center gap-2 group/menubox`}
+                        >
+                          <span>
+                            <IoDocumentTextOutline className=" w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
+                          </span>
+                          {submenu.subMenu}
+                          <span>
+                            <MdOutlineKeyboardArrowRight className="text-xl text-black" />
+                          </span>
+                        </Link>
+                      ) : (
+                        <h6
+                          className={`font-semibold flex w-full items-center gap-2 group/menubox`}
+                        >
+                          <span>
+                            <IoDocumentTextOutline className=" w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
+                          </span>
+                          {submenu.subMenu}
+                          <span>
+                            <MdOutlineKeyboardArrowRight className="text-xl text-black" />
+                          </span>
+                        </h6>
+                      )}
                     </div>
-                    {hoveredSubMenuIndex === i && submenu.subDividion?.length && (
-                      <div className={`w-full space-y-2`}>
-                        {submenu.subDividion.map((subdiv, id) => (
-                          <div key={id} className="block space-y-2 h-fit">
-                            <Link
-                              href={subdiv.href}
-                              className={`font-semibold w-full`}
-                              onClick={() => handleClick(subdiv.href)}
-                            >
-                              {subdiv.subLink}
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               ))}
+            {FilteredData && (
+              <div
+                className={`space-y-4 bg-white w-max absolute top-0 left-72`}
+              >
+                <h4 className="font-Archivo pb-3 font-bold text-lg underline underline-offset-8 text-primary tracking-wide">
+                  {FilteredData.menu}
+                </h4>
+                {FilteredData.subDividion.map((subdiv, id) => (
+                  <div key={id} className="block space-y-2 h-fit">
+                    <Link
+                      href={subdiv.href}
+                      className={`font-semibold w-full`}
+                      onClick={() => handleClick(subdiv.href)}
+                    >
+                      {subdiv.subLink}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
       )}

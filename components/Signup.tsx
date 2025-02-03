@@ -129,10 +129,10 @@ export const SignUp = () => {
     };
 
     return (
-        <div className="rounded-md border-4 border-[#ECEFF1] bg-white shadow-xl m-4">
+        <div className="rounded-md border-4 border-[#ECEFF1] bg-white shadow-xl mt-14 xl:m-4 mx-5">
             <div className="flex flex-wrap items-start relative">
 
-                <div className="w-full p-4 sm:px-6 border-2">
+                <div className="w-full py-2 sm:px-6 border-2">
                     <div className="w-full px-4 py-4 sm:p-12.5 xl:p-17.5 text-[#1E318D]">
                         {/* <span className="mb-1.5 block font-medium text-sm md:text-base">Start for free</span> */}
                         <h2 className="mb-6 text-lg font-bold text-[#1E318D] md:text-2xl">
