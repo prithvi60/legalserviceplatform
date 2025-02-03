@@ -8,7 +8,7 @@ import { z } from "zod";
 import toast from "react-hot-toast";
 import { Loader } from "@/components/UI/Loader";
 import Link from "next/link";
-import { LoaderPinwheel } from "lucide-react";
+import { Spinner } from "@heroui/spinner";
 
 const schema = z.object({
     email: z.string().email("Invalid email address"),
@@ -96,11 +96,10 @@ export const SignIn = () => {
     if (status === "loading") {
         return (
             <div className="w-full padding h-[80vh] flex justify-center items-center">
-                <LoaderPinwheel className="animate-spin w-10 h-10 text-primary" />
+                <Spinner size="lg" classNames={{
+                    label: "animate-pulse text-base md:text-2xl font-archivo font-semibold tracking-wider"
+                }} color="primary" labelColor="primary" label="Loading..." />
             </div>
-            // <div className="w-full h-[80vh] flex justify-center items-center">
-            //     Loading...
-            // </div>
         );
     }
 

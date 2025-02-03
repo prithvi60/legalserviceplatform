@@ -43,6 +43,11 @@ const CalendlyLink = ({
                 endContent={
                     text === "Get a Demo" && <FaLongArrowAltRight className='text-base' />
                 }
+                onPress={() => {
+                    if (window.Calendly) {
+                        window.Calendly.initPopupWidget({ url })
+                    }
+                }}
                 onClick={(e) => {
                     e.preventDefault()
                     if (window.Calendly) {

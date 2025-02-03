@@ -30,8 +30,8 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
   const [isHover, toggleHover] = useState(false);
   const { status } = useSession();
   const router = useRouter();
-  // Set default value of hoveredSubMenuIndex to 0
-  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<string>("");
+  const defaultSubMenu = menu.subCategories?.[0]?.subMenu || "";
+  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<string>(defaultSubMenu);
 
   const toggleHoverMenu = () => {
     toggleHover(!isHover);
@@ -174,7 +174,7 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
                   <div key={id} className="block space-y-2 h-fit">
                     <Link
                       href={subdiv.href}
-                      className={`font-semibold w-full`}
+                      className={`font-semibold w-full hover:text-primary/80`}
                       onClick={() => handleClick(subdiv.href)}
                     >
                       {subdiv.subLink}

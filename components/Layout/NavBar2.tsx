@@ -10,7 +10,7 @@ import { GetUserResponse } from '@/types/Types';
 import { GET_USER } from '@/constants/Queries';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown';
 import { Avatar } from '@heroui/avatar';
-import { LoaderPinwheel } from 'lucide-react';
+import { Spinner } from "@heroui/spinner";
 
 
 const AcmeLogo = () => {
@@ -79,7 +79,7 @@ const NavBar2 = () => {
                                         <p className="font-semibold text-xs">Signed in as</p>
                                         {loading ? (
                                             <div className="w-full mx-auto flex justify-center items-center">
-                                                <LoaderPinwheel className="animate-spin size-6 text-center text-primary" />
+                                                <Spinner size="md" color="primary" />
                                             </div>
                                         ) : (
                                             <p className="font-semibold text-primary">{RoleBased?.getUser?.email}</p>

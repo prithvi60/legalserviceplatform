@@ -9,12 +9,12 @@ import MyDocs from "./MyDocs";
 import { Avatar } from "@heroui/avatar";
 import { FaEnvelope } from "react-icons/fa6";
 import { Button } from "@heroui/button";
-import { LoaderPinwheel } from "lucide-react";
 import ProfileEditForm from "./ProfileEditForm";
+import { Spinner } from "@heroui/spinner";
 
 
 const ProfilePage = () => {
-    const { data: sessionData, status } = useSession();
+    const { data: sessionData } = useSession();
     const { data: RoleBased, loading } = useQuery<GetUserResponse>(GET_USER, {
         variables: { email: sessionData?.user?.email },
     });
@@ -37,11 +37,10 @@ const ProfilePage = () => {
     if (loading || getDocLoading)
         return (
             <div className="w-full padding h-[80vh] flex justify-center items-center">
-                <LoaderPinwheel className="animate-spin w-24 h-24 text-primary" />
+                <Spinner size="lg" classNames={{
+                    label: "animate-pulse text-base md:text-2xl font-archivo font-semibold tracking-wider"
+                }} color="primary" labelColor="primary" label="Loading..." />
             </div>
-            // <p className="w-full padding h-screen flex justify-center items-center text-2xl md:text-4xl font-Lorin font-bold tracking-widest animate-pulse">
-            //     Loading...
-            // </p>
         );
 
     return (

@@ -25,8 +25,8 @@ import { Button } from "@heroui/button";
 import { Avatar } from "@heroui/avatar";
 import { GetUserResponse } from "@/types/Types";
 import { GET_USER } from "@/constants/Queries";
-import { LoaderPinwheel } from "lucide-react";
 import { useQuery } from "@apollo/client";
+import { Spinner } from "@heroui/spinner";
 
 export const AcmeLogo = () => {
     return (
@@ -191,7 +191,7 @@ export default function NavbarComponent() {
                                     <p className="font-semibold text-xs">Signed in as</p>
                                     {loading ? (
                                         <div className="w-full mx-auto flex justify-center items-center">
-                                            <LoaderPinwheel className="animate-spin size-6 text-center text-primary" />
+                                            <Spinner size="md" color="primary" />
                                         </div>
                                     ) : (
                                         <p className="font-semibold text-primary">{RoleBased?.getUser?.email}</p>
@@ -287,7 +287,7 @@ export default function NavbarComponent() {
                                     <p className="font-semibold text-sm">Signed in as</p>
                                     {loading ? (
                                         <div className="w-full mx-auto flex justify-center items-center">
-                                            <LoaderPinwheel className="animate-spin size-6 text-center text-primary" />
+                                            <Spinner size="md" color="primary" />
                                         </div>
                                     ) : (
                                         <p className="font-semibold text-primary">{RoleBased?.getUser?.email}</p>
