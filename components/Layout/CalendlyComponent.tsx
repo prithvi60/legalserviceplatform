@@ -1,18 +1,39 @@
+// CalendlyComponent.tsx
 import dynamic from "next/dynamic";
-// import CalendlyPopup from "../UI/CalendlyButton";
-const Calendly = dynamic(() => import("../UI/CalendlyButton"), {
-    ssr: false
-});
+import { Suspense } from "react";
+import { Spinner } from "@heroui/spinner";
 
-const CalendlyComponent = ({text}:{text:string}) => {
-    return (
-        <div>
-            <Calendly
-                url="https://calendly.com/gokulgandhi2301"
-                text={text}
-            />
-        </div>
-    )
+// Define props interface
+interface CalendlyProps {
+    url: string;
+    text: string;
 }
 
-export default CalendlyComponent
+// Dynamically import the CalendlyButton component
+const DynamicCalendly = dynamic<CalendlyProps>(
+    () => import("../UI/CalendlyButton").then((mod) => mod.default),
+    {
+        ssr: false,
+        // loading: () => (
+        //     <Spinner
+        //         size="md"
+        //         color="primary"
+        //     />
+        // ),
+    }
+);
+
+const CalendlyComponent = ({ text }: { text: string }) => {
+    return (
+        <Suspense fallback={<Spinner size="md" color="primary" />}>
+            <div>
+                <DynamicCalendly
+                    url="https://calendly.com/gokulgandhi2301"
+                    text={text}
+                />
+            </div>
+        </Suspense>
+    );
+};
+
+export default CalendlyComponent;

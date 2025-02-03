@@ -1,13 +1,13 @@
 'use client'
 
 import { Button } from '@heroui/button'
-import Script from 'next/script'
+// import Script from 'next/script'
 import { FaLongArrowAltRight } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
 
 interface CalendlyLinkProps {
     url: string
     text?: string
-    // className?: string
 }
 
 interface CalendlyInterface {
@@ -23,17 +23,39 @@ declare global {
 const CalendlyLink = ({
     url,
     text
-    // className = "text-blue-500 hover:text-blue-700 underline"
 }: CalendlyLinkProps) => {
+    const [isScriptLoaded, setIsScriptLoaded] = useState(false)
+
+    useEffect(() => {
+        const handleScriptLoad = () => {
+            setIsScriptLoaded(true)
+        }
+
+        const script = document.createElement('script')
+        script.src = 'https://assets.calendly.com/assets/external/widget.js'
+        script.async = true
+        script.onload = handleScriptLoad
+        document.body.appendChild(script)
+
+        return () => {
+            document.body.removeChild(script)
+        }
+    }, [])
+
+    const handleCalendlyClick = (e: React.MouseEvent | React.TouchEvent) => {
+        e.preventDefault()
+        if (window.Calendly && isScriptLoaded) {
+            window.Calendly.initPopupWidget({ url })
+        } else {
+            console.error('Calendly script not loaded')
+        }
+    }
+
     return (
         <>
             <link
                 href="https://assets.calendly.com/assets/external/widget.css"
                 rel="stylesheet"
-            />
-            <Script
-                src="https://assets.calendly.com/assets/external/widget.js"
-                strategy="lazyOnload"
             />
             <Button
                 color="warning"
@@ -43,17 +65,9 @@ const CalendlyLink = ({
                 endContent={
                     text === "Get a Demo" && <FaLongArrowAltRight className='text-base' />
                 }
-                onPress={() => {
-                    if (window.Calendly) {
-                        window.Calendly.initPopupWidget({ url })
-                    }
-                }}
-                onClick={(e) => {
-                    e.preventDefault()
-                    if (window.Calendly) {
-                        window.Calendly.initPopupWidget({ url })
-                    }
-                }}
+                onClick={handleCalendlyClick}
+                onTouchEnd={handleCalendlyClick}
+                aria-label={`Schedule ${text}`}
             >
                 {text}
             </Button>
