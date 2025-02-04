@@ -1,7 +1,8 @@
 import { decryptText } from "@/services/encryption";
 import { FormData2 } from "@/types/Types";
+import { Input } from "@heroui/input";
 import { Tooltip } from "@heroui/tooltip";
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 interface LetterPreviewProps {
     formData: FormData2;
@@ -11,6 +12,120 @@ interface LetterPreviewProps {
     isFormComplete: boolean;
     targetRef: React.RefObject<HTMLDivElement>;
 }
+
+export const renderStep = ({ step, formData, handleInputChange }: { step: number; formData: FormData2; handleInputChange: (name: keyof FormData2, value: string) => void }): JSX.Element | null => {
+    switch (step) {
+        case 1:
+            return (
+                <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Basic Information</h3>
+                    <Input
+                        label="Agreement Day"
+                        placeholder="e.g. 22nd"
+                        value={formData.agreementDay}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            handleInputChange("agreementDay", e.target.value)
+                        }
+                    />
+                    <Input
+                        label="Agreement Month"
+                        placeholder="e.g. 01 or January"
+                        value={formData.agreementMonth}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            handleInputChange("agreementMonth", e.target.value)
+                        }
+                    />
+                    <Input
+                        label="Disclosing Party Company Name"
+                        placeholder="Enter company name"
+                        value={formData.disclosingPartyCompanyName}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            handleInputChange("disclosingPartyCompanyName", e.target.value)
+                        }
+                    />
+                </div>
+            );
+
+        case 2:
+            return (
+                <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Disclosing Party Details</h3>
+                    <div className="block space-y-4">
+                        <Input
+                            label="Disclosing Party Registered Office"
+                            placeholder="Enter registered office address"
+                            value={formData.disclosingPartyRegisteredOffice}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                handleInputChange(
+                                    "disclosingPartyRegisteredOffice",
+                                    e.target.value
+                                )
+                            }
+                            className="w-full"
+                        />
+                        <Input
+                            label="Disclosing Party Representative Name"
+                            placeholder="Enter representative name"
+                            value={formData.disclosingPartyRepName}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                handleInputChange("disclosingPartyRepName", e.target.value)
+                            }
+                            className="w-full"
+                        />
+                        <Input
+                            label="Disclosing Party Position"
+                            placeholder="Enter position"
+                            value={formData.disclosingPartyPosition}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                                handleInputChange("disclosingPartyPosition", e.target.value)
+                            }
+                            className="w-full"
+                        />
+                    </div>
+                </div>
+            );
+
+        case 3:
+            return (
+                <div className="space-y-4">
+                    <h3 className="text-lg font-semibold">Receiving Party Details</h3>
+                    <Input
+                        label="Receiving Party Company Name"
+                        placeholder="Enter company name"
+                        value={formData.receivingPartyName}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            handleInputChange("receivingPartyName", e.target.value)
+                        }
+                        className="w-full"
+                    />
+                    <Input
+                        label="Receiving Party Registered Office"
+                        placeholder="Enter registered office address"
+                        value={formData.receivingPartyRegisteredOffice}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            handleInputChange(
+                                "receivingPartyRegisteredOffice",
+                                e.target.value
+                            )
+                        }
+                        className="w-full"
+                    />
+                    <Input
+                        label="Receiving Party Position"
+                        placeholder="Enter position"
+                        value={formData.receivingPartyPosition}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            handleInputChange("receivingPartyPosition", e.target.value)
+                        }
+                        className="w-full"
+                    />
+                </div>
+            );
+
+        default:
+            return null;
+    }
+};
 
 const LetterPreview: React.FC<LetterPreviewProps> = ({
     formData,

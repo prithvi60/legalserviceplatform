@@ -8,7 +8,7 @@ export default {
     "./services/**/*.{js,ts,jsx,tsx,mdx}",
     "./features/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(accordion|avatar|button|card|date-picker|dropdown|form|input|navbar|popover|progress|radio|scroll-shadow|divider|ripple|spinner|calendar|date-input|menu).js",
+    "./node_modules/@heroui/theme/dist/components/(accordion|avatar|button|card|checkbox|date-picker|dropdown|form|input|navbar|popover|progress|radio|scroll-shadow|select|divider|ripple|spinner|calendar|date-input|menu|listbox).js"
   ],
   theme: {
     extend: {

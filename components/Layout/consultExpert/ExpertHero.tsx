@@ -1,7 +1,7 @@
-import { Button } from "@heroui/button";
 import Image from "next/image";
 import React from "react";
 import ExpertContactForm from "./ExpertContactForm";
+import CalendlyComponent from "../CalendlyComponent";
 
 const ExpertHero = () => {
     return (
@@ -14,14 +14,7 @@ const ExpertHero = () => {
                     At Vakilsearch, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>
-                <Button
-                    size="lg"
-                    radius="md"
-                    color="warning"
-                    className="font-Inter font-medium tracking-wider"
-                >
-                    Book Now
-                </Button>
+                <CalendlyComponent text='Book Now' />
                 <ul className="block space-y-3 text-[#717171] w-full lg:w-3/4">
                     {expertContentList.map((list, idx) => (
                         <li

@@ -29,6 +29,19 @@ export interface FormData2 {
   disclosingPartyRegisteredOffice: string;
 }
 
+export interface NDAFormData {
+  agreementDay: string;
+  agreementMonth: string;
+  receivingPartyName: string;
+  receivingPartyAddress: string;
+  receivingPartyRegisteredOffice: string;
+  receivingPartyPosition: string;
+  disclosingPartyCompanyName: string;
+  disclosingPartyRepName: string;
+  disclosingPartyPosition: string;
+  disclosingPartyRegisteredOffice: string;
+}
+
 export interface Context {
   userId?: number;
 }
