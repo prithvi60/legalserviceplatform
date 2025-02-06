@@ -1,11 +1,10 @@
-import Image from 'next/image'
 import React from 'react'
 import CalendlyComponent from './CalendlyComponent';
 
 const Information = () => {
     return (
-        <section className="padding w-full space-y-6 sm:space-y-12">
-            <div className="w-[120px] h-[120px] sm:w-[220px] sm:h-[220px] overflow-hidden mx-auto relative">
+        <section className="padding bg-white w-full space-y-6 sm:space-y-12">
+            {/* <div className="w-[120px] h-[120px] sm:w-[220px] sm:h-[220px] overflow-hidden mx-auto relative">
                 <Image
                     className="object-contain object-center"
                     alt="bg image"
@@ -13,7 +12,7 @@ const Information = () => {
                     fill
                     priority
                 />
-            </div>
+            </div> */}
             <h2 className="font-Archivo font-bold text-center tracking-wide text-2xl md:text-4xl xl:text-6xl">
                 Access Legal Advice Instantly - Fast, Easy, and Hassle-Free!
             </h2>
@@ -29,7 +28,7 @@ const Information = () => {
                 >
                     Get a Demo
                 </Button> */}
-                <CalendlyComponent text='Get a Demo'/>
+                <CalendlyComponent text='Get a Demo' />
             </div>
 
         </section>

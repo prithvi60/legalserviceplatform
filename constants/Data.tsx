@@ -1,3 +1,4 @@
+
 export const navLinks = [
     {
         menu: "Consult an Expert",
@@ -16,7 +17,7 @@ export const navLinks = [
             {
                 href: "#",
                 subMenu: "Company Registration",
-                subDividion: [
+                subDivision: [
                     {
                         href: "/documentation/business_contracts/PLD",
                         subLink: "Private Limited Company",
@@ -34,7 +35,7 @@ export const navLinks = [
             {
                 href: "#",
                 subMenu: "International Business Setup",
-                subDividion: [
+                subDivision: [
                     {
                         href: "/documentation/business_contracts/USI",
                         subLink: "US Incorporation",
@@ -52,7 +53,7 @@ export const navLinks = [
             {
                 href: "#",
                 subMenu: "Company Name Search",
-                subDividion: [
+                subDivision: [
                     {
                         href: "/documentation/business_contracts/CNS",
                         subLink: "Company Name Search",
@@ -71,9 +72,9 @@ export const navLinks = [
             {
                 href: "/documentation/business_contracts",
                 subMenu: "Business Contracts",
-                subDividion: [
+                subDivision: [
                     {
-                        href: "/documentation/business_contracts",
+                        href: "/documentation/business_contracts/NDA",
                         subLink: "Non Disclosure Agreement NDA",
                     },
                     {
@@ -89,7 +90,7 @@ export const navLinks = [
             {
                 href: "/documentation",
                 subMenu: "Personal & Family",
-                subDividion: [
+                subDivision: [
                     { href: "/documentation", subLink: "Power of Attorney" },
                     {
                         href: "/documentation/business_contracts/WA",
@@ -104,7 +105,7 @@ export const navLinks = [
             {
                 href: "/documentation",
                 subMenu: "Real Estate",
-                subDividion: [
+                subDivision: [
                     {
                         href: "/documentation/business_contracts/RA",
                         subLink: "Rental Agreement",
@@ -126,7 +127,7 @@ export const navLinks = [
 export const navActiveLinks = [
     {
         menu: "Company Registration",
-        subDividion: [
+        subDivision: [
             {
                 href: "/documentation/business_contracts/PLD",
                 subLink: "Private Limited Company",
@@ -143,7 +144,7 @@ export const navActiveLinks = [
     },
     {
         menu: "International Business Setup",
-        subDividion: [
+        subDivision: [
             {
                 href: "/documentation/business_contracts/USI",
                 subLink: "US Incorporation",
@@ -160,7 +161,7 @@ export const navActiveLinks = [
     },
     {
         menu: "Company Name Search",
-        subDividion: [
+        subDivision: [
             {
                 href: "/documentation/business_contracts/CNS",
                 subLink: "Company Name Search",
@@ -173,9 +174,9 @@ export const navActiveLinks = [
     },
     {
         menu: "Business Contracts",
-        subDividion: [
+        subDivision: [
             {
-                href: "/documentation/business_contracts",
+                href: "/documentation/business_contracts/NDA",
                 subLink: "Non Disclosure Agreement NDA",
             },
             {
@@ -190,7 +191,7 @@ export const navActiveLinks = [
     },
     {
         menu: "Personal & Family",
-        subDividion: [
+        subDivision: [
             { href: "/documentation", subLink: "Power of Attorney" },
             {
                 href: "/documentation/business_contracts/WA",
@@ -204,7 +205,7 @@ export const navActiveLinks = [
     },
     {
         menu: "Real Estate",
-        subDividion: [
+        subDivision: [
             {
                 href: "/documentation/business_contracts/RA",
                 subLink: "Rental Agreement",
@@ -213,4 +214,195 @@ export const navActiveLinks = [
             { href: "/documentation/business_contracts/GD", subLink: "Gift Deed" },
         ],
     },
+];
+
+export const navLinks2 = [
+    {
+        menu: "Business setup",
+        subCategories: [
+            {
+                subMenu: "UAE",
+                subDivision: [
+                    {
+                        href: "/business_setup/uae/IBS",
+                        subLink: "International business setup ",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        menu: "Tax & Compliance",
+        subCategories: [
+            {
+                subMenu: "INDIA",
+                subDivision: [
+                    {
+                        href: "/tax_compliance/india/GIT",
+                        subLink: "GST and Indirect Tax",
+                    },
+                    {
+                        href: "tax_compliance/india/AF",
+                        subLink: "Annual Filings",
+                    },
+                    {
+                        href: "tax_compliance/india/ATB",
+                        subLink: "Accounting & Tax Convert Your Business",
+                    },
+                ],
+            },
+            {
+                subMenu: "UAE",
+                subDivision: [
+                    { href: "tax_compliance/uae/AT", subLink: "Accounting & Tax" },
+                    {
+                        href: "tax_compliance/uae/AF",
+                        subLink: "Annual Filings",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        menu: "Legal Documentation",
+        subCategories: [
+            {
+                subMenu: "INDIA",
+                subDivision: [
+                    {
+                        href: "/legal_documentation/india/BC",
+                        subLink: "Business Contracts",
+                    },
+                    {
+                        href: "/legal_documentation/india/EA",
+                        subLink: "Employee Agreement",
+                    },
+                    {
+                        href: "/legal_documentation/india/RA",
+                        subLink: "Remote Agreement",
+                    },
+                    {
+                        href: "legal_documentation/india/PF",
+                        subLink: "Personal & Family",
+                    },
+                    {
+                        href: "legal_documentation/india/REN",
+                        subLink: "Real Estate Notices HR Policies",
+                    },
+                ],
+            },
+            {
+                subMenu: "UAE",
+                subDivision: [
+                    { href: "legal_documentation/uae/BC", subLink: "Business Contracts" },
+                    {
+                        href: "legal_documentation/uae/PF",
+                        subLink: "Personal & Family",
+                    },
+                    {
+                        href: "legal_documentation/uae/REN",
+                        subLink: "Real Estate Notices HR Policies",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        menu: "Financial Consultation",
+        subCategories: [
+            {
+                href: "/financial_consultation/lawyers",
+                subMenu: "Strategic Business Finance",
+            },
+            {
+                href: "/financial_consultation/BVFM",
+                subMenu: "Business Valuation & Financial Modelling",
+            },
+            {
+                href: "/financial_consultation/FIA",
+                subMenu: "Fundraising & Investment Advisory",
+            },
+            {
+                href: "/financial_consultation/PDI",
+                subMenu: "Pitch Deck & Investment Documentation",
+            },
+        ],
+    },
+    {
+        menu: "Expert Consultation",
+        subCategories: [
+            { href: "/consultAExpert/lawyers", subMenu: "Lawyers" },
+            {
+                href: "/consultAExpert/CA_CS",
+                subMenu: "CAs & CSs at your fingertips",
+            },
+        ],
+    },
+
+];
+
+export const communityServices = [
+    {
+        title: "Tax & Compliance",
+        services: [
+            {
+                country: "INDIA",
+                lists: "GST and Indirect Tax , Annual Filings , Accounting & Tax Convert Your Business"
+            },
+            {
+                country: "UAE",
+                lists: "Accounting & Tax , Annual Filings"
+            },
+        ],
+    },
+    {
+        title: "Legal Documentation",
+        services: [
+            {
+                country: "INDIA",
+                lists: "Business Contracts ,Personal & Family, Real Estate Notices HR Policies"
+            },
+            {
+                country: "UAE",
+                lists: "Business Contracts ,Personal & Family, Real Estate Notices HR Policies"
+            },
+        ],
+    },
+    {
+        title: "Expert Consultation",
+        services: [
+            {
+                country: "Lawyers",
+                lists: ""
+            },
+            {
+                country: "CAs",
+                lists: ""
+            },
+            {
+                country: "CSs",
+                lists: ""
+            }
+        ],
+    },
+    {
+        title: "Financial Consultation",
+        services: [
+            {
+                country: "",
+                lists: "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation"
+            },
+
+        ],
+    },
+    {
+        title: "Business Setup",
+        services: [
+            {
+                country: "UAE",
+                lists: "International business setup"
+            },
+        ],
+    },
+
 ];

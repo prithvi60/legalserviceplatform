@@ -14,8 +14,8 @@ interface Menu {
 
 interface SubMenu {
   subMenu: string;
-  href: string;
-  subDividion?: Array<SubLink>;
+  href?: string;
+  subDivision?: Array<SubLink>;
 }
 
 interface SubLink {
@@ -65,7 +65,7 @@ export default function MobMenu({ Menus }: { Menus: Menu[] }) {
       </button>
 
       <motion.div
-        className="fixed !z-50 left-0 right-0 top-16 overflow-y-auto h-full bg-[#FFFBEE] backdrop-blur text-primary p-6 pb-20"
+        className="fixed !z-50 left-0 right-0 top-16 no_scrollbar overflow-y-auto h-full bg-[#FFFBEE] backdrop-blur text-primary p-6 pb-20"
         initial={{ x: "-100%" }}
         animate={{ x: isOpen ? "0%" : "-100%" }}
       >
@@ -95,7 +95,7 @@ export default function MobMenu({ Menus }: { Menus: Menu[] }) {
                   >
                     {menu?.subCategories?.map((submenu: SubMenu, idx: number) => {
                       const isSubMenuOpen = openSubMenuIndex === idx;
-                      const hasSubDiv = submenu.subDividion?.length;
+                      const hasSubDiv = submenu.subDivision?.length;
                       return (
                         <li
                           key={idx}
@@ -124,7 +124,7 @@ export default function MobMenu({ Menus }: { Menus: Menu[] }) {
                               variants={subMenuDrawer}
                               className="ml-5"
                             >
-                              {submenu.subDividion?.map((subDiv: SubLink, id: number) => (
+                              {submenu.subDivision?.map((subDiv: SubLink, id: number) => (
                                 <li key={id}>
                                   <Link className="p-2 flex-center hover:bg-white/5 rounded-md gap-x-2 cursor-pointer" href={subDiv.href} onClick={() => toggleDrawer(subDiv.href)}>
                                     <span>

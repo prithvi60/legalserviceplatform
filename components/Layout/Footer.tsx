@@ -1,7 +1,6 @@
 "use client"
 import Link from "next/link";
 import { useState } from "react";
-import { AcmeLogo } from "./NavbarComponent";
 import { FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { TbSend } from "react-icons/tb";
 import { FaXTwitter } from "react-icons/fa6";
@@ -30,8 +29,7 @@ const Footer = () => {
         <footer className="padding w-full font-Inter bg-primary/90 text-white flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-12 lg:gap-8">
             <div className="block space-y-8">
                 <Link href={"/"} className="flex justify-center lg:justify-start items-center gap-2">
-                    <AcmeLogo />
-                    <p className="font-bold text-inherit">XY</p>
+                    <p className="font-bold font-Inter italic font-semibold">Resolve</p>
                 </Link>
                 <div className="text-sm text-center lg:text-start md:text-base space-y-3">
                     <p>Copyright © {new Date().getFullYear()}</p>

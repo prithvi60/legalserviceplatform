@@ -1,15 +1,16 @@
 // documentConfig.ts
 
-import { NDAFormData } from "@/types/Types";
+import { EARenderStep, NDALetterPreview, NDARenderStep, } from "@/components/Layout/LetterPreview";
+import { EmployeeFormData, NDAFormData } from "@/types/Types";
 export interface FieldGroup<T> {
     step: number;
     fields: (keyof T)[];
 }
 
 export const documentConfig = {
-    NDA: {
+    BC: {
         title: "Non-Disclosure Agreement",
-        documentSlug: "NDA",
+        documentSlug: "BC",
         initialFormData: {
             agreementDay: "",
             agreementMonth: "",
@@ -38,7 +39,117 @@ export const documentConfig = {
                 `,
         storageKey: "nda-form-data",
         fileName: "nda-agreement.pdf",
-        url: "/documentation/business_contracts",
+        url: "/documentation/business_contracts/NDA",
+        renderStep: NDARenderStep,
+        letterPreview: NDALetterPreview
     },
+    // EA: {
+    //     title: "Employee Agreement",
+    //     documentSlug: "EA",
+    //     initialFormData: {
+    //         employee_name: "",
+    //         employee_address: "",
+    //         designation: "",
+    //         department: "",
+    //         joining_date: "",
+    //         ctc: 0,
+    //         ctc_breakup: "",
+    //         bank_account_details: "",
+    //         work_location: "",
+    //         office_hours: "",
+    //         severance_package: "",
+    //         public_holidays: [],
+    //         paid_leave: 0,
+    //         casual_sick_leave: 0,
+    //         joining_bonus: 0,
+    //         non_compete_duration: "",
+
+    //         // Radio Buttons
+    //         employment_type: "Full-time",
+    //         remote_work_policy: "No",
+    //         weekend_work: "No",
+    //         leave_accrual_policy: "No",
+    //         termination_cause: "No",
+    //         non_compete_clause: "No",
+    //         confidentiality_agreement: "No",
+    //         intellectual_property_rights: "No",
+    //         code_of_conduct_agreement: "No",
+    //         background_check: "No",
+
+    //         // Dropdowns
+    //         probation_period: "No probation",
+    //         termination_notice_period: "1 month",
+    //         reimbursement_policy: "No reimbursement",
+    //         dispute_resolution_clause: "Arbitration",
+    //         working_days: [],
+    //         benefits_provided: [],
+    //         required_documents: [],
+    //     } as EmployeeFormData,
+    //     fieldGroups: [
+    //         {
+    //             step: 1,
+    //             fields: ["employee_name", "employee_address", "designation", "department"],
+    //         },
+    //         {
+    //             step: 2,
+    //             fields: ["joining_date", "ctc", "ctc_breakup", "bank_account_details"],
+    //         },
+    //         {
+    //             step: 3,
+    //             fields: ["work_location", "office_hours", "severance_package", "public_holidays"],
+    //         },
+    //         {
+    //             step: 4,
+    //             fields: ["paid_leave", "casual_sick_leave", "joining_bonus", "non_compete_duration"],
+    //         },
+    //         {
+    //             step: 5,
+    //             fields: [
+    //                 "employment_type",
+    //                 "remote_work_policy",
+    //                 "weekend_work",
+    //                 "leave_accrual_policy",
+    //             ],
+    //         },
+    //         {
+    //             step: 6,
+    //             fields: [
+    //                 "termination_cause",
+    //                 "non_compete_clause",
+    //                 "confidentiality_agreement",
+    //                 "intellectual_property_rights",
+    //             ],
+    //         },
+    //         {
+    //             step: 7,
+    //             fields: [
+    //                 "code_of_conduct_agreement",
+    //                 "background_check",
+    //                 "probation_period",
+    //                 "termination_notice_period",
+    //             ],
+    //         },
+    //         {
+    //             step: 8,
+    //             fields: [
+    //                 "reimbursement_policy",
+    //                 "dispute_resolution_clause",
+    //                 "working_days",
+    //                 "benefits_provided",
+    //             ],
+    //         },
+    //         {
+    //             step: 9,
+    //             fields: ["required_documents"],
+    //         },
+    //     ] as FieldGroup<EmployeeFormData>[],
+    //     sensitiveContent: `
+    //             `,
+    //     storageKey: "ea-form-data",
+    //     fileName: "ea-agreement.pdf",
+    //     url: "/documentation/business_contracts/",
+    //     renderStep: EARenderStep,
+    //     letterPreview: NDALetterPreview
+    // },
 
 };

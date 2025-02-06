@@ -8,10 +8,19 @@ export default {
     "./services/**/*.{js,ts,jsx,tsx,mdx}",
     "./features/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(accordion|avatar|button|card|checkbox|date-picker|dropdown|form|input|navbar|popover|progress|radio|scroll-shadow|select|divider|ripple|spinner|calendar|date-input|menu|listbox).js"
+    "./node_modules/@heroui/theme/dist/components/(accordion|avatar|button|card|checkbox|date-picker|dropdown|form|input|navbar|popover|progress|radio|scroll-shadow|select|divider|ripple|spinner|calendar|date-input|menu|listbox).js",
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1440px",
+        "2xl": "1536px",
+        "2xxl": "1952px",
+        "3xl": "3840px",
+      },
       fontFamily: {
         Archivo: ["var(--font-archivo)"],
         Lorin: ["var(--font-lorin)"],

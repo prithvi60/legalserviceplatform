@@ -2,12 +2,17 @@ import { Input } from "@heroui/input";
 import { Card, CardHeader, CardBody } from "@heroui/card";
 import { IoSearch } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
-import Link from "next/link";
 import Image from "next/image";
+import { communityServices } from "@/constants/Data";
 
 const Search = () => {
     return (
-        <section className="padding w-full space-y-10 bg-white">
+        <section className="padding w-full bg-[#F1F2F5] space-y-10">
+            {/* <div className=" rounded-xl p-10 w-full h-full"> */}
+            <div className="block space-y-2">
+                <h4 className="font-Archivo text-2xl font-semibold md:text-3xl xl:text-4xl">Explore our suite of products</h4>
+                <p className="font-Lorin">Explore our suite of products to see how you can simplify, automate and accelerate your Legal processes.</p>
+            </div>
             <Input
                 isRequired
                 variant="bordered"
@@ -32,39 +37,41 @@ const Search = () => {
                 }}
                 className="bg-transparent rounded-lg text-black"
             />
-            <div className="flex mx-auto items-center no_scrollbar gap-5 xl:gap-10 w-full overflow-x-scroll">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:px-20 place-content-center place-items-center gap-5 xl:gap-10 w-full">
                 {communityServices.map((item, idx) => (
                     <Card
                         key={idx}
-                        className="py-4 px-4 text-white bg-primary min-w-64 mx-auto md:min-w-80"
+                        className={`py-4 px-4 text-white bg-primary mx-auto w-full h-full md:h-80 lg:h-72 ${idx === 3 ? "lg:col-span-2" : ""}`}
                     >
                         <CardHeader className="pb-3 pt-2 flex-col items-start">
                             <div className="flex flex-col">
                                 <h4 className="text-base md:text-lg font-Archivo font-bold tracking-wider">
                                     {item.title}
                                 </h4>
-                                <p className="text-sm font-Lorin font-medium">
-                                    {item.price}
-                                </p>
                                 <div className="absolute size-24 rotate-[4rad] -top-10 -right-10 md:size-36 md:rotate-[4rad] md:-top-16 md:-right-14">
                                     <Image fill alt="icon" src={"/circle-icon-1.svg"} />
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardBody className="overflow-visible gap-5 justify-center py-2">
+                        <CardBody className="overflow-visible gap-5 py-2">
                             <ul className="space-y-4">
-                                {item.lists.map((list, id) => (
+                                {item.services.map((service, id) => (
                                     <li
                                         key={id}
-                                        className="font-Lorin text-sm flex justify-between items-center md:text-base"
+                                        className="font-Lorin text-sm block space-y-1.5 md:text-base border-b-2 border-white"
                                     >
-                                        <Link
-                                            href={"#"}
-                                            className="w-4/5 pb-2 border-b-2 border-white"
-                                        >
-                                            <h4>{list}</h4>
-                                        </Link>
-                                        <RiArrowDownSLine className="text-lg md:text-xl" />
+                                        {service.country !== "" && (
+                                            <h4
+                                                className="w-full flex justify-between items-center pb-2"
+                                            >
+                                                {service.country} <span><RiArrowDownSLine className="text-lg md:text-xl" /></span>
+                                            </h4>
+                                        )}
+                                        {service?.lists !== "" && (
+                                            <p className="text-xs pb-2 font-Lorin font-medium">
+                                                {service?.lists}
+                                            </p>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
@@ -72,41 +79,10 @@ const Search = () => {
                     </Card>
                 ))}
             </div>
+            {/* </div> */}
         </section>
     );
 };
 
 export default Search;
 
-const communityServices = [
-    {
-        lists: [
-            "Private limited company",
-            "Limited liability",
-            "Private limited company",
-            "Limited liability",
-        ],
-        title: "Register your company",
-        price: "Starting from ₹999/-",
-    },
-    {
-        lists: [
-            "Private limited company",
-            "Limited liability",
-            "Private limited company",
-            "Limited liability",
-        ],
-        title: "Register your company",
-        price: "Starting from ₹999/-",
-    },
-    {
-        lists: [
-            "Private limited company",
-            "Limited liability",
-            "Private limited company",
-            "Limited liability",
-        ],
-        title: "Register your company",
-        price: "Starting from ₹999/-",
-    },
-];

@@ -4,11 +4,9 @@ import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import Link from "next/link";
-import { Button } from "@heroui/button";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { navActiveLinks } from "@/constants/Data";
 
 interface Menu {
   menu: string;
@@ -17,8 +15,8 @@ interface Menu {
 
 interface SubMenu {
   subMenu: string;
-  href: string;
-  subDividion?: Array<SubLink>;
+  href?: string;
+  subDivision?: Array<SubLink>;
 }
 
 interface SubLink {
@@ -27,24 +25,35 @@ interface SubLink {
 }
 
 export default function DesktopMenu({ menu }: { menu: Menu }) {
-  const [isHover, toggleHover] = useState(false);
+  const [isHover, setIsHover] = useState(false);
   const { status } = useSession();
   const router = useRouter();
   const defaultSubMenu = menu.subCategories?.[0]?.subMenu || "";
-  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<string>(defaultSubMenu);
+  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] =
+    useState<string>(defaultSubMenu);
+  const [leaveTimeout, setLeaveTimeout] = useState<NodeJS.Timeout | null>(null);
+  const handleMouseEnter = () => {
+    if (leaveTimeout) {
+      clearTimeout(leaveTimeout);
+      setLeaveTimeout(null);
+    }
+    setIsHover(true);
+  };
 
-  const toggleHoverMenu = () => {
-    toggleHover(!isHover);
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setHoveredSubMenuIndex(defaultSubMenu);
+    }, 500);
+    setIsHover(false);
+    setLeaveTimeout(timeout);
   };
 
   const handleClick = (val: string) => {
-
     if (status === "authenticated") {
       router.push(val);
     } else {
-      localStorage.setItem('returnUrl', val);
-      // Navigate to sign in
-      router.push('/api/auth/signin');
+      localStorage.setItem("returnUrl", val);
+      router.push("/api/auth/signin");
     }
   };
 
@@ -61,7 +70,7 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
       opacity: 0,
       rotateX: -15,
       transition: {
-        duration: 0.5,
+        duration: 0.2,
       },
       transitionEnd: {
         display: "none",
@@ -71,43 +80,31 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
 
   const hasSubMenu = menu?.subCategories?.length;
 
-  const FilteredData = navActiveLinks.find(
-    (val) => val.menu === hoveredSubMenuIndex
+  const FilteredData = menu.subCategories?.find(
+    (val) => val.subMenu === hoveredSubMenuIndex
   );
 
   return (
     <motion.li
-      className={`group/link px-2 xl:px-5 ${menu.menu === "Consult an Expert" ? "relative" : ""
-        }`}
-      onHoverStart={toggleHoverMenu}
-      onHoverEnd={toggleHoverMenu}
+      className={`group/link relative px-1`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       key={menu.menu}
     >
-      {menu.menu === "Consult an Expert" ? (
-        <Button
-          size="md"
-          radius="sm"
-          color="warning"
-          className="font-Lorin flex-center gap-1 font-medium text-lg lg:text-xl text-black"
-        >
-          Consult an Expert
-          {hasSubMenu && (
-            <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
-          )}
-        </Button>
-      ) : (
-        <span className="flex-center gap-1 hover:bg-white/5 text-xl cursor-pointer px-3 py-2 rounded-xl">
-          {menu.menu}
-          {hasSubMenu && (
-            <ChevronDown className="mt-[0.6px] group-hover/link:rotate-180 duration-200" />
-          )}
-        </span>
-      )}
+      <span className="flex-center gap-1 hover:bg-white/5 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
+        {menu.menu}
+        {hasSubMenu && (
+          <ChevronDown className="mt-[0.6px] group-hover/link:text-warning group-hover/link:rotate-180 duration-200" />
+        )}
+      </span>
 
       {hasSubMenu && (
         <motion.div
-          className={`${menu.menu === "Consult an Expert" ? "sub-menu_1" : "sub-menu"
-            }`}
+          className={`${menu.menu === "Expert Consultation" ||
+            menu.menu === "Financial Consultation"
+            ? "sub-menu w-max "
+            : "sub-menu w-[640px]"
+            } ${menu.menu === "Legal Documentation" ? " h-[300px]" : "h-fit"}`}
           initial="exit"
           animate={isHover ? "enter" : "exit"}
           variants={subMenuAnimate}
@@ -119,62 +116,59 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
                   className="relative cursor-pointer w-full"
                   key={i}
                   onMouseEnter={() => setHoveredSubMenuIndex(submenu.subMenu)}
-                // onMouseLeave={() => setHoveredSubMenuIndex(0)}
                 >
                   <div
-                    className={`${menu.menu === "Consult an Expert"
+                    className={`${menu.menu === "Expert Consultation" ||
+                      menu.menu === "Financial Consultation"
                       ? "grid grid-cols-1 w-full"
-                      : "grid grid-cols-2 w-[540px]"
+                      : "grid grid-cols-2 w-full pb-3"
                       } relative gap-x-4 h-fit`}
                   >
-                    <div
-                      className={`w-full h-20 flex justify-center items-center p-1.5 ${hoveredSubMenuIndex === submenu.subMenu
-                        ? "bg-warning/60 rounded-md"
-                        : ""
-                        }`}
-                    >
-                      {menu.menu === "Consult an Expert" ? (
-                        <Link
-                          href={submenu.href}
-                          className={`font-semibold flex w-full items-center gap-2 group/menubox`}
-                        >
-                          <span>
-                            <IoDocumentTextOutline className=" w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
-                          </span>
-                          {submenu.subMenu}
-                          <span>
-                            <MdOutlineKeyboardArrowRight className="text-xl text-black" />
-                          </span>
-                        </Link>
-                      ) : (
+                    {menu.menu === "Expert Consultation" ||
+                      menu.menu === "Financial Consultation" ? (
+                      <Link
+                        href={submenu.href || "#"}
+                        className={`font-semibold w-full text-base xl:text-lg hover:text-primary/80`}
+                      >
+                        {submenu.subMenu}
+                      </Link>
+                    ) : (
+                      <div
+                        className={`w-full h-20 flex justify-center items-center p-1.5 ${hoveredSubMenuIndex === submenu.subMenu
+                          ? "bg-warning/60 rounded-md"
+                          : ""
+                          }`}
+                      >
                         <h6
-                          className={`font-semibold flex w-full items-center gap-2 group/menubox`}
+                          className={`font-semibold text-xl flex w-full items-center gap-2 group/menubox`}
                         >
                           <span>
-                            <IoDocumentTextOutline className=" w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
+                            <IoDocumentTextOutline className="w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
                           </span>
                           {submenu.subMenu}
                           <span>
                             <MdOutlineKeyboardArrowRight className="text-xl text-black" />
                           </span>
                         </h6>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             {FilteredData && (
-              <div
-                className={`space-y-4 bg-white w-max absolute top-0 left-72`}
-              >
-                <h4 className="font-Archivo pb-3 font-bold text-lg underline underline-offset-8 text-primary tracking-wide">
-                  {FilteredData.menu}
-                </h4>
-                {FilteredData.subDividion.map((subdiv, id) => (
+              <div className={`space-y-4 w-1/2 absolute top-0 left-[340px]`}>
+                {menu.menu !== "Expert Consultation" &&
+                  menu.menu !== "Financial Consultation" && (
+                    <h4 className="font-Archivo pb-3 font-bold text-base xl:text-lg underline underline-offset-8 text-primary tracking-wide">
+                      {FilteredData.subMenu}
+                    </h4>
+                  )}
+
+                {FilteredData.subDivision?.map((subdiv, id) => (
                   <div key={id} className="block space-y-2 h-fit">
                     <Link
                       href={subdiv.href}
-                      className={`font-semibold w-full hover:text-primary/80`}
+                      className={`font-semibold w-full text-base xl:text-lg hover:text-primary/80`}
                       onClick={() => handleClick(subdiv.href)}
                     >
                       {subdiv.subLink}
