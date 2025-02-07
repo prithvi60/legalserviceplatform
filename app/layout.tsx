@@ -7,6 +7,8 @@ import localFont from "next/font/local";
 import Footer from "@/components/Layout/Footer";
 import Information from "@/components/Layout/Information";
 import NavBar2 from "@/components/Layout/NavBar2";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const archivo = Archivo({
   variable: "--font-archivo",

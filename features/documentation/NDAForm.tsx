@@ -1,5 +1,5 @@
-"use client";
 
+"use client";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Card, CardBody } from "@heroui/card";
 import { Button } from "@heroui/button";
@@ -36,7 +36,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
     const docType = searchParams.get("DT")?.trim() || null;
     const docNumber = Number(searchParams.get("DN")) || 0;
     const paymentStatus = searchParams.get("paymentStatus");
-    console.log("doc && number", docType, docNumber);
+    // console.log("doc && number", docType, docNumber);
 
     const config = documentConfig[documentType];
     const {
@@ -192,7 +192,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         // console.log("existing", existingForm);
 
         try {
-            console.log("existing", existingForm);
+            // console.log("existing", existingForm);
 
             if (
                 existingForm &&
@@ -427,6 +427,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         const newProgress = calculateProgress();
         setState((prev) => ({ ...prev, progress: newProgress }));
     }, [state.formData, state.step, calculateProgress]);
+    console.log(state.isDownloading);
 
     // download process
     useEffect(() => {
@@ -437,24 +438,23 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         ) {
             const performDownload = async () => {
                 try {
+                    if (!targetRef.current) {
+                        console.error("Error: targetRef is null. Waiting for re-render...");
+                        return;
+                    }
                     setState((prev) => ({
                         ...prev,
                         isDecrypted: true,
                         isDownloading: true,
                     }));
-                    await new Promise((resolve) => {
-                        toPDF();
-                        setTimeout(resolve, 500);
-                    });
-                    // await toPDF();
+                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                    console.log("Generating PDF...");
+                    await toPDF();
+                    console.log("PDF generated successfully.");
 
                     // Clear session storage and verify it's removed
                     sessionStorage.removeItem(storageKey);
 
-                    if (sessionStorage.getItem(storageKey)) {
-                        console.warn("Session storage was not cleared, retrying...");
-                        sessionStorage.removeItem(storageKey);
-                    }
                     setState((prev) => ({
                         ...prev,
                         isDecrypted: false,
@@ -462,7 +462,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                     }));
                     const urlLink = new URL(window.location.href);
                     urlLink.searchParams.delete("paymentStatus");
-                    window.history.replaceState({}, "", urlLink);
+                    window.history.replaceState({}, "", url);
                     await new Promise((resolve) => setTimeout(resolve, 500));
                     window.location.replace(url);
                 } catch (error) {
@@ -476,7 +476,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
             };
             performDownload();
         }
-    }, [paymentStatus, state.isDownloading, GetDocType, storageKey, toPDF, url]);
+    }, [paymentStatus, state.isDownloading, GetDocType, storageKey, toPDF, url, targetRef]);
 
     const isFormComplete = (): boolean => {
         return (
@@ -513,6 +513,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                 {renderStep({
                                     step: state.step,
                                     formData: state.formData,
+                                    // @ts-ignore
                                     handleInputChange,
                                 })}
                                 <div className="flex justify-between mt-4">

@@ -58,7 +58,7 @@ const DummyPaymentGateway: React.FC<DummyPaymentGatewayProps> = ({
 
     if (isComplete) {
         return (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]">
                 <Card className="w-full max-w-md mx-4">
                     <CardBody className="text-center py-8">
                         <div className="flex justify-center mb-4">

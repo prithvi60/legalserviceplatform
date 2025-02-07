@@ -10,14 +10,14 @@ const StartYourBusiness = () => {
                     Start Your Business with Confidence - We&apos;ve Got You Covered!
                 </h3>
             </div>
-            <div className="flex gap-10 overflow-x-scroll no_scrollbar h-full mx-auto">
+            <div className="flex gap-5 md:gap-10 overflow-x-scroll no_scrollbar h-full mx-auto">
                 {startBusiness.map((item, idx) => (
                     <Card
                         key={idx}
                         className="py-4 px-6 bg-[#FFBF0033] min-w-72 mx-auto md:min-w-96"
                     >
                         <CardHeader className="pb-3 pt-2 px-4 flex-col gap-2 items-start">
-                            <div className='bg-white p-2 rounded-lg'>
+                            <div>
                                 {item.icon}
                             </div>
                         </CardHeader>

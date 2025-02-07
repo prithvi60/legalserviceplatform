@@ -57,3 +57,9 @@
 .para {
   margin: 5px 0px !important;
 }
+
+@media (min-width: 768px) {
+  .custom-slider .slick-slide > div {
+    margin: 0 20px !important;
+  }
+}

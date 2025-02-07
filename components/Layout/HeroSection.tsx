@@ -20,7 +20,7 @@ const HeroSection = () => {
                         priority
                         className="object-contain object-center"
                         alt="bg image"
-                        src={"/megaphone.png"}
+                        src={"/hero-img.png"}
                         fill
                     />
                 </div>

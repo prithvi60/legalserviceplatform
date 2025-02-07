@@ -1,6 +1,6 @@
-import { Input } from "@heroui/input";
+// import { Input } from "@heroui/input";
 import { Card, CardHeader, CardBody } from "@heroui/card";
-import { IoSearch } from "react-icons/io5";
+// import { IoSearch } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
 import Image from "next/image";
 import { communityServices } from "@/constants/Data";
@@ -13,7 +13,7 @@ const Search = () => {
                 <h4 className="font-Archivo text-2xl font-semibold md:text-3xl xl:text-4xl">Explore our suite of products</h4>
                 <p className="font-Lorin">Explore our suite of products to see how you can simplify, automate and accelerate your Legal processes.</p>
             </div>
-            <Input
+            {/* <Input
                 isRequired
                 variant="bordered"
                 startContent={
@@ -36,8 +36,8 @@ const Search = () => {
                     errorMessage: "!text-[#f26161]",
                 }}
                 className="bg-transparent rounded-lg text-black"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:px-20 place-content-center place-items-center gap-5 xl:gap-10 w-full">
+            /> */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center place-items-center gap-5 xl:gap-10 w-full">
                 {communityServices.map((item, idx) => (
                     <Card
                         key={idx}

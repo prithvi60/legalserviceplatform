@@ -1,7 +1,6 @@
 import { CalendarDate } from "@internationalized/date";
 import { Prisma } from "@prisma/client";
 
-
 export interface FormData {
   entityType: "company" | "organization";
   employeeName: string;
@@ -60,6 +59,8 @@ export interface EmployeeFormData {
   casual_sick_leave: number;
   joining_bonus: number;
   non_compete_duration: string;
+  bonus_payment_terms: string;
+  arbitration_institution: string;
   // radio button
   employment_type: "Full-time" | "Part-time" | "Contract" | "Temporary";
   remote_work_policy: "Yes" | "No";

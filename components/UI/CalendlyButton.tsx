@@ -61,7 +61,7 @@ const CalendlyLink = ({
                 color="warning"
                 radius="md"
                 size={text === "Get Started" ? "md" : "lg"}
-                className="font-Inter font-medium"
+                className="font-Inter font-semibold relative z-20"
                 endContent={
                     text === "Get a Demo" && <FaLongArrowAltRight className='text-base' />
                 }

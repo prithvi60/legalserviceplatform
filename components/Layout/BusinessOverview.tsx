@@ -9,7 +9,7 @@ const BusinessOverview = () => {
             <div className='block space-y-10'>
                 {businessOverviews.map((list, idx) => (
                     <div key={idx} className='flex items-center gap-10 p-5 bg-[#F1F2F5] rounded-lg'>
-                        <div className='bg-white p-2 rounded-lg'>
+                        <div>
                             {list.icon}
                         </div>
                         <div className='block space-y-1.5'>

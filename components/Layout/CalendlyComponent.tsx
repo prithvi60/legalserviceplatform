@@ -26,7 +26,7 @@ const DynamicCalendly = dynamic<CalendlyProps>(
 const CalendlyComponent = ({ text }: { text: string }) => {
     return (
         <Suspense fallback={<Spinner size="md" color="primary" />}>
-            <div>
+            <div className="relative z-auto">
                 <DynamicCalendly
                     url="https://calendly.com/gokulgandhi2301"
                     text={text}

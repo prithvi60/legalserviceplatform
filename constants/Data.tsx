@@ -377,6 +377,16 @@ export const communityServices = [
         ],
     },
     {
+        title: "Financial Consultation",
+        services: [
+            {
+                country: "",
+                lists:
+                    "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation",
+            },
+        ],
+    },
+    {
         title: "Expert Consultation",
         services: [
             {
@@ -394,16 +404,6 @@ export const communityServices = [
         ],
     },
     {
-        title: "Financial Consultation",
-        services: [
-            {
-                country: "",
-                lists:
-                    "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation",
-            },
-        ],
-    },
-    {
         title: "Business Setup",
         services: [
             {
@@ -416,26 +416,34 @@ export const communityServices = [
 
 export const businessOverviews = [
     {
-        icon: (<MdSpaceDashboard className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <MdSpaceDashboard className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Unified Dashboard",
-        desc: "Track compliance, legal, and tax matters seamlessly."
+        desc: "Track compliance, legal, and tax matters seamlessly.",
     },
     {
-        icon: (<RiTeamFill className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <RiTeamFill className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Your Legal & Compliance Team",
-        desc: "Lawyers + CAs + CSs in your pocket."
+        desc: "Lawyers + CAs + CSs in your pocket.",
     },
     {
-        icon: (<FaArrowsToDot className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <FaArrowsToDot className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Automatic Reminders",
-        desc: "Stay on top of deadlines & legal requirements."
+        desc: "Stay on top of deadlines & legal requirements.",
     },
     {
-        icon: (<SiPivotaltracker className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <SiPivotaltracker className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Efficient Tracking",
-        desc: "Real-time updates on compliance & financial health."
+        desc: "Real-time updates on compliance & financial health.",
     },
-]
+];
 
 export const SCGResults = [
     {
@@ -525,33 +533,182 @@ export const talkToExpert = [
 
 export const startBusiness = [
     {
-        icon: (<MdSpaceDashboard className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <MdSpaceDashboard className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "All-in-One Unified Dashboard",
-        desc: "Manage compliance, legal, and financial needs effortlessly from a single, intuitive platform."
+        desc: "Manage compliance, legal, and financial needs effortlessly from a single, intuitive platform.",
     },
     {
-        icon: (<RiTeamFill className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <RiTeamFill className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Your Legal, Tax & Compliance Experts",
-        desc: "Access lawyers, chartered accountants (CAs), and company secretaries (CSs) at your fingertips."
+        desc: "Access lawyers, chartered accountants (CAs), and company secretaries (CSs) at your fingertips.",
     },
     {
-        icon: (<FaArrowsToDot className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <FaArrowsToDot className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Stay Compliant with Automatic Reminders",
-        desc: "Never miss a deadline! Our smart compliance tracker keeps your business aligned with the latest regulations."
+        desc: "Never miss a deadline! Our smart compliance tracker keeps your business aligned with the latest regulations.",
     },
     {
-        icon: (<SiPivotaltracker className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <SiPivotaltracker className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Efficient Compliance Tracking & Monitoring",
-        desc: "Automated alerts and real-time monitoring ensure you stay ahead of regulatory requirements."
+        desc: "Automated alerts and real-time monitoring ensure you stay ahead of regulatory requirements.",
     },
     {
-        icon: (<MdOutlineSecurity className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <MdOutlineSecurity className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Security, Confidentiality & Guaranteed Results",
-        desc: "We prioritize data protection, professional discretion, and 100% accuracy in every service."
+        desc: "We prioritize data protection, professional discretion, and 100% accuracy in every service.",
     },
     {
-        icon: (<GrMoney className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        icon: (
+            <GrMoney className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        ),
         title: "Affordable & Transparent Pricing",
-        desc: "Premium legal and financial solutions from senior industry experts – at unbeatable rates."
+        desc: "Premium legal and financial solutions from senior industry experts – at unbeatable rates.",
     },
-]
+];
+
+export const exploreSuitLists = [
+    {
+        mainTitle: "Business Registration - UAE",
+        desc: "Get your company up and running with hassle-free registration.",
+        lists: [
+            "Private Limited Company",
+            "Limited Liability Partnership (LLP)",
+            "One Person Company (OPC)",
+            "Partnership Firm",
+            "Sole Proprietorship",
+        ],
+        footerName: "Start your business in the UAE today",
+        btnName: "Get Started",
+    },
+    {
+        mainTitle: "GST Filing & Compliance - UAE & India",
+        desc: "Stay compliant with expert tax filing services.",
+        lists: [
+            "GST Registration",
+            "GST Filing & Returns",
+            "GST Cancellation & Revocation",
+            "Reply to GST Notices",
+            "Indirect Tax Advisory",
+        ],
+        footerName: "Simplify your tax filings ",
+        btnName: "Schedule a Consultation",
+    },
+    {
+        mainTitle: "Accounting & Compliance - UAE & India",
+        desc: "Accurate bookkeeping and financial reporting to keep your business on track.",
+        lists: [
+            "Bookkeeping & Accounting",
+            "Annual Compliance Reports",
+            "TDS Return Filing",
+            "Income Tax Notices Handling",
+            "Secretarial Audits",
+        ],
+        footerName: "Ensure seamless financial compliance",
+        btnName: "Book a Consultation",
+    },
+    {
+        mainTitle: "Advanced Financial Services for Businesses & Startups",
+        desc: "Optimize financial health and strategic growth.",
+        lists: [
+            "Corporate Finance Advisory - Build strong financial structures.",
+            "Cash Flow & Working Capital Management - Maintain business liquidity.",
+            "Financial Risk Management - Identify & mitigate business risks.",
+            "Revenue & Profitability Forecasting - Data-driven financial planning.",
+            "Cap Table Management - Streamline equity distribution.",
+            "Pitch Deck Creation - Investor-ready, data-backed presentations.",
+        ],
+        footerName: "Strategize for financial success",
+        btnName: "Get Started",
+    },
+    {
+        mainTitle: "Business Valuation & Financial Modeling",
+        desc: "Make informed financial decisions with accurate business insights.",
+        lists: [
+            "Company Valuation Reports - Investment & acquisition insights.",
+            "Financial Modeling for Investors - Forecast growth & performance.",
+            "Market & Competitor Financial Analysis - Benchmark & analyze market trends.",
+            "Revenue & Profitability Forecasting - Build strong financial projections.",
+        ],
+        footerName: "Maximize business valuation",
+        btnName: "Consult Our Experts",
+    },
+    {
+        mainTitle: "Fundraising & Investment Advisory",
+        desc: "Get investment-ready with expert legal & financial support.",
+        lists: [
+            "Venture Capital (VC) & Angel Investment Assistance - Secure funding seamlessly.",
+            "Investor Readiness & Due Diligence - Ensure compliance & transparency.",
+            "Financial Due Diligence for Mergers & Acquisitions (M&A) - Assess risk & valuation accuracy.",
+        ],
+        footerName: "Raise funds with confidence",
+        btnName: "Talk to an Expert",
+    },
+    {
+        mainTitle: "Pitch Deck & Investment Documentation",
+        desc: "Present your business with clarity and impact.",
+        lists: [
+            "Investor-Ready Pitch Decks - Persuasive, data-driven presentations.",
+            "Business Plans & Financial Projections - Clear & compelling growth roadmaps.",
+            "Cap Table Management & Structuring - Optimize equity distribution.",
+            "Term Sheets & Shareholder Agreements - Legally sound investment documentation.",
+        ],
+        footerName: "Impress investors & secure funding",
+        btnName: "Get Started",
+    },
+    {
+        mainTitle: "Legal Documentation & Compliance",
+        desc: "Protect your business with solid legal foundations.",
+        lists: [
+            "Business Contracts & Agreements - NDAs, MoUs, service agreements.",
+            "Investor Agreements & Cap Table Management - Structuring ownership & equity.",
+            "Employment & Compensation Structures - ESOPs, payroll, and benefits planning.",
+            "Regulatory & Corporate Governance Compliance - Ensuring legal compliance.",
+            "Intellectual Property (IP) Protection - Trademarks, copyrights & patents.",
+            "Mergers & Acquisitions (M&A) Legal Support - Due diligence & deal structuring.",
+            "Dispute Resolution & Litigation Support - Business legal advisory.",
+        ],
+        footerName: "Secure your business legally",
+        btnName: "Speak to Our Experts",
+    },
+];
+
+export const customerFeedbackLists = [
+    {
+        img: "/slider-sample.png",
+        alt: "sample img",
+        review: "",
+        reviewer: "news channel 1",
+        href: "",
+    },
+    {
+        img: "/slider-sample.png",
+        alt: "sample img",
+        review: "",
+        reviewer: "news channel 2",
+        href: "",
+    },
+    {
+        img: "/slider-sample.png",
+        alt: "sample img",
+        review: "",
+        reviewer: "news channel 3",
+        href: "",
+    },
+    {
+        img: "/slider-sample.png",
+        alt: "sample img",
+        review: "",
+        reviewer: "news channel 4",
+        href: "",
+    },
+];

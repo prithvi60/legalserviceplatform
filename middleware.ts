@@ -4,7 +4,7 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Check if the user is trying to access protected routes
-  if (pathname.startsWith("/documentation") || pathname === "/profile") {
+  if (pathname.startsWith("/legal_documentation") || pathname === "/profile") {
     // Get the user token from cookies or session
     const token =
       req.cookies.get("next-auth.session-token") ||
@@ -21,5 +21,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/documentation/:path*", "/profile"], // Protect all routes under `/documentation`
+  matcher: ["/legal_documentation/:path*", "/profile"], // Protect all routes under `/documentation`
 };

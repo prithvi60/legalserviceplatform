@@ -6,12 +6,12 @@ const AboutTemplate = () => {
     return (
         <section className='w-full h-full space-y-10 bg-white'>
             <p className='px-[40px] py-[40px] bg-white md:px-[80px] xl:px-[144px] font-Inter text-xl md:text-2xl xl:text-3xl'>With<span className="text-primary font-bold mx-3">Resolve</span>, crafting airtight contracts is no longer a tedious process. <span className="text-primary font-bold mx-3">Customize, manage, and deploy contract templates in minutes</span> — without the constant back-and-forth with Legal.</p>
-            <div className="px-[40px] py-[40px] md:px-[80px] xl:px-[144px] w-full h-full bg-[#F8F8FA] flex items-center relative flex-col lg:flex-row overflow-hidden gap-5">
-                <div className="w-full h-[200px] md:w-[480px] md:h-[380px] overflow-hidden relative z-0 lg:basis-3/5">
+            <div className="px-[40px] py-[40px] md:px-[80px] xl:px-[144px] w-full h-full bg-[#F8F8FA] flex relative flex-col lg:flex-row overflow-hidden gap-5">
+                <div className="w-full h-[320px] md:h-[520px] overflow-hidden relative z-0 lg:basis-3/5">
                     <Image
                         className="object-contain object-center"
                         alt="bg image"
-                        src={"/sample-1.png"}
+                        src={"/sample.png"}
                         fill
                     />
                 </div>
@@ -45,8 +45,8 @@ const AboutTemplate = () => {
                     </ul>
                 </div>
             </div>
-            <div className="px-[40px] py-[40px] md:px-[80px] xl:px-[144px] w-full h-full bg-[#F8F8FA] flex items-center relative flex-col-reverse lg:flex-row  overflow-hidden gap-5">
-                <div className="block space-y-4 w-full lg:w-2/5 mx-auto">
+            <div className="px-[40px] py-[40px] md:px-[80px] xl:px-[144px] w-full h-full bg-[#F8F8FA] flex relative flex-col-reverse lg:flex-row  overflow-hidden gap-5">
+                <div className="block space-y-4 w-full lg:w-2/5 ">
                     <div className='block space-y-3.5'>
                         <h2 className="font-Archivo text-secondary font-semibold tracking-wide text-2xl md:text-3xl xl:text-4xl">
                             Automate & Personalize Contract Creation
@@ -75,11 +75,11 @@ const AboutTemplate = () => {
                         ))}
                     </ul>
                 </div>
-                <div className="w-full h-[200px] md:w-[480px] md:h-[380px] overflow-hidden relative z-0 lg:basis-2/5">
+                <div className="w-full h-[320px] md:h-[520px] overflow-hidden relative z-0 lg:basis-3/5">
                     <Image
                         className="object-contain object-center"
                         alt="bg image"
-                        src={"/sample-2.webp"}
+                        src={"/sample.png"}
                         fill
                     />
                 </div>
