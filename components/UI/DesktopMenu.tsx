@@ -29,9 +29,9 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
   const { status } = useSession();
   const router = useRouter();
   const defaultSubMenu = menu.subCategories?.[0]?.subMenu || "";
-  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] =
-    useState<string>(defaultSubMenu);
+  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<string>(defaultSubMenu);
   const [leaveTimeout, setLeaveTimeout] = useState<NodeJS.Timeout | null>(null);
+
   const handleMouseEnter = () => {
     if (leaveTimeout) {
       clearTimeout(leaveTimeout);
@@ -42,9 +42,9 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
 
   const handleMouseLeave = () => {
     const timeout = setTimeout(() => {
+      setIsHover(false);
       setHoveredSubMenuIndex(defaultSubMenu);
-    }, 500);
-    setIsHover(false);
+    }, 250);
     setLeaveTimeout(timeout);
   };
 
@@ -69,9 +69,9 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
     exit: {
       opacity: 0,
       rotateX: -15,
-      transition: {
-        duration: 0.2,
-      },
+      // transition: {
+      //   duration: 0.2,
+      // },
       transitionEnd: {
         display: "none",
       },

@@ -1,8 +1,6 @@
+import { businessOverviews } from '@/constants/Data'
 import React from 'react'
-import { MdSpaceDashboard } from "react-icons/md";
-import { RiTeamFill } from "react-icons/ri";
-import { FaArrowsToDot } from "react-icons/fa6";
-import { SiPivotaltracker } from "react-icons/si";
+
 const BusinessOverview = () => {
     return (
         <section className='padding w-full bg-white h-full space-y-10'>
@@ -26,27 +24,3 @@ const BusinessOverview = () => {
 }
 
 export default BusinessOverview
-
-
-const businessOverviews = [
-    {
-        icon: (<MdSpaceDashboard className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
-        title: "Unified Dashboard",
-        desc: "Track compliance, legal, and tax matters seamlessly."
-    },
-    {
-        icon: (<RiTeamFill className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
-        title: "Your Legal & Compliance Team",
-        desc: "Lawyers + CAs + CSs in your pocket."
-    },
-    {
-        icon: (<FaArrowsToDot className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
-        title: "Automatic Reminders",
-        desc: "Stay on top of deadlines & legal requirements."
-    },
-    {
-        icon: (<SiPivotaltracker className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
-        title: "Efficient Tracking",
-        desc: "Real-time updates on compliance & financial health."
-    },
-]

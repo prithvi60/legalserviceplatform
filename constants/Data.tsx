@@ -1,3 +1,9 @@
+import { MdSpaceDashboard } from "react-icons/md";
+import { RiTeamFill } from "react-icons/ri";
+import { FaArrowsToDot } from "react-icons/fa6";
+import { SiPivotaltracker } from "react-icons/si";
+import { MdOutlineSecurity } from "react-icons/md";
+import { GrMoney } from "react-icons/gr";
 
 export const navLinks = [
     {
@@ -338,7 +344,6 @@ export const navLinks2 = [
             },
         ],
     },
-
 ];
 
 export const communityServices = [
@@ -347,11 +352,12 @@ export const communityServices = [
         services: [
             {
                 country: "INDIA",
-                lists: "GST and Indirect Tax , Annual Filings , Accounting & Tax Convert Your Business"
+                lists:
+                    "GST and Indirect Tax , Annual Filings , Accounting & Tax Convert Your Business",
             },
             {
                 country: "UAE",
-                lists: "Accounting & Tax , Annual Filings"
+                lists: "Accounting & Tax , Annual Filings",
             },
         ],
     },
@@ -360,11 +366,13 @@ export const communityServices = [
         services: [
             {
                 country: "INDIA",
-                lists: "Business Contracts ,Personal & Family, Real Estate Notices HR Policies"
+                lists:
+                    "Business Contracts ,Personal & Family, Real Estate Notices HR Policies",
             },
             {
                 country: "UAE",
-                lists: "Business Contracts ,Personal & Family, Real Estate Notices HR Policies"
+                lists:
+                    "Business Contracts ,Personal & Family, Real Estate Notices HR Policies",
             },
         ],
     },
@@ -373,16 +381,16 @@ export const communityServices = [
         services: [
             {
                 country: "Lawyers",
-                lists: ""
+                lists: "",
             },
             {
                 country: "CAs",
-                lists: ""
+                lists: "",
             },
             {
                 country: "CSs",
-                lists: ""
-            }
+                lists: "",
+            },
         ],
     },
     {
@@ -390,9 +398,9 @@ export const communityServices = [
         services: [
             {
                 country: "",
-                lists: "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation"
+                lists:
+                    "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation",
             },
-
         ],
     },
     {
@@ -400,9 +408,150 @@ export const communityServices = [
         services: [
             {
                 country: "UAE",
-                lists: "International business setup"
+                lists: "International business setup",
             },
         ],
     },
-
 ];
+
+export const businessOverviews = [
+    {
+        icon: (<MdSpaceDashboard className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Unified Dashboard",
+        desc: "Track compliance, legal, and tax matters seamlessly."
+    },
+    {
+        icon: (<RiTeamFill className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Your Legal & Compliance Team",
+        desc: "Lawyers + CAs + CSs in your pocket."
+    },
+    {
+        icon: (<FaArrowsToDot className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Automatic Reminders",
+        desc: "Stay on top of deadlines & legal requirements."
+    },
+    {
+        icon: (<SiPivotaltracker className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Efficient Tracking",
+        desc: "Real-time updates on compliance & financial health."
+    },
+]
+
+export const SCGResults = [
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "100% Data Security",
+        summary: "We ensure privacy & professional discretion.",
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "On-Time Delivery",
+        summary: "Quick turnaround for all legal & compliance needs.",
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Accurate & Reliable Solutions",
+        summary: "Expert-driven, legally sound services.",
+    },
+];
+
+export const ALCTools = [
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "AI Case Alerts & Research",
+        summary: "Stay updated on legal developments.",
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Judgment Database",
+        summary: "5M+ legal case references at your fingertips.",
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Compliance Tracking",
+        summary: "Never miss a tax or regulatory deadline.",
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Live Court Display Board",
+        summary: "Get instant updates on hearings & cases.",
+    },
+];
+
+export const talkToExpert = [
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Talk to Lawyer",
+        lists: ["Draft contracts", "handle disputes", "legal advisory"],
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Talk to CAs",
+        lists: ["Tax planning", "auditing", "financial compliance"],
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Talk to CSs",
+        lists: ["Corporate governance", "regulatory compliance."],
+    },
+    {
+        icon: "/Icon-1.svg",
+        alt: "icons",
+        href: "#",
+        title: "Talk to Financial analysts",
+        lists: ["Investor and Company analysis"],
+    },
+];
+
+export const startBusiness = [
+    {
+        icon: (<MdSpaceDashboard className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "All-in-One Unified Dashboard",
+        desc: "Manage compliance, legal, and financial needs effortlessly from a single, intuitive platform."
+    },
+    {
+        icon: (<RiTeamFill className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Your Legal, Tax & Compliance Experts",
+        desc: "Access lawyers, chartered accountants (CAs), and company secretaries (CSs) at your fingertips."
+    },
+    {
+        icon: (<FaArrowsToDot className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Stay Compliant with Automatic Reminders",
+        desc: "Never miss a deadline! Our smart compliance tracker keeps your business aligned with the latest regulations."
+    },
+    {
+        icon: (<SiPivotaltracker className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Efficient Compliance Tracking & Monitoring",
+        desc: "Automated alerts and real-time monitoring ensure you stay ahead of regulatory requirements."
+    },
+    {
+        icon: (<MdOutlineSecurity className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Security, Confidentiality & Guaranteed Results",
+        desc: "We prioritize data protection, professional discretion, and 100% accuracy in every service."
+    },
+    {
+        icon: (<GrMoney className='text-4xl md:text-5xl text-primary flex-shrink-0' />),
+        title: "Affordable & Transparent Pricing",
+        desc: "Premium legal and financial solutions from senior industry experts – at unbeatable rates."
+    },
+]
