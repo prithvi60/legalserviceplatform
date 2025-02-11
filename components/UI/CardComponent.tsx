@@ -10,6 +10,7 @@ interface Lists {
     alt: string
     lists: string[],
     href: string,
+    url: string
 }
 
 export const CardComponent = ({ data }: { data: Lists }) => {
@@ -49,7 +50,7 @@ export const CardComponent = ({ data }: { data: Lists }) => {
                 </ul>
             </CardBody>
             <CardFooter className="py-4 px-6">
-                <CalendlyComponent text='Book Now' />
+                <CalendlyComponent text='Book Now' url={data.url} />
                 <div className="absolute size-72 -bottom-48 -right-36">
                     <Image fill alt="icon" src={"/circle-icon-1.svg"} />
                 </div>

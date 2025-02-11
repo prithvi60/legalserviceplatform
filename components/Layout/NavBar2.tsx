@@ -68,6 +68,7 @@ const NavBar2 = () => {
         variables: { email: sessionData?.user?.email },
         skip: !sessionData?.user?.email,
     });
+    // console.log(sessionData?.user);
 
     return (
         <header className="px-5 md:px-10 py-5 text-sm z-50 sticky inset-0 flex-center text-white bg-primary">

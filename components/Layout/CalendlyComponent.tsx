@@ -23,12 +23,12 @@ const DynamicCalendly = dynamic<CalendlyProps>(
     }
 );
 
-const CalendlyComponent = ({ text }: { text: string }) => {
+const CalendlyComponent = ({ text, url }: { text: string, url: string }) => {
     return (
         <Suspense fallback={<Spinner size="md" color="primary" />}>
             <div className="relative z-auto">
                 <DynamicCalendly
-                    url="https://calendly.com/gokulgandhi2301"
+                    url={url}
                     text={text}
                 />
             </div>

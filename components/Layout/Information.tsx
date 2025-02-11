@@ -28,7 +28,7 @@ const Information = () => {
                 >
                     Get a Demo
                 </Button> */}
-                <CalendlyComponent text='Get a Demo' />
+                <CalendlyComponent text='Get a Demo' url="https://calendly.com/prithvi-webibee/general" />
             </div>
 
         </section>

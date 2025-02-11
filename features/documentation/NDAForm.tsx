@@ -1,10 +1,9 @@
 
 "use client";
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { Card, CardBody } from "@heroui/card";
 import { Button } from "@heroui/button";
 import { Progress } from "@heroui/progress";
-import { usePDF } from "react-to-pdf";
 import { IoMdDownload } from "react-icons/io";
 import { GetBFResponse, GetOBFResponse, GetUserResponse } from "@/types/Types";
 import { Loader } from "@/components/UI/Loader";
@@ -23,21 +22,20 @@ import { getStorageData } from "@/constants/Helper";
 import { Spinner } from "@heroui/spinner";
 import { documentConfig } from "@/constants/documentConfig";
 import toast from "react-hot-toast";
-
+import usePDFGeneration from "@/context/UsePDFGeneration";
 interface DocumentPreviewProps {
     documentType: keyof typeof documentConfig;
 }
 
 const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
-    const { data: sessionData } = useSession();
+    const { data: sessionData } = useSession() as { data: { user: { email: string } } | null };
     const router = useRouter();
     const searchParams = useSearchParams();
-
     const docType = searchParams.get("DT")?.trim() || null;
     const docNumber = Number(searchParams.get("DN")) || 0;
     const paymentStatus = searchParams.get("paymentStatus");
     // console.log("doc && number", docType, docNumber);
-
+    const targetRef = useRef<HTMLDivElement | null>(null);
     const config = documentConfig[documentType];
     const {
         title,
@@ -51,7 +49,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         letterPreview,
         renderStep,
     } = config;
-
+    const LetterPreviewComponent = letterPreview
     // State management
     const [state, setState] = useState(() => {
         const storageData = getStorageData();
@@ -121,11 +119,16 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         awaitRefetchQueries: true,
     });
 
-    const { toPDF, targetRef } = usePDF({
-        filename: fileName,
-        page: { margin: 20, format: "a4", orientation: "portrait" },
-        canvas: { mimeType: "image/jpeg", qualityRatio: 0.6 },
-    });
+    // const { toPDF, targetRef } = usePDF({
+    //     filename: fileName,
+    //     page: { margin: 20, format: "a4", orientation: "portrait" },
+    //     canvas: { mimeType: "image/jpeg", qualityRatio: 0.6 },
+    //     overrides: {
+    //         pdf: {
+    //             compress: true
+    //         },
+    //     }
+    // });
 
     const totalFields = useMemo(
         () => fieldGroups.reduce((acc, group) => acc + group.fields.length, 0),
@@ -151,20 +154,43 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
             : false;
     }, [state.step, state.formData, fieldGroups]);
 
-    // problem will occur here, when we make it dynamic value
-    const handleInputChange = useCallback(
-        (name: keyof typeof initialFormData, value: string | number | boolean | string[]) => {
-            setState((prev) => ({
-                ...prev,
-                formData: { ...prev.formData, [name]: value },
-            }));
-        },
-        []
-    );
+    // const handleInputChange = useCallback(
+    //     (name: keyof typeof initialFormData, value: string | number | boolean | string[]) => {
+    //         setState((prev) => ({
+    //             ...prev,
+    //             formData: { ...prev.formData, [name]: value },
+    //         }));
+    //     },
+    //     []
+    // );
 
     const existingData = sessionStorage.getItem(storageKey);
     const currentData = JSON.parse(existingData || "{}");
-    // console.log(currentData);
+
+    // problem will occur here, when we make it dynamic value
+    const handleInputChange = useCallback(
+        (name: keyof typeof initialFormData, value: string | number | boolean | string[]) => {
+            setState((prev) => {
+                const updatedFormData = { ...prev.formData, [name]: value };
+
+                // Store updated data in sessionStorage immediately
+                if (typeof window !== "undefined") {
+                    sessionStorage.setItem(
+                        storageKey,
+                        JSON.stringify({
+                            ...currentData,
+                            formData: updatedFormData,
+                            step: prev.step,
+                            progress: prev.progress,
+                        })
+                    );
+                }
+
+                return { ...prev, formData: updatedFormData };
+            });
+        },
+        [currentData, storageKey]
+    );
 
     // Reusable function to save progress to the database
     const saveProgressToDatabase = useCallback(async () => {
@@ -363,21 +389,8 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         router.push(paymentUrl);
     }, [router]);
 
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            sessionStorage.setItem(
-                storageKey,
-                JSON.stringify({
-                    ...currentData,
-                    formData: state.formData,
-                    step: state.step,
-                    progress: state.progress,
-                })
-            );
-        }
-    }, [currentData, state.formData, state.step, state.progress, storageKey]);
-
     // Load data from the database or session storage
+
     useEffect(() => {
         const documentData = GetDoc?.getBusinessForm?.formData;
 
@@ -427,56 +440,108 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         const newProgress = calculateProgress();
         setState((prev) => ({ ...prev, progress: newProgress }));
     }, [state.formData, state.step, calculateProgress]);
-    console.log(state.isDownloading);
 
-    // download process
-    useEffect(() => {
-        if (
-            paymentStatus === "success" &&
-            !state.isDownloading &&
-            GetDocType?.getBusinessForms?.length
-        ) {
-            const performDownload = async () => {
-                try {
-                    if (!targetRef.current) {
-                        console.error("Error: targetRef is null. Waiting for re-render...");
-                        return;
-                    }
-                    setState((prev) => ({
-                        ...prev,
-                        isDecrypted: true,
-                        isDownloading: true,
-                    }));
-                    await new Promise((resolve) => setTimeout(resolve, 1000));
-                    console.log("Generating PDF...");
-                    await toPDF();
-                    console.log("PDF generated successfully.");
+    // const generatePDF = async () => {
+    //     const element = targetRef.current;
+    //     if (!element) return console.error("Error: targetRef is null.");
 
-                    // Clear session storage and verify it's removed
-                    sessionStorage.removeItem(storageKey);
+    //     await new Promise(resolve => setTimeout(resolve, 500));
 
-                    setState((prev) => ({
-                        ...prev,
-                        isDecrypted: false,
-                        isDownloading: false,
-                    }));
-                    const urlLink = new URL(window.location.href);
-                    urlLink.searchParams.delete("paymentStatus");
-                    window.history.replaceState({}, "", url);
-                    await new Promise((resolve) => setTimeout(resolve, 500));
-                    window.location.replace(url);
-                } catch (error) {
-                    console.error("Error generating PDF:", error);
-                    setState((prev) => ({
-                        ...prev,
-                        isDownloading: false,
-                        isDecrypted: false,
-                    }));
-                }
-            };
-            performDownload();
-        }
-    }, [paymentStatus, state.isDownloading, GetDocType, storageKey, toPDF, url, targetRef]);
+    //     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    //     const [pageWidth, pageHeight, margin] = [210, 297, 10];
+    //     let yOffset = margin;
+
+    //     for (const child of element.children) {
+    //         const canvas = await html2canvas(child, { scale: 2 });
+    //         const imgData = canvas.toDataURL("image/jpeg", 0.8);
+    //         const imgWidth = pageWidth - 2 * margin;
+    //         const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    //         if (yOffset + imgHeight > pageHeight - margin) {
+    //             pdf.addPage();
+    //             yOffset = margin;
+    //         }
+    //         pdf.addImage(imgData, "JPEG", margin, yOffset, imgWidth, imgHeight);
+    //         yOffset += imgHeight + 5;
+    //     }
+    //     return pdf.output('blob');
+    // };
+
+    // const performDownloadAndSendEmail = async () => {
+    //     if (!(paymentStatus === "success" && !state.isDownloading && GetDocType?.getBusinessForms?.length)) return;
+
+    //     try {
+    //         await new Promise(resolve => {
+    //             const interval = setInterval(() => {
+    //                 if (targetRef.current) {
+    //                     clearInterval(interval);
+    //                     resolve(undefined);
+    //                 }
+    //             }, 500);
+    //         });
+
+    //         if (!targetRef.current) return console.error("Error: targetRef.current is still null after delay.");
+
+    //         setState(prev => ({ ...prev, isDecrypted: true, isDownloading: true }));
+
+    //         const pdfBlob = await generatePDF();
+    //         if (!pdfBlob) throw new Error("PDF generation failed.");
+
+    //         const pdfBase64 = await new Promise((resolve, reject) => {
+    //             const reader = new FileReader();
+    //             reader.readAsDataURL(pdfBlob);
+    //             reader.onloadend = () => typeof reader.result === "string"
+    //                 ? resolve(reader.result.split(",")[1])
+    //                 : reject(new Error("Failed to read PDF Blob"));
+    //             reader.onerror = reject;
+    //         });
+
+    //         const response = await fetch("/api/sendEmailWithAttachment", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({ pdfBlob: pdfBase64, email: sessionData?.user?.email, pdfName: fileName }),
+    //         });
+
+    //         const result = await response.json();
+    //         if (!result.success) throw new Error(result.message);
+
+    //         toast.success("Mail sent successfully!", {
+    //             position: "top-right",
+    //             duration: 3000,
+    //             style: { border: "1px solid #65a34e", padding: "16px", color: "#65a34e" },
+    //             iconTheme: { primary: "#65a34e", secondary: "#FFFAEE" },
+    //         });
+
+    //         sessionStorage.removeItem(storageKey);
+    //         setState(prev => ({ ...prev, isDecrypted: false, isDownloading: false }));
+
+    //         const urlLink = new URL(window.location.href);
+    //         urlLink.searchParams.delete("paymentStatus");
+    //         window.history.replaceState({}, "", url);
+    //         setTimeout(() => window.location.replace(url), 500);
+    //     } catch (error) {
+    //         console.error("Error generating PDF or sending email:", error);
+    //         setState(prev => ({ ...prev, isDownloading: false, isDecrypted: false }));
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     const timer = setTimeout(performDownloadAndSendEmail, 1000);
+    //     return () => clearTimeout(timer);
+    // }, [paymentStatus, state.isDownloading, GetDocType?.getBusinessForms?.length, storageKey, url, targetRef, fileName, sessionData?.user?.email]);
+
+    usePDFGeneration({
+        targetRef,
+        paymentStatus,
+        state,
+        setState,
+        GetDocType,
+        storageKey,
+        url,
+        fileName,
+        sessionData,
+    });
+
 
     const isFormComplete = (): boolean => {
         return (
@@ -543,10 +608,11 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                         .step === fieldGroups.length &&
                                         state.progress === 100 && (
                                             <Button
+                                                disabled={paymentStatus === 'success' ? true : false}
                                                 onClick={handleFinishClick}
                                                 color="warning"
                                                 radius="sm"
-                                                className="text-white font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
+                                                className="text-white disabled:bg-warning/60 font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
                                             >
                                                 Save & Finish!
                                             </Button>
@@ -563,14 +629,15 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                 Preview
                             </h3>
                             <div className="no_scrollbar max-h-[490px] overflow-y-scroll">
-                                {letterPreview({
-                                    formData: state.formData,
-                                    currentYear: state.currentYear,
-                                    encryptedContent: state.encryptedContent,
-                                    isDecrypted: state.isDecrypted,
-                                    isFormComplete: isFormComplete(),
-                                    targetRef: targetRef,
-                                })}
+                                {LetterPreviewComponent && (
+                                    <LetterPreviewComponent
+                                        formData={state.formData}
+                                        currentYear={state.currentYear}
+                                        encryptedContent={state.encryptedContent}
+                                        isDecrypted={state.isDecrypted}
+                                        isFormComplete={isFormComplete()}
+                                        targetRef={targetRef} />
+                                )}
                             </div>
                             {(isFormComplete() ||
                                 GetDoc?.getBusinessForm.status === "IsComplete") && (

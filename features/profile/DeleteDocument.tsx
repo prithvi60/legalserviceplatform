@@ -8,6 +8,7 @@ import { GetUserResponse } from "@/types/Types";
 import { useMutation, useQuery } from "@apollo/client";
 import { Button } from "@heroui/button";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 export const DeleteDocument = ({
     docId,
@@ -33,21 +34,27 @@ export const DeleteDocument = ({
 
     // Mutation for deleting the business form
     const [deleteBusinessForm] = useMutation(DELETE_BUSINESS_FORM, {
-        refetchQueries: [
-            {
-                query: GET_BUSINESS_FORMS,
-                variables: { userId, DocType: docType, orderBy: { DocNumber: "desc" } },
-            },
-        ],
-        awaitRefetchQueries: true,
-        onError: (error) => {
-            console.error("Delete mutation error:", error);
-        },
+        refetchQueries: [{ query: GET_BUSINESS_FORMS, variables: { userId, DocType: docType } }],
     });
 
     const handleDelete = async () => {
         if (!docId || !userId) {
-            alert("Missing document or user data.");
+            toast.error(
+                "Missing document or user data.",
+                {
+                    position: "top-right",
+                    duration: 3000,
+                    style: {
+                        border: "1px solid #EB1C23",
+                        padding: "16px",
+                        color: "#EB1C23",
+                    },
+                    iconTheme: {
+                        primary: "#EB1C23",
+                        secondary: "#FFFAEE",
+                    },
+                }
+            );
             return;
         }
 
@@ -63,24 +70,30 @@ export const DeleteDocument = ({
             });
 
             if (response?.data?.deleteBusinessForm) {
-                alert("Form deleted successfully!");
+                toast.success("Document Deleted successfully!", {
+                    position: "top-right",
+                    duration: 3000,
+                    style: {
+                        border: "1px solid #65a34e",
+                        padding: "16px",
+                        color: "#65a34e",
+                    },
+                    iconTheme: {
+                        primary: "#65a34e",
+                        secondary: "#FFFAEE",
+                    },
+                });
                 // Redirect to the URL
                 if (status === "IsPending") {
                     window.location.replace(url);
                 }
             } else {
                 console.error("Failed to delete business form");
-                alert("Form deletion failed!");
             }
         } catch (error) {
             console.error("Error deleting form:", error);
-            alert("Error occurred while deleting the form.");
         }
     };
-
-    // if (userLoading || deleteLoading) {
-    //     return <p>Loading...</p>; // Show loading indicator while queries/mutations are in progress
-    // }
 
     return (
         <Button

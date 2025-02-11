@@ -11,7 +11,7 @@ import { useMemo } from "react";
 
 const getGraphqlUri = () => {
     if (process.env.NODE_ENV === "production") {
-        return "https://legalserviceplatform.vercel.app/api/graphql";
+        return "https://resolve-demo.vercel.app/api/graphql";
     }
     return "http://localhost:3000/api/graphql";
 };

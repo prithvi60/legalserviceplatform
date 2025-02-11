@@ -29,7 +29,8 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
   const { status } = useSession();
   const router = useRouter();
   const defaultSubMenu = menu.subCategories?.[0]?.subMenu || "";
-  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] = useState<string>(defaultSubMenu);
+  const [hoveredSubMenuIndex, setHoveredSubMenuIndex] =
+    useState<string>(defaultSubMenu);
   const [leaveTimeout, setLeaveTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
@@ -91,12 +92,21 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
       onMouseLeave={handleMouseLeave}
       key={menu.menu}
     >
-      <span className="flex-center gap-1 hover:bg-white/5 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
-        {menu.menu}
-        {hasSubMenu && (
-          <ChevronDown className="mt-[0.6px] group-hover/link:text-warning group-hover/link:rotate-180 duration-200" />
-        )}
-      </span>
+      {menu.menu === "Expert Consultation" ? (
+        <span className="flex-center gap-1 bg-warning text-black font-medium hover:bg-warning/80 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
+          {menu.menu}
+          {hasSubMenu && (
+            <ChevronDown className="mt-[0.6px] group-hover/link:text-primary group-hover/link:rotate-180 duration-200" />
+          )}
+        </span>
+      ) : (
+        <span className="flex-center gap-1 hover:bg-white/5 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
+          {menu.menu}
+          {hasSubMenu && (
+            <ChevronDown className="mt-[0.6px] group-hover/link:text-warning group-hover/link:rotate-180 duration-200" />
+          )}
+        </span>
+      )}
 
       {hasSubMenu && (
         <motion.div

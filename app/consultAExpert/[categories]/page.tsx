@@ -4,11 +4,11 @@ import React from 'react'
 
 const Page = ({ params }: { params: { categories: string } }) => {
     const { categories } = params
-    // console.log(categories);
+    console.log(categories);
 
     return (
         <div>
-            <ExpertHero />
+            <ExpertHero categories={categories} />
             <TalkCardComponent />
         </div>
     )

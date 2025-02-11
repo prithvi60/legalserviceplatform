@@ -5,7 +5,7 @@ import React from 'react'
 const StartYourBusiness = () => {
     return (
         <section className="padding bg-white w-full space-y-12">
-            <div className="block space-y-2 text-center">
+            <div className="block space-y-2">
                 <h3 className='font-Archivo w-full font-bold tracking-wide text-2xl md:text-3xl xl:text-5xl text-secondary'>
                     Start Your Business with Confidence - We&apos;ve Got You Covered!
                 </h3>

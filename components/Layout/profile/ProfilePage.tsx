@@ -21,10 +21,10 @@ const ProfilePage = () => {
     const { data: GetDocType, loading: getDocLoading } = useQuery<GetBFResponse>(
         GET_BUSINESS_FORMS,
         {
-            variables: { userId, DocType: "NDA", orderBy: { DocNumber: "desc" } },
+            variables: { userId, DocType: "BC", orderBy: { DocNumber: "desc" } },
         }
     );
-    // console.log(GetDocType?.getBusinessForms);
+    console.log(GetDocType?.getBusinessForms);
 
     const filteredDataOfRA = GetDocType?.getBusinessForms.filter(
         (doc) => doc.status === "IsPending"

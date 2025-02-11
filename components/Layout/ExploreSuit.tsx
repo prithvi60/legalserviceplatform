@@ -58,11 +58,11 @@ const ExploreSuit = () => {
                                     ))}
                                 </ul>
                             </CardBody>
-                            <CardFooter className="justify-between">
+                            <CardFooter className="flex-row justify-between sm:justify-start gap-5 items-center sm:items-start lg:items-center sm:flex-col lg:flex-row lg:justify-between">
                                 <h4 className="text-base md:text-lg w-3/5 xl:text-xl font-Inter font-semibold tracking-wider text-black text-opacity-80">
                                     {item.footerName}
                                 </h4>
-                                <CalendlyComponent text={item.btnName} />
+                                <CalendlyComponent text={item.btnName} url="https://calendly.com/prithvi-webibee/general" />
                                 <div className="absolute size-44 md:size-48 -bottom-3 right-0">
                                     <Image fill alt="icon" src={"/Ellipse.svg"} />
                                 </div>

@@ -39,26 +39,21 @@ const CustomerFeedback = () => {
                             </div>
                             <div className="block space-y-4 md:space-y-6 w-full md:w-3/5">
                                 <p className="text-base text-secondary font-Lorin">
-                                    How We Are Transforming Legal Services in India. Maecenas
-                                    dignissim justo eget nulla rutrum molestie. Maecenas lobortis
-                                    sem dui, vel rutrum risus tincidunt ullamcorper. Proin eu enim
-                                    metus. Vivamus sed libero ornare, tristique quam in, gravida
-                                    enim. Nullam ut molestie arcu, at hendrerit elit. Morbi
-                                    laoreet elit at ligula molestie, nec molestie mi blandit.
-                                    Suspendisse cursus tellus sed augue ultrices, quis tristique
-                                    nulla sodales. Suspendisse eget lorem eu turpis vestibulum
-                                    pretium. Suspendisse potenti. Quisque malesuada enim sapien,
-                                    vitae placerat ante feugiat eget. Quisque vulputate odio
+                                    {list.review}
                                 </p>
-                                <h2 className="font-Archivo font-bold tracking-wide text-xl md:text-2xl xl:text-4xl">
-                                    {list.reviewer}
-                                </h2>
-                                <Link
-                                    href="#"
-                                    className="text-base md:text-lg font-Lorin underline underline-offset-4"
-                                >
-                                    Read More in Our Blog
-                                </Link>
+                                <div className="space-y-2.5">
+                                    <h2 className="font-Archivo font-bold tracking-wide text-xl md:text-2xl xl:text-4xl">
+                                        {list.reviewer}
+                                    </h2>
+                                    <div>
+                                        <Link
+                                            href="#"
+                                            className="text-base md:text-lg font-Lorin underline underline-offset-4"
+                                        >
+                                            Read More in Our Blog
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}

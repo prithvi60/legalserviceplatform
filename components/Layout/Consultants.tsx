@@ -31,6 +31,7 @@ export const consultantLists = [
             "Limited liability",
         ],
         href: "#",
+        url: "https://calendly.com/prithvi-webibee/ritu"
     },
     {
         title: "SJ Anakha",
@@ -44,6 +45,7 @@ export const consultantLists = [
             "Limited liability",
         ],
         href: "#",
+        url: "https://calendly.com/prithvi-webibee/prithvi"
     },
     {
         title: "SJ Anakha",
@@ -57,5 +59,6 @@ export const consultantLists = [
             "Limited liability",
         ],
         href: "#",
+        url: "https://calendly.com/prithvi-webibee/ritu"
     },
 ];

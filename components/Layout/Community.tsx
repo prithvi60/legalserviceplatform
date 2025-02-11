@@ -22,7 +22,7 @@ const Community = ({
 }) => {
     return (
         <section className="padding bg-white w-full space-y-12">
-            <div className="block space-y-2 text-center">
+            <div className="block space-y-2">
                 <h3 className="font-Archivo text-3xl tracking-wider font-semibold md:text-5xl xl:text-6xl text-secondary">
                     {mainTitle}
                 </h3>

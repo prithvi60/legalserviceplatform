@@ -22,7 +22,7 @@ const LetsBegin = () => {
                     At Vakilsearch, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>
-                <CalendlyComponent text='Get Started' />
+                <CalendlyComponent text='Get Started' url="https://calendly.com/prithvi-webibee/general" />
                 {/* <Button
                     radius="none"
                     size="md"

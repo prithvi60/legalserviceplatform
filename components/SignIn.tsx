@@ -9,6 +9,9 @@ import toast from "react-hot-toast";
 import { Loader } from "@/components/UI/Loader";
 import Link from "next/link";
 import { Spinner } from "@heroui/spinner";
+import { Button } from "@heroui/button";
+import { FcGoogle } from "react-icons/fc";
+import GoogleAuthButton from "./UI/GoogleAuthButton";
 
 const schema = z.object({
     email: z.string().email("Invalid email address"),
@@ -30,7 +33,6 @@ export const SignIn = () => {
         resolver: zodResolver(schema),
         mode: "onBlur",
     });
-
     const onSubmit: SubmitHandler<FormFields> = async (data) => {
 
         const returnUrl = typeof window !== 'undefined'
@@ -265,6 +267,16 @@ export const SignIn = () => {
                                 </div>
                             )}
                         </form>
+                        {/* <p className="rounded-full mx-auto font-Archivo font-semibold tracking-widest py-1 px-1.5 bg-primary w-max text-white text-base md:text-lg">or</p> */}
+                        {/* <form
+                            action={credentialsAction}
+                            className="w-full text-center">
+                            <Button onClick={() => signIn("google")} size="lg" color="primary" type="submit" className="" variant="bordered" startContent={<FcGoogle className="text-xl" />
+                            }>
+                                Sign in to Gmail
+                            </Button>
+                        </form> */}
+                        {/* <GoogleAuthButton /> */}
                         <div className="text-end">
                             <p>
                                 No account?{" "}
@@ -279,6 +291,6 @@ export const SignIn = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };

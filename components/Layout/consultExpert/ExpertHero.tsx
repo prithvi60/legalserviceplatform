@@ -3,7 +3,7 @@ import React from "react";
 import ExpertContactForm from "./ExpertContactForm";
 import CalendlyComponent from "../CalendlyComponent";
 
-const ExpertHero = () => {
+const ExpertHero = ({ categories }: { categories: string }) => {
     return (
         <section className="padding w-full h-full flex relative flex-col lg:flex-row overflow-hidden gap-8 xl:gap-5">
             <div className="block space-y-4 w-full md:w-1/2 lg:w-3/5">
@@ -14,7 +14,13 @@ const ExpertHero = () => {
                     At Vakilsearch, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>
-                <CalendlyComponent text='Book Now' />
+                <CalendlyComponent
+                    text="Book Now"
+                    url={`${categories === "lawyers"
+                        ? "https://calendly.com/prithvi-webibee/ritu"
+                        : "https://calendly.com/prithvi-webibee/prithvi "
+                        }`}
+                />
                 <ul className="block space-y-3 text-[#717171] w-full lg:w-3/4">
                     {expertContentList.map((list, idx) => (
                         <li

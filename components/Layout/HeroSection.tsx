@@ -15,12 +15,12 @@ const HeroSection = () => {
                         Get Expert Help Instantly
                     </h5>
                 </div>
-                <div className="w-[200px] h-[200px] md:w-[480px] md:h-[480px] basis-full md:basis-2/5 overflow-hidden relative z-0">
+                <div className="w-[320px] h-[200px] md:w-[480px] md:h-[480px] basis-full md:basis-2/5 overflow-hidden relative z-0">
                     <Image
                         priority
                         className="object-contain object-center"
                         alt="bg image"
-                        src={"/hero-img.png"}
+                        src={"/hero-gif-2.gif"}
                         fill
                     />
                 </div>
@@ -34,7 +34,7 @@ const HeroSection = () => {
                         Trusted by businesses across India!
                     </h5>
                 </div>
-                <div className="font-Inter flex flex-col md:flex-row md:items-center gap-10  text-base md:text-lg w-full md:w-2/5">
+                <div className="font-Inter flex flex-col md:flex-row md:items-center gap-3 md:gap-10  text-base md:text-lg w-full md:w-2/5">
                     <h4 className="flex text-3xl text-primary font-bold md:items-center gap-3">
                         <span>
                             <FaStar className="text-warning mx-2 text-2xl md:text-4xl xl:text-6xl" />

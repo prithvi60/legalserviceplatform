@@ -354,10 +354,12 @@ export const communityServices = [
                 country: "INDIA",
                 lists:
                     "GST and Indirect Tax , Annual Filings , Accounting & Tax Convert Your Business",
+                href: "/legal_documentation/india/BC"
             },
             {
                 country: "UAE",
                 lists: "Accounting & Tax , Annual Filings",
+                href: "/legal_documentation/india/BC"
             },
         ],
     },
@@ -368,11 +370,43 @@ export const communityServices = [
                 country: "INDIA",
                 lists:
                     "Business Contracts ,Personal & Family, Real Estate Notices HR Policies",
+                href: "/legal_documentation/india/BC"
             },
             {
                 country: "UAE",
                 lists:
                     "Business Contracts ,Personal & Family, Real Estate Notices HR Policies",
+                href: "/legal_documentation/india/BC"
+            },
+        ],
+    },
+    {
+        title: "Expert Consultation",
+        services: [
+            {
+                country: "Lawyers",
+                lists: "",
+                href: "consultAExpert/lawyers"
+            },
+            {
+                country: "CAs",
+                lists: "",
+                href: "consultAExpert/CA_CS"
+            },
+            {
+                country: "CSs",
+                lists: "",
+                href: "consultAExpert/CA_CS"
+            },
+        ],
+    },
+    {
+        title: "Business Setup",
+        services: [
+            {
+                country: "UAE",
+                lists: "International business setup",
+                href: "/legal_documentation/india/BC"
             },
         ],
     },
@@ -383,32 +417,7 @@ export const communityServices = [
                 country: "",
                 lists:
                     "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation",
-            },
-        ],
-    },
-    {
-        title: "Expert Consultation",
-        services: [
-            {
-                country: "Lawyers",
-                lists: "",
-            },
-            {
-                country: "CAs",
-                lists: "",
-            },
-            {
-                country: "CSs",
-                lists: "",
-            },
-        ],
-    },
-    {
-        title: "Business Setup",
-        services: [
-            {
-                country: "UAE",
-                lists: "International business setup",
+                href: "/legal_documentation/india/BC"
             },
         ],
     },
@@ -686,29 +695,22 @@ export const customerFeedbackLists = [
     {
         img: "/slider-sample.png",
         alt: "sample img",
-        review: "",
+        review: "How We Are Transforming Legal Services in India.",
         reviewer: "news channel 1",
         href: "",
     },
     {
         img: "/slider-sample.png",
         alt: "sample img",
-        review: "",
+        review: "Empowering Startups with Affordable Compliance Solutions.",
         reviewer: "news channel 2",
         href: "",
     },
     {
         img: "/slider-sample.png",
         alt: "sample img",
-        review: "",
+        review: "Making Business Setup Faster & Easier for Entrepreneurs.",
         reviewer: "news channel 3",
         href: "",
-    },
-    {
-        img: "/slider-sample.png",
-        alt: "sample img",
-        review: "",
-        reviewer: "news channel 4",
-        href: "",
-    },
+    }
 ];
