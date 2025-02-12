@@ -16,9 +16,9 @@ const Search = () => {
                 {communityServices.map((item, idx) => (
                     <Card
                         key={idx}
-                        className={`py-6 px-5 md:px-10 text-white bg-primary mx-auto w-full h-full col-span-5 `}
+                        className={`py-6 px-5 md:px-10 bg-[#EFEFFF] mx-auto w-full h-full col-span-5 `}
                     >
-                        <CardBody className="overflow-visible md:flex-row gap-10 md:gap-5 py-2">
+                        <CardBody className="overflow-visible lg:flex-row gap-10 lg:gap-5 py-2">
                             <div className="block space-y-4 w-full md:w-2/5">
                                 <h4 className="text-2xl md:text-3xl font-Archivo font-bold tracking-wider">
                                     {item.title}
@@ -27,7 +27,7 @@ const Search = () => {
                                     {item.services.map((service, id) => (
                                         <li
                                             key={id}
-                                            className="font-Lorin text-sm block md:text-base border-b-2 border-white"
+                                            className="font-Lorin text-sm block md:text-base border-b-2 border-black"
                                         >
                                             <Link href={service.href} className="space-y-1.5">
                                                 {service.country !== "" && (
@@ -54,7 +54,7 @@ const Search = () => {
                                     loop
                                     autoPlay
                                     playsInline
-                                    className="h-full md:h-[330px] w-full  object-contain object-center"
+                                    className="h-full md:h-[330px] w-full object-contain xl:object-cover object-center"
                                 >
                                     <source src="/demo.mp4" type="video/mp4" />
                                 </video>
