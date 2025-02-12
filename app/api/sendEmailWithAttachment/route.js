@@ -30,18 +30,20 @@ export async function POST(request) {
   }
 
   const userMailOptions = {
-    from: `Legal Services <${process.env.EMAIL_ID}>`,
+    from: `Resolve <${process.env.EMAIL_ID}>`,
     to: email,
-    subject: "Acknowledgment: We received your Enquiry",
+    subject: "Your Customized Acknowledgment PDF - Resolve",
     html: `<p>Dear Applicant,</p>
-           <p>Greetings from Legal Services!</p>
-           <p>We have received your enquiry, our team will revert back shortly.</p>
-           <p>Thanks & Regards,<br>
+           <p>Greetings from Resolve!</p>
+           <p>Thank you for using Resolve service. We appreciate your time and effort in customizing your document.</p>
+           <p>You can download your customized PDF file below - ${pdfName}</p>
+           <p>If you need any further assistance, feel free to reach out to us.</p>
+           <p>Best Regards,<br>
            <br>
-           <span style="margin-top: 2px;">Legal Services Intellectual Property Attorneys<span><br>
-           <span style="margin-top: 2px;">Swarna Shree complex, 3rd Floor.<br>
-           No. 36, Veerappan street, Sowcarpet,<br>
-           Chennai, Tamil Nadu, India - 600 079</span><br></p>`,
+           <span style="margin-top: 2px;">Resolve<span><br>
+           <span style="margin-top: 2px;">No. 12, Lakshmi Towers, 4th Floor<br>
+           Gandhi Nagar<br>
+           Chennai, Tamil Nadu, India - 600102</span><br></p>`,
     attachments: [
       {
         filename: pdfName || "document.pdf",
