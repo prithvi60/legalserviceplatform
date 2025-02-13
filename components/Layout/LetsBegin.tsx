@@ -19,7 +19,7 @@ const LetsBegin = () => {
                     Starting a Business and Confused Where to Begin?
                 </h2>
                 <p className="text-base text-secondary md:text-lg font-Lorin">
-                    At Vakilsearch, we take care of Accounting, Business, Compliance, and
+                    At Rezolvate, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>
                 <CalendlyComponent text='Get Started' url="https://calendly.com/prithvi-webibee/general" />

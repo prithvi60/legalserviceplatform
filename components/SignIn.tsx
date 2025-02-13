@@ -253,7 +253,7 @@ export const SignIn = () => {
                             <button
                                 disabled={isSubmitting}
                                 type="submit"
-                                className={`w-full cursor-pointer rounded-md p-4 text-black transition bg-warning font-semibold ${isSubmitting
+                                className={`w-full cursor-pointer rounded-md p-4 text-black transition bg-success font-semibold ${isSubmitting
                                     ? "bg-opacity-40 cursor-not-allowed"
                                     : "hover:bg-opacity-90"
                                     }`}

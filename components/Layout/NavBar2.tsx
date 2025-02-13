@@ -54,7 +54,7 @@ const AuthSection = ({ status, userData, loading }: {
     return (
         <Link
             href="/api/auth/signin"
-            className="flex rounded-md py-1 hover:bg-warning px-4 border-2 border-white font-semibold"
+            className="flex rounded-md py-1 hover:bg-success px-4 border-2 border-white font-semibold"
         >
             Login
         </Link>

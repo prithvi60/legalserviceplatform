@@ -419,7 +419,7 @@ export const SignUp = () => {
                                 <button
                                     disabled={!isValid || isSubmitting}
                                     type="submit"
-                                    className={`w-full cursor-pointer rounded-md p-4 text-black transition bg-warning font-semibold mb-5 ${!isValid || isSubmitting
+                                    className={`w-full cursor-pointer rounded-md p-4 text-black transition bg-success font-semibold mb-5 ${!isValid || isSubmitting
                                         ? "bg-opacity-40 cursor-not-allowed"
                                         : "hover:bg-opacity-90"
                                         }`}

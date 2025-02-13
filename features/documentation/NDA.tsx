@@ -751,12 +751,12 @@ const NDAPreview: React.FC = () => {
                                         .step < fieldGroups.length && (
                                             <Button
                                                 onPress={handleNext}
-                                                color="warning"
+                                                color="success"
                                                 radius="sm"
                                                 className="text-white font-semibold font-Lorin"
                                                 disabled={!isCurrentStepComplete()}
                                             >
-                                                save & continue
+                                            Save & continue
                                             </Button>
                                         )}
                                     {JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}")
@@ -764,7 +764,7 @@ const NDAPreview: React.FC = () => {
                                         progress === 100 && (
                                             <Button
                                                 onClick={handleFinishClick}
-                                                color="warning"
+                                                color="success"
                                                 radius="sm"
                                                 className="text-white font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
                                             >

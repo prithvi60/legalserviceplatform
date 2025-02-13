@@ -586,7 +586,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                         onPress={handleBack}
                                         disabled={state.step === 1}
                                         variant="bordered"
-                                        color="warning"
+                                        color="success"
                                         radius="sm"
                                         className="text-[#1E318D] font-medium font-Lorin"
                                     >
@@ -596,12 +596,12 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                         fieldGroups.length && (
                                             <Button
                                                 onPress={handleNext}
-                                                color="warning"
+                                                color="success"
                                                 radius="sm"
                                                 className="text-white font-semibold font-Lorin"
                                                 disabled={!isCurrentStepComplete()}
                                             >
-                                                {getDocsLoading ? <Loader /> : "save & continue"}
+                                                {getDocsLoading ? <Loader /> : "Save & continue"}
                                             </Button>
                                         )}
                                     {JSON.parse(sessionStorage.getItem(storageKey) || "{}")
@@ -610,7 +610,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                             <Button
                                                 disabled={paymentStatus === 'success' ? true : false}
                                                 onClick={handleFinishClick}
-                                                color="warning"
+                                                color="success"
                                                 radius="sm"
                                                 className="text-white disabled:bg-warning/60 font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
                                             >

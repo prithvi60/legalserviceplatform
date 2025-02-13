@@ -11,7 +11,7 @@ const ExpertHero = ({ categories }: { categories: string }) => {
                     Online Lawyer Consultation
                 </h2>
                 <p className="text-base w-full md:w-4/5 text-[#717171] lg:text-lg font-Lorin">
-                    At Vakilsearch, we take care of Accounting, Business, Compliance, and
+                    At Rezolvate, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>
                 <CalendlyComponent
