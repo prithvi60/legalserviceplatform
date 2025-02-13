@@ -58,7 +58,7 @@ const CalendlyLink = ({
                 rel="stylesheet"
             />
             <Button
-                color="warning"
+                color="success"
                 radius="md"
                 size={text === "Get Started" ? "md" : "lg"}
                 className="font-Inter font-semibold relative z-20"

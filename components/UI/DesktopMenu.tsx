@@ -93,7 +93,7 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
       key={menu.menu}
     >
       {menu.menu === "Expert Consultation" ? (
-        <span className="flex-center gap-1 bg-warning text-black font-medium hover:bg-warning/80 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
+        <span className="flex-center gap-1 bg-success text-black font-medium hover:bg-success/80 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
           {menu.menu}
           {hasSubMenu && (
             <ChevronDown className="mt-[0.6px] group-hover/link:text-primary group-hover/link:rotate-180 duration-200" />
@@ -145,7 +145,7 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
                     ) : (
                       <div
                         className={`w-full h-20 flex justify-center items-center p-1.5 ${hoveredSubMenuIndex === submenu.subMenu
-                          ? "bg-warning/60 rounded-md"
+                          ? "bg-success/60 rounded-md"
                           : ""
                           }`}
                       >

@@ -16,7 +16,7 @@ const Search = () => {
                 {communityServices.map((item, idx) => (
                     <Card
                         key={idx}
-                        className={`py-6 px-5 md:px-10 bg-[#EFEFFF] mx-auto w-full h-full col-span-5 `}
+                        className={`py-6 px-5 md:px-10 linear-blue_1 text-white mx-auto w-full h-full col-span-5 `}
                     >
                         <CardBody className="overflow-visible lg:flex-row gap-10 lg:gap-5 py-2">
                             <div className="block space-y-4 w-full md:w-2/5">
@@ -27,7 +27,7 @@ const Search = () => {
                                     {item.services.map((service, id) => (
                                         <li
                                             key={id}
-                                            className="font-Lorin text-sm block md:text-base border-b-2 border-black"
+                                            className="font-Lorin text-sm block md:text-base border-b-2 border-white"
                                         >
                                             <Link href={service.href} className="space-y-1.5">
                                                 {service.country !== "" && (

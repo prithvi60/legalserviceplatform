@@ -44,6 +44,10 @@ export default {
             // success: "#4D4D4D",
             warning: "#FFC107",
             // danger: "#1D252D",
+            // new theme
+            success: "#ffab34",
+            // cta:#ffab34
+            // lightbg:#9affa3
           },
         },
       },

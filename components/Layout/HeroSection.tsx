@@ -8,7 +8,7 @@ const HeroSection = () => {
             <section className="padding w-full h-screen text-white linear-blue_1 flex items-center relative flex-col md:flex-row overflow-hidden gap-5">
                 <div className="block space-y-4 w-full md:w-3/5">
                     <h2 className="font-Archivo font-bold tracking-wide text-3xl md:text-5xl xl:text-7xl">
-                        <span className="text-warning mr-3">Simplify</span>Legal, Tax &
+                        <span className="text-success mr-3">Simplify</span>Legal, Tax &
                         Compliance
                     </h2>
                     <h5 className="font-Lorin ml-1 font-medium tracking-wide text-lg md:text-xl">
