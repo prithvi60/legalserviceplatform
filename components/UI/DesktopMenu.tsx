@@ -87,13 +87,13 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
 
   return (
     <motion.li
-      className={`group/link relative px-1`}
+      className={`group/link relative px-1 font-Inter font-medium tracking-wide`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       key={menu.menu}
     >
       {menu.menu === "Expert Consultation" ? (
-        <span className="flex-center gap-1 bg-success text-black font-medium hover:bg-success/80 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
+        <span className="flex-center gap-1 bg-success text-black font-Inter font-semibold hover:bg-success/80 text-base xl:text-xl cursor-pointer px-2 xl:px-4 py-1.5 xl:py-2 rounded-xl">
           {menu.menu}
           {hasSubMenu && (
             <ChevronDown className="mt-[0.6px] group-hover/link:text-primary group-hover/link:rotate-180 duration-200" />
@@ -132,7 +132,7 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
                       menu.menu === "Financial Consultation"
                       ? "grid grid-cols-1 w-full"
                       : "grid grid-cols-2 w-full pb-3"
-                      } relative gap-x-4 h-fit`}
+                      } relative gap-x-4 h-fit `}
                   >
                     {menu.menu === "Expert Consultation" ||
                       menu.menu === "Financial Consultation" ? (

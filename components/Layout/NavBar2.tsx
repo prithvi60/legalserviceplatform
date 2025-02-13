@@ -75,7 +75,7 @@ const NavBar2 = () => {
             <nav className="flex-center-between w-full">
                 <Link href="/" className="z-[999] relative flex-center gap-x-2">
                     {/* <AcmeLogo /> */}
-                    <h3 className="text-lg xl:text-xl font-Inter italic font-semibold">Rezolvate</h3>
+                    <h3 className="text-lg xl:text-2xl font-Inter italic font-bold tracking-widest">Rezolvate</h3>
                 </Link>
 
                 <div className="flex-center gap-x-5">

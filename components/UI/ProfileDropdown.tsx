@@ -31,7 +31,7 @@ export const ProfileDropdown = ({ email, loading }: { email?: string; loading: b
             <DropdownItem
                 key="My_Profile"
                 classNames={{
-                    base: "data-[hover=true]:!bg-warning/80",
+                    base: "data-[hover=true]:!bg-success/80",
                 }}
             >
                 <Link href="/profile" className="w-full block">
