@@ -62,4 +62,14 @@
   .custom-slider .slick-slide > div {
     margin: 0 20px !important;
   }
+  .custom-slider .slick-track{
+    padding: 8px !important ;
+    max-height: 300px;
+  
+  }
+}
+.custom-slider .slick-track{
+  padding: 16px !important ;
+  max-height: 600px;
+
 }

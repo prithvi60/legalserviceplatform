@@ -15,7 +15,7 @@ const HeroSection = () => {
                         Get Expert Help Instantly
                     </h5>
                 </div>
-                <div className="w-[320px] h-[200px] md:w-[480px] md:h-[480px] basis-full md:basis-2/5 overflow-hidden relative z-0">
+                <div className="w-[360px] h-[250px] md:w-[480px] md:h-[680px] basis-full md:basis-2/5 overflow-hidden relative z-0">
                     <Image
                         priority
                         className="object-contain object-center"

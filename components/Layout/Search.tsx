@@ -2,7 +2,6 @@
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { communityServices } from "@/constants/Data";
 import { useRef } from "react";
-import Link from "next/link";
 import Slider from "react-slick";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import Image from "next/image";
@@ -15,9 +14,9 @@ const Search = () => {
     slidesToScroll: 1,
     nextArrow: <SamplePrevArrow />,
     prevArrow: <SampleNextArrow />,
-    autoplay: true,
+    autoplay: false,
     speed: 2000,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 768,
@@ -95,7 +94,7 @@ const Search = () => {
           {communityServices.map((item, idx) => (
             <Card
               key={idx}
-              className=" relative bg-[#FFC10733] w-full mx-auto md:w-[450px] hover:scale-110"
+              className=" relative bg-[#FFC10733] w-full mx-auto  hover:scale-105 hover:bg-[#FFC10733]/40 cursor-pointer"
             >
               <div className="w-full ">
                 <video
@@ -104,27 +103,27 @@ const Search = () => {
                   loop
                   autoPlay
                   playsInline
-                  className="h-full md:h-[330px] w-full object-contain xl:object-cover object-center"
+                  className="h-full w-full object-contain object-center"
                 >
                   <source src="/demo.mp4" type="video/mp4" />
                 </video>
               </div>
-              <CardHeader className="pb-3 pt-2 px-4 flex-col gap-2 items-start">
-                <h4 className="text-xl text-black text-opacity-80 xl:text-2xl font-Archivo font-semibold tracking-wider">
+              <CardHeader className="pb-3 pt-2  flex-col gap-2 items-start  py-4 px-6">
+                <h4 className="text-xl text-black text-opacity-80 xl:text-2xl font-Archivo font-semibold tracking-wide r">
                   {item.title}
                 </h4>
                 {/* <p className="text-sm text-black text-opacity-70 font-Lorin font-medium">
                                     {item.desc}
                                 </p> */}
               </CardHeader>
-              <CardBody className="overflow-visible gap-5 justify-center py-2">
+              <CardBody className="overflow-visible gap-5 justify-center  py-4 px-6">
                 <ul className="text-sm px-4 font-light space-y-1.5 list-disc font-Lorin list-outside text-black text-opacity-70 z-10">
                   {item.services.map((list, id) => (
 
                     <div key={id}>
 
                         <li >{list.country}</li>
-                        <a href={list.href}>{list.lists}</a>
+                        <a href={list.href} className="text-primary">{list.lists}</a>
                     </div>
                   ))}
                 </ul>

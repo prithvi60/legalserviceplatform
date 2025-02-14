@@ -384,18 +384,18 @@ export const communityServices = [
         title: "Expert Consultation",
         services: [
             {
-                country: "Lawyers",
-                lists: "",
+                country: "India",
+                lists: "Lawyers",
                 href: "consultAExpert/lawyers"
             },
             {
-                country: "CAs",
-                lists: "",
+                country: "India",
+                lists: "CAs",
                 href: "consultAExpert/CA_CS"
             },
             {
-                country: "CSs",
-                lists: "",
+                country: "India",
+                lists: "CSs",
                 href: "consultAExpert/CA_CS"
             },
         ],
