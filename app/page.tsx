@@ -4,6 +4,7 @@ import Community from "@/components/Layout/Community";
 import CustomerFeedback from "@/components/Layout/CustomerFeedback";
 import ExploreSuit from "@/components/Layout/ExploreSuit";
 import HeroSection from "@/components/Layout/HeroSection";
+import OurClients from "@/components/Layout/OurClients";
 import Search from "@/components/Layout/Search";
 import StartYourBusiness from "@/components/Layout/StartYourBusiness";
 import VideoSection from "@/components/Layout/VideoSection";

@@ -10,31 +10,22 @@ interface LogoItem {
 
 const OurClients = () => {
     return (
-        <section className="padding !pt-0 !pb-4 md:!pb-8 w-full bg-warning space-y-7 md:space-y-14">
+        <section className="absolute bottom-8 w-full  ">
             <div className="w-full">
                 <div className="flex relative justify-center items-center gap-2 sm:gap-6">
-                    <div className="w-32 h-20 md:w-48 md:h-28 overflow-hidden relative">
+                    {/* <div className="w-32 h-20 md:w-48 md:h-28 overflow-hidden relative mb-8">
                         <Image
                             fill
                             src={"/dart_board.png"}
                             alt="icon"
                             className="object-contain object-center"
                         />
-                    </div>
-                    <h4 className="font-Archivo tracking-wider text-2xl sm:text-3xl">Our Clients</h4>
+                    </div> */}
+                    <h4 className="font-Archivo tracking-wider text-2xl sm:text-3xl mb-8">Trusted By</h4>
                 </div>
-                <p className="text-base text-center font-Lorin">
-                    We have been working with some Fortune 500+ clients
-                </p>
-            </div>
-            {/* <div className='flex justify-center items-center gap-8 w-full h-full'>
-                {clientsLogo.map((item, idx) => (
-                    <div key={idx} className='size-20 overflow-hidden relative'>
-                        <Image fill src={item.img} alt={item.alt} className='object-contain object-center' />
-                    </div>
-                ))}
-            </div> */}
+            
             <MarqueeEffect data={clientsLogo} />
+            </div>
         </section>
     );
 };
