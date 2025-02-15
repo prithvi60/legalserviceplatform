@@ -37,8 +37,8 @@ export default {
       themes: {
         light: {
           colors: {
-            default: "#FFFBEE",
-            background: "#FFFBEE",
+            default: "#F1F2F5",
+            background: "#F1F2F5",
             primary: "#1E318D",
             secondary: "#4D4D4D", //main title color
             // success: "#4D4D4D",

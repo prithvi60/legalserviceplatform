@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import Link from "next/link";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -25,28 +25,19 @@ interface SubLink {
 }
 
 export default function DesktopMenu({ menu }: { menu: Menu }) {
-  const [isHover, setIsHover] = useState(false);
   const { status } = useSession();
   const router = useRouter();
+
   const defaultSubMenu = menu.subCategories?.[0]?.subMenu || "";
+  const [isHover, setIsHover] = useState(false);
   const [hoveredSubMenuIndex, setHoveredSubMenuIndex] =
     useState<string>(defaultSubMenu);
-  const [leaveTimeout, setLeaveTimeout] = useState<NodeJS.Timeout | null>(null);
 
-  const handleMouseEnter = () => {
-    if (leaveTimeout) {
-      clearTimeout(leaveTimeout);
-      setLeaveTimeout(null);
-    }
-    setIsHover(true);
-  };
+  const handleMouseEnter = () => setIsHover(true);
+  const handleMouseLeave = () => setIsHover(false);
 
-  const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setIsHover(false);
-      setHoveredSubMenuIndex(defaultSubMenu);
-    }, 250);
-    setLeaveTimeout(timeout);
+  const handleSubMenuHover = (subMenu: string) => {
+    setHoveredSubMenuIndex(subMenu);
   };
 
   const handleClick = (val: string) => {
@@ -58,138 +49,130 @@ export default function DesktopMenu({ menu }: { menu: Menu }) {
     }
   };
 
-  const subMenuAnimate = {
-    enter: {
-      opacity: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.5,
-      },
-      display: "block",
-    },
-    exit: {
-      opacity: 0,
-      rotateX: -15,
-      // transition: {
-      //   duration: 0.2,
-      // },
-      transitionEnd: {
-        display: "none",
-      },
-    },
-  };
-
   const hasSubMenu = menu?.subCategories?.length;
-
   const FilteredData = menu.subCategories?.find(
     (val) => val.subMenu === hoveredSubMenuIndex
   );
 
   return (
     <motion.li
-      className={`group/link relative px-1 font-Inter font-medium tracking-wide`}
+      className="group/link relative px-2 font-Inter font-medium tracking-wide"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       key={menu.menu}
     >
-      {menu.menu === "Expert Consultation" ? (
-        <span className="flex-center gap-1 bg-success text-black font-Inter font-semibold hover:bg-success/80 text-base xl:text-xl cursor-pointer px-2 xl:px-4 py-1.5 xl:py-2 rounded-xl">
-          {menu.menu}
-          {hasSubMenu && (
-            <ChevronDown className="mt-[0.6px] group-hover/link:text-primary group-hover/link:rotate-180 duration-200" />
-          )}
-        </span>
-      ) : (
-        <span className="flex-center gap-1 hover:bg-white/5 text-base xl:text-xl cursor-pointer px-1 xl:px-2 py-1.5 xl:py-2 rounded-xl">
-          {menu.menu}
-          {hasSubMenu && (
-            <ChevronDown className="mt-[0.6px] group-hover/link:text-warning group-hover/link:rotate-180 duration-200" />
-          )}
-        </span>
-      )}
+      <span
+        className={`flex items-center gap-1 ${
+          menu.menu === "Expert Consultation"
+            ? "bg-success text-black font-semibold hover:bg-success/90"
+            : "hover:bg-white/5"
+        } text-lg md:text-xl cursor-pointer px-2 xl:px-4 py-1.5 xl:py-2 rounded-lg font-Archivo`}
+      >
+        {menu.menu}
+        {hasSubMenu && (
+          <ChevronDown
+            className={`mt-[0.6px]  group-hover/link:rotate-180 duration-200  ${
+              menu.menu === "Expert Consultation"
+                ? "text-black"
+                : "text-success"
+            } `}
+          />
+        )}
+      </span>
 
-      {hasSubMenu && (
-        <motion.div
-          className={`${menu.menu === "Expert Consultation" ||
-            menu.menu === "Financial Consultation"
-            ? "sub-menu w-max "
-            : "sub-menu w-[640px]"
-            } ${menu.menu === "Legal Documentation" ? " h-[300px]" : "h-fit"}`}
-          initial="exit"
-          animate={isHover ? "enter" : "exit"}
-          variants={subMenuAnimate}
-        >
-          <div className={`grid gap-4 grid-cols-1 relative`}>
-            {hasSubMenu &&
-              menu.subCategories?.map((submenu, i) => (
-                <div
-                  className="relative cursor-pointer w-full"
-                  key={i}
-                  onMouseEnter={() => setHoveredSubMenuIndex(submenu.subMenu)}
-                >
+      <AnimatePresence>
+        {isHover && hasSubMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className={`absolute z-50 left-0 mt-2 w-[750px] bg-white text-black shadow-xl rounded-lg overflow-hidden ${
+              menu.menu === "Expert Consultation" ||
+              menu.menu === "Financial Consultation"
+                ? "w-[500px]"
+                : "w-[750px]"
+            }`}
+          >
+            {menu.menu === "Expert Consultation" ||
+            menu.menu === "Financial Consultation" ? (
+              // Card-based layout for Expert & Financial Consultation
+              <div className="p-6 max-w-fit">
+                {menu.subCategories?.map((submenu, i) => (
                   <div
-                    className={`${menu.menu === "Expert Consultation" ||
-                      menu.menu === "Financial Consultation"
-                      ? "grid grid-cols-1 w-full"
-                      : "grid grid-cols-2 w-full pb-3"
-                      } relative gap-x-4 h-fit `}
+                    key={i}
+                    className="p-4 mb-2  rounded-lg transition"
+                    onMouseEnter={() => handleSubMenuHover(submenu.subMenu)}
                   >
-                    {menu.menu === "Expert Consultation" ||
-                      menu.menu === "Financial Consultation" ? (
-                      <Link
-                        href={submenu.href || "#"}
-                        className={`font-semibold w-full text-base xl:text-lg hover:text-primary/80`}
-                      >
-                        {submenu.subMenu}
-                      </Link>
-                    ) : (
-                      <div
-                        className={`w-full h-20 flex justify-center items-center p-1.5 ${hoveredSubMenuIndex === submenu.subMenu
-                          ? "bg-success/60 rounded-md"
-                          : ""
-                          }`}
-                      >
-                        <h6
-                          className={`font-semibold text-xl flex w-full items-center gap-2 group/menubox`}
-                        >
-                          <span>
-                            <IoDocumentTextOutline className="w-fit text-4xl p-2 rounded-md group-hover/menubox:bg-primary/50 group-hover/menubox:text-warning duration-300" />
-                          </span>
-                          {submenu.subMenu}
-                          <span>
-                            <MdOutlineKeyboardArrowRight className="text-xl text-black" />
-                          </span>
-                        </h6>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            {FilteredData && (
-              <div className={`space-y-4 w-1/2 absolute top-0 left-[340px]`}>
-                {menu.menu !== "Expert Consultation" &&
-                  menu.menu !== "Financial Consultation" && (
-                    <h4 className="font-Archivo pb-3 font-bold text-base xl:text-lg underline underline-offset-8 text-primary tracking-wide">
-                      {FilteredData.subMenu}
-                    </h4>
-                  )}
-
-                {FilteredData.subDivision?.map((subdiv, id) => (
-                  <div key={id} className="block space-y-2 h-fit">
                     <Link
-                      href={subdiv.href}
-                      className={`font-semibold w-full text-base xl:text-lg hover:text-primary/80`}
-                      onClick={() => handleClick(subdiv.href)}
+                      href={submenu.href || "#"}
+                      className="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-100 transition"
+                      onClick={() => handleClick(submenu.href || "#")}
                     >
-                      {subdiv.subLink}
+                      <IoDocumentTextOutline className="text-3xl text-primary" />
+                      <span className="font-semibold text-lg">
+                        {submenu.subMenu}
+                      </span>
                     </Link>
                   </div>
                 ))}
               </div>
+            ) : (
+              // Grid-based layout for all other submenus
+              <div className="grid grid-cols-12">
+                {/* Left Column - Submenu List */}
+                <div
+                  className={`col-span-4 p-6 flex flex-col gap-4 bg-primary text-white`}
+                >
+                  {menu.subCategories?.map((submenu, i) => (
+                    <div
+                      key={i}
+                      onMouseEnter={() => handleSubMenuHover(submenu.subMenu)}
+                      className={`cursor-pointer p-3 rounded-lg ${
+                        hoveredSubMenuIndex === submenu.subMenu
+                          ? "bg-white text-black"
+                          : "hover:bg-white/20"
+                      }`}
+                    >
+                      <h6 className="text-lg font-semibold flex items-center gap-2">
+                        {submenu.subMenu}
+                        <MdOutlineKeyboardArrowRight className="text-xl" />
+                      </h6>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Right Column - SubLinks */}
+                <div className="col-span-8 p-6">
+                  {FilteredData && (
+                    <>
+                      <h4 className="font-bold text-lg underline text-primary tracking-wide mb-4">
+                        {FilteredData.subMenu}
+                      </h4>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        {FilteredData.subDivision?.map((subdiv, id) => (
+                          <Link
+                            key={id}
+                            href={subdiv.href}
+                            className="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-100 transition"
+                            onClick={() => handleClick(subdiv.href)}
+                          >
+                            <IoDocumentTextOutline className="text-3xl text-primary" />
+                            <span className="font-semibold text-lg">
+                              {subdiv.subLink}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
             )}
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.li>
   );
 }

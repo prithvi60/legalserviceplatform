@@ -9,7 +9,7 @@ const Achievements = () => {
                     Helping a local{" "}
                     <span className="text-white">business reinvent itself</span>
                 </h2>
-                <p className="text-sm md:text-base font-Inter">
+                <p className="text-lg md:text-xl font-Inter">
                     We reached here with our hard work and dedication
                 </p>
             </div>
@@ -29,7 +29,7 @@ const Achievements = () => {
                             <h5 className="text-xl font-Inter font-bold md:text-2xl">
                                 {list.count}
                             </h5>
-                            <p className="text-sm font-Inter tracking-wide capitalize">
+                            <p className="text-lg font-Inter tracking-wide capitalize">
                                 {list.countName}
                             </p>
                         </div>

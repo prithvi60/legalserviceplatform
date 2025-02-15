@@ -24,7 +24,7 @@ const RecentActivity = ({ data }: RecentActivityProps) => {
         <section className="w-full font-Lorin space-y-8 md:space-y-12">
             <h2 className="text-lg tracking-wider capitalize">Recent Activity</h2>
             {!data?.length ? (
-                <p className="text-center font-Archivo tracking-wider text-base md:text-lg text-slate-500">
+                <p className="text-center font-Archivo tracking-wider text-base md:text-xl text-slate-500">
                     Currently, no pending data is available.
                 </p>
             ) : (

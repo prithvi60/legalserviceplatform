@@ -33,7 +33,7 @@ const Search = () => {
         <h4 className="font-Archivo text-2xl font-semibold md:text-3xl xl:text-4xl">
           Explore our suite of products
         </h4>
-        <p className="font-Lorin">
+        <p className="font-Lorin text-lg md:text-xl">
           Explore our suite of products to see how you can simplify, automate
           and accelerate your Legal processes.
         </p>
@@ -53,7 +53,7 @@ const Search = () => {
                                     {item.services.map((service, id) => (
                                         <li
                                             key={id}
-                                            className="font-Lorin text-sm block md:text-base border-b-2 border-white"
+                                            className="font-Lorin text-lg block md:text-base border-b-2 border-white"
                                         >
                                             <Link href={service.href} className="space-y-1.5">
                                                 {service.country !== "" && (
@@ -92,9 +92,10 @@ const Search = () => {
       <div className="slider-container">
         <Slider {...settings} className="custom-slider">
           {communityServices.map((item, idx) => (
+            // bg-[#3b58de]
             <Card
               key={idx}
-              className=" relative bg-[#FFC10733] w-full mx-auto  hover:scale-105 hover:bg-[#FFC10733]/40 cursor-pointer"
+              className=" relative bg-[#3b58de] w-full mx-auto  hover:scale-105 hover:bg-[#3b58de]/90 cursor-pointer"
             >
               <div className="w-full ">
                 <video
@@ -108,33 +109,29 @@ const Search = () => {
                   <source src="/demo.mp4" type="video/mp4" />
                 </video>
               </div>
-              <CardHeader className="pb-3 pt-2  flex-col gap-2 items-start  py-4 px-6">
-                <h4 className="text-xl text-black text-opacity-80 xl:text-2xl font-Archivo font-semibold tracking-wide r">
+              <CardHeader className="pb-1 pt-4  flex-col gap-2 items-start  py-4 px-6">
+                <h4 className="text-xl text-white xl:text-2xl font-Archivo font-medium ">
                   {item.title}
                 </h4>
-                {/* <p className="text-sm text-black text-opacity-70 font-Lorin font-medium">
+                {/* <p className="text-lg text-white text-opacity-70 font-Lorin font-medium">
                                     {item.desc}
                                 </p> */}
               </CardHeader>
               <CardBody className="overflow-visible gap-5 justify-center  py-4 px-6">
-                <ul className="text-sm px-4 font-light space-y-1.5 list-disc font-Lorin list-outside text-black text-opacity-70 z-10">
+                <ul className="text-lg px-4 font-medium space-y-1.5 list-disc font-Lorin list-outside text-white z-10">
                   {item.services.map((list, id) => (
 
                     <div key={id}>
 
-                        <li >{list.country}</li>
-                        <a href={list.href} className="text-primary">{list.lists}</a>
+                        <li className="list-none text-success font-semibold">{list.country}</li>
+                        <a href={list.href} className="text-default font-light">{list.lists}</a>
                     </div>
                   ))}
                 </ul>
               </CardBody>
               <CardFooter className="flex-row justify-between sm:justify-start gap-5 items-center sm:items-start lg:items-center sm:flex-col lg:flex-row lg:justify-between">
-                {/* <h4 className="text-base md:text-lg w-3/5 xl:text-xl font-Inter font-semibold tracking-wider text-black text-opacity-80">
-                                    {item.footerName}
-                                </h4> */}
-                {/* <CalendlyComponent text={item.btnName} url="https://calendly.com/prithvi-webibee/general" /> */}
                 <div className="absolute size-44 md:size-48 -bottom-3 right-0">
-                  <Image fill alt="icon" src={"/Ellipse.svg"} />
+                  <Image fill alt="icon" src={"/Ellipse2.svg"} />
                 </div>
               </CardFooter>
             </Card>

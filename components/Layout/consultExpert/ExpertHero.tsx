@@ -25,7 +25,7 @@ const ExpertHero = ({ categories }: { categories: string }) => {
                     {expertContentList.map((list, idx) => (
                         <li
                             key={idx}
-                            className="font-Lorin flex items-center gap-5 font-medium text-base md:text-lg"
+                            className="font-Lorin flex items-center gap-5 font-medium text-base md:text-xl"
                         >
                             <div className="size-8 flex-shrink-0 overflow-hidden relative z-0">
                                 <Image

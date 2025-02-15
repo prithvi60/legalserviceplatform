@@ -176,7 +176,7 @@ export const SignIn = () => {
                                     </span>
                                 </div>
                                 {errors.email && (
-                                    <div className="absolute -bottom-5 left-0 w-full text-xs md:text-sm text-red-500 font-semibold text-center mt-1">
+                                    <div className="absolute -bottom-5 left-0 w-full text-xs md:text-xl text-red-500 font-semibold text-center mt-1">
                                         {errors.email.message}
                                     </div>
                                 )}
@@ -244,7 +244,7 @@ export const SignIn = () => {
                                     </span>
                                 </div>
                                 {errors.password && (
-                                    <div className="absolute -bottom-5 left-0 w-full text-xs md:text-sm text-red-500 font-semibold text-center mt-1">
+                                    <div className="absolute -bottom-5 left-0 w-full text-xs md:text-xl text-red-500 font-semibold text-center mt-1">
                                         {errors.password.message}
                                     </div>
                                 )}
@@ -262,12 +262,12 @@ export const SignIn = () => {
                             </button>
 
                             {errors.root && (
-                                <div className="absolute -bottom-6 text-sm md:text-base w-full left-1/2 -translate-x-1/2 text-red-500 font-semibold text-center mt-5">
+                                <div className="absolute -bottom-6 text-lg md:text-xl w-full left-1/2 -translate-x-1/2 text-red-500 font-semibold text-center mt-5">
                                     {errors.root.message}
                                 </div>
                             )}
                         </form>
-                        {/* <p className="rounded-full mx-auto font-Archivo font-semibold tracking-widest py-1 px-1.5 bg-primary w-max text-white text-base md:text-lg">or</p> */}
+                        {/* <p className="rounded-full mx-auto font-Archivo font-semibold tracking-widest py-1 px-1.5 bg-primary w-max text-white text-base md:text-xl">or</p> */}
                         {/* <form
                             action={credentialsAction}
                             className="w-full text-center">
@@ -282,7 +282,7 @@ export const SignIn = () => {
                                 No account?{" "}
                                 <Link
                                     href="/auth/signup"
-                                    className="text-primary font-sans tracking-wide text-sm font-semibold underline underline-offset-4 md:text-base hover:text-primary/70"
+                                    className="text-primary font-sans tracking-wide text-lg font-semibold underline underline-offset-4 md:text-base hover:text-primary/70"
                                 >
                                     Create one!
                                 </Link>

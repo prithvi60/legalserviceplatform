@@ -5,7 +5,7 @@ const DocumentTemplate = () => {
         <section className="w-full max-w-7xl mx-auto h-full flex gap-20">
             <div className="p-5 border-2 max-h-[70vh] border-green-600 rounded basis-full md:basis-[35%]"></div>
             <div className="shadow-2xl basis-full md:basis-[65%]">
-                <ScrollShadow hideScrollBar size={100} className="max-h-[70vh] bg-white/90 rounded w-full">
+                <ScrollShadow hideScrollBar size={100} className="max-h-[70vh]  rounded w-full">
                     {/* <ScrollShadow className="w-auto h-auto"> */}
                     <div className="p-10">
                         <h1 className="text-2xl font-bold mb-4 text-center">

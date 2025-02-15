@@ -66,7 +66,7 @@ const ProfilePage = () => {
                                 <h5 className="font-Archivo font-medium tracking-wider text-lg md:text-xl">
                                     {RoleBased?.getUser?.username}
                                 </h5>
-                                <p className="text-sm md:text-base font-Lorin opacity-60">
+                                <p className="text-lg md:text-xl font-Lorin opacity-60">
                                     {RoleBased?.getUser?.email}
                                 </p>
                             </div>
@@ -89,7 +89,7 @@ const ProfilePage = () => {
                                         <h5 className="font-Lorin font-normal tracking-wider text-base">
                                             Free Plan
                                         </h5>
-                                        <p className="text-sm md:text-base font-Lorin opacity-60">
+                                        <p className="text-lg md:text-xl font-Lorin opacity-60">
                                             1 month ago
                                         </p>
                                     </div>
@@ -123,7 +123,7 @@ const ProfilePage = () => {
 export default ProfilePage;
 
 {
-    /* <p className="font-Archivo font-base md:text-lg text-center font-medium">
+    /* <p className="font-Archivo font-base md:text-xl text-center font-medium">
                             Currently, no pending document form is available.
                         </p> */
 }

@@ -48,7 +48,7 @@ const CustomerFeedback = () => {
                                     <div>
                                         <Link
                                             href="#"
-                                            className="text-base md:text-lg font-Lorin underline underline-offset-4"
+                                            className="text-base md:text-xl font-Lorin underline underline-offset-4"
                                         >
                                             Read More in Our Blog
                                         </Link>

@@ -112,7 +112,7 @@ const ExpertContactForm = () => {
                                 onChange={handleChange}
                                 required
                                 placeholder="Enter your first name"
-                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                             />
                         </div>
                     </div>
@@ -129,7 +129,7 @@ const ExpertContactForm = () => {
                                 onChange={handleChange}
                                 required
                                 placeholder="Enter your last name"
-                                className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                                className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                             />
                         </div>
                     </div>
@@ -145,7 +145,7 @@ const ExpertContactForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter your email ID"
-                            className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                            className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                         />
                     </div>
                 </div>
@@ -162,7 +162,7 @@ const ExpertContactForm = () => {
                             onChange={handleChange}
                             required
                             placeholder="Enter your phone no."
-                            className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                            className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                         />
                     </div>
                 </div>
@@ -179,7 +179,7 @@ const ExpertContactForm = () => {
                             required
                             placeholder="Write your message..."
                             rows={3}
-                            className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                            className="w-full py-2 pl-6 pr-10  bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                         />
                     </div>
                 </div>

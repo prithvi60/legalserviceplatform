@@ -26,7 +26,7 @@ const Community = ({
                 <h3 className="font-Archivo text-3xl tracking-wider font-semibold md:text-5xl xl:text-6xl text-secondary">
                     {mainTitle}
                 </h3>
-                <p className="font-Lorin text-sm md:text-base text-[#717171]">{desc}</p>
+                <p className="font-Lorin text-lg md:text-xl text-[#717171]">{desc}</p>
             </div>
             <div className="flex flex-col md:flex-row justify-center md:flex-wrap text-white gap-5">
                 {data.map((item, idx) => (
@@ -49,13 +49,13 @@ const Community = ({
                                 {item.title}
                             </h4>
                             {item.lists ? (
-                                <ul className="text-sm mx-auto pl-2 w-1/2 space-y-1.5 list-disc font-Lorin font-medium list-outside">
+                                <ul className="text-lg mx-auto pl-2 w-1/2 space-y-1.5 list-disc font-Lorin font-medium list-outside">
                                     {item.lists.map((list, id) => (
                                         <li key={id}>{list}</li>
                                     ))}
                                 </ul>
                             ) : (
-                                <p className="text-sm text-center font-Lorin font-medium">
+                                <p className="text-lg text-center font-Lorin font-medium">
                                     {item.summary}
                                 </p>
                             )}

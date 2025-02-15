@@ -26,12 +26,12 @@ const Footer = () => {
     // console.log(submitted?.email);
 
     return (
-        <footer className="padding w-full font-Inter bg-primary/90 text-white flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-12 lg:gap-8">
+        <footer className="padding w-full font-Inter bg-[#3b58de]/90 text-white flex flex-col justify-center items-center lg:flex-row lg:justify-between gap-12 lg:gap-8">
             <div className="block space-y-8">
                 <Link href={"/"} className="flex justify-center lg:justify-start items-center gap-2">
                     <p className="font-Inter italic font-semibold">Rezolvate</p>
                 </Link>
-                <div className="text-sm text-center lg:text-start md:text-base space-y-3">
+                <div className="text-lg text-center lg:text-start md:text-base space-y-3">
                     <p>Copyright © {new Date().getFullYear()}</p>
                     <p>All rights reserved</p>
                 </div>
@@ -51,7 +51,7 @@ const Footer = () => {
                         <h4 className="text-lg font-semibold capitalize tracking-wider md:text-xl">Company</h4>
                         <ul className="block space-y-4">
                             {footerLinks1.map((list, idx) => (
-                                <li key={idx} className="text-sm capitalize md:text-base tracking-wide hover:text-warning">
+                                <li key={idx} className="text-lg capitalize md:text-base tracking-wide hover:text-warning">
                                     <Link href={list.href}>
                                         {list.menu}
                                     </Link>
@@ -63,7 +63,7 @@ const Footer = () => {
                         <h4 className="text-lg font-semibold capitalize tracking-wider md:text-xl">Support</h4>
                         <ul className="block space-y-4">
                             {footerLinks2.map((list, idx) => (
-                                <li key={idx} className="text-sm capitalize md:text-base tracking-wide hover:text-warning">
+                                <li key={idx} className="text-lg capitalize md:text-base tracking-wide hover:text-warning">
                                     <Link href={list.href}>
                                         {list.menu}
                                     </Link>

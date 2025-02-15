@@ -25,7 +25,7 @@ const MyDocs = ({ data }: RecentActivityProps) => {
             <h2 className="text-lg tracking-wider capitalize">My Documents</h2>
             <div className="flex flex-col md:flex-row justify-center md:flex-wrap xl:flex-nowrap gap-4">
                 {!data?.length ? (
-                    <p className="text-center font-Archivo tracking-wider text-base md:text-lg text-slate-500">
+                    <p className="text-center font-Archivo tracking-wider text-base md:text-xl text-slate-500">
                         At this time, there is no data available for download.
                     </p>
                 ) : (

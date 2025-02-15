@@ -82,7 +82,7 @@ const DummyPaymentGateway: React.FC<DummyPaymentGatewayProps> = ({
                 <CardBody>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
-                            <p className="text-sm text-gray-600">Amount to pay</p>
+                            <p className="text-lg text-gray-600">Amount to pay</p>
                             <p className="text-2xl font-semibold">${amount.toFixed(2)}</p>
                         </div>
                         <Input

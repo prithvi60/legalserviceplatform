@@ -20,7 +20,7 @@ const AboutTemplate = () => {
                         <h2 className="font-Archivo text-secondary font-semibold tracking-wide text-2xl md:text-3xl xl:text-4xl">
                             Build a Library of Reusable, Customizable Templates
                         </h2>
-                        <h5 className="font-Lorin ml-1 font-medium tracking-wide text-base md:text-lg text-secondary/60">
+                        <h5 className="font-Lorin ml-1 font-medium tracking-wide text-base md:text-xl text-secondary/60">
                             Track compliance, legal, and tax matters seamlessly.
                         </h5>
                     </div>
@@ -37,8 +37,8 @@ const AboutTemplate = () => {
                                     />
                                 </div>
                                 <div className='block space-y-1.5'>
-                                    <h4 className='font-Lorin tracking-wide text-secondary text-opacity-80 font-semibold text-base md:text-lg'>{list.title}</h4>
-                                    <p className='text-secondary text-sm text-opacity-60 font-Lorin'>{list.desc}</p>
+                                    <h4 className='font-Lorin tracking-wide text-secondary text-opacity-80 font-semibold text-base md:text-xl'>{list.title}</h4>
+                                    <p className='text-secondary text-lg text-opacity-60 font-Lorin'>{list.desc}</p>
                                 </div>
                             </li>
                         ))}
@@ -51,7 +51,7 @@ const AboutTemplate = () => {
                         <h2 className="font-Archivo text-secondary font-semibold tracking-wide text-2xl md:text-3xl xl:text-4xl">
                             Automate & Personalize Contract Creation
                         </h2>
-                        <h5 className="font-Lorin ml-1 font-medium tracking-wide text-base md:text-lg text-secondary/60">
+                        <h5 className="font-Lorin ml-1 font-medium tracking-wide text-base md:text-xl text-secondary/60">
                             Track compliance, legal, and tax matters seamlessly.
                         </h5>
                     </div>
@@ -68,8 +68,8 @@ const AboutTemplate = () => {
                                     />
                                 </div>
                                 <div className='block space-y-1.5'>
-                                    <h4 className='font-Lorin tracking-wide text-secondary text-opacity-80 font-semibold text-base md:text-lg'>{list.title}</h4>
-                                    <p className='text-secondary text-sm text-opacity-60 font-Lorin'>{list.desc}</p>
+                                    <h4 className='font-Lorin tracking-wide text-secondary text-opacity-80 font-semibold text-base md:text-xl'>{list.title}</h4>
+                                    <p className='text-secondary text-lg text-opacity-60 font-Lorin'>{list.desc}</p>
                                 </div>
                             </li>
                         ))}

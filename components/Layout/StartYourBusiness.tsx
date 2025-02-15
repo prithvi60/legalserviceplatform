@@ -25,7 +25,7 @@ const StartYourBusiness = () => {
                             <h4 className="text-xl md:text-2xl font-Archivo font-bold tracking-wider">
                                 {item.title}
                             </h4>
-                            <p className="text-sm md:text-base font-Lorin font-medium">
+                            <p className="text-lg md:text-xl font-Lorin font-medium">
                                 {item.desc}
                             </p>
                         </CardBody>

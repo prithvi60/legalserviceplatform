@@ -313,7 +313,7 @@ export default function NavbarComponent() {
                             </DropdownMenu>
                         </Dropdown>
                         {/* <button
-                            className="flex items-center rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white gap-3.5 font-semibold duration-300 ease-in-out text-sm lg:text-base"
+                            className="flex items-center rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white gap-3.5 font-semibold duration-300 ease-in-out text-lg lg:text-base"
                             onClick={handleLogout}
                         >
                             Log Out
@@ -321,7 +321,7 @@ export default function NavbarComponent() {
                     </NavbarItem>
                 ) : (
                     <>
-                        <NavbarItem className="flex mr-2 sm:mr-8 rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white font-semibold text-sm lg:text-base">
+                        <NavbarItem className="flex mr-2 sm:mr-8 rounded-md py-1.5 hover:bg-warning px-4 border-2 border-white font-semibold text-lg lg:text-base">
                             <Link href="/api/auth/signin">Login</Link>
                         </NavbarItem>
                         {/* <NavbarItem>

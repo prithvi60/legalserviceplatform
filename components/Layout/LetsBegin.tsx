@@ -18,7 +18,7 @@ const LetsBegin = () => {
                 <h2 className="font-Archivo font-bold tracking-wide text-xl md:text-2xl xl:text-4xl text-secondary">
                     Starting a Business and Confused Where to Begin?
                 </h2>
-                <p className="text-base text-secondary md:text-lg font-Lorin">
+                <p className="text-base text-secondary md:text-xl font-Lorin">
                     At Rezolvate, we take care of Accounting, Business, Compliance, and
                     handle end-to-end solutions.
                 </p>

@@ -134,7 +134,7 @@ export const SignUp = () => {
 
                 <div className="w-full py-2 sm:px-6 border-2">
                     <div className="w-full px-4 py-4 sm:p-12.5 xl:p-17.5 text-[#1E318D]">
-                        {/* <span className="mb-1.5 block font-medium text-sm md:text-base">Start for free</span> */}
+                        {/* <span className="mb-1.5 block font-medium text-lg md:text-xl">Start for free</span> */}
                         <h2 className="mb-6 text-lg font-bold text-[#1E318D] md:text-2xl">
                             Create a New Account
                         </h2>
@@ -145,14 +145,14 @@ export const SignUp = () => {
                         >
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-lg md:text-xl">
                                         Name
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type="text"
                                             placeholder="Enter your full name"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-lg sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("username")}
                                         />
 
@@ -180,7 +180,7 @@ export const SignUp = () => {
                                     </div>
                                 </div>
                                 {errors.username && (
-                                    <div className="absolute -bottom-6 left-0 w-full text-xs md:text-sm text-red-500 font-semibold text-center mt-1">
+                                    <div className="absolute -bottom-6 left-0 w-full text-xs md:text-xl text-red-500 font-semibold text-center mt-1">
                                         {errors.username.message}
                                     </div>
                                 )}
@@ -188,14 +188,14 @@ export const SignUp = () => {
 
                             <div className="relative">
                                 <div className="flex gap-3 items-center ">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-lg md:text-xl">
                                         Email
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type="email"
                                             placeholder="Enter your email"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-lg sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("email")}
                                         />
 
@@ -219,7 +219,7 @@ export const SignUp = () => {
                                     </div>
                                 </div>
                                 {errors.email && (
-                                    <div className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-sm mt-1">
+                                    <div className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-xl mt-1">
                                         {errors.email.message}
                                     </div>
                                 )}
@@ -228,14 +228,14 @@ export const SignUp = () => {
                             {/* Phone Number */}
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-lg md:text-xl">
                                         Phone Number
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type="text"
                                             placeholder="Enter Your Ph.No."
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-lg sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("phone_number")}
                                         />
                                         <span className="hidden sm:block absolute right-4 top-2">
@@ -244,7 +244,7 @@ export const SignUp = () => {
                                     </div>
                                 </div>
                                 {errors.phone_number && (
-                                    <span className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-sm mt-2">
+                                    <span className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-xl mt-2">
                                         {errors.phone_number.message}
                                     </span>
                                 )}
@@ -252,14 +252,14 @@ export const SignUp = () => {
                             {/* Address */}
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-lg md:text-xl">
                                         Address
                                     </label>
                                     <div className="relative flex-grow">
                                         <textarea
                                             placeholder="Enter Your address"
                                             rows={3}
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-lg sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("address")}
                                         />
                                         <span className="hidden sm:block absolute right-4 top-8">
@@ -268,21 +268,21 @@ export const SignUp = () => {
                                     </div>
                                 </div>
                                 {errors.address && (
-                                    <span className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-sm mt-2">
+                                    <span className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-xl mt-2">
                                         {errors.address.message}
                                     </span>
                                 )}
                             </div>
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-lg md:text-xl">
                                         Password
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             placeholder="6+ Characters, 1 Capital letter"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-lg sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("password")}
                                         />
 
@@ -337,7 +337,7 @@ export const SignUp = () => {
                                     </div>
                                 </div>
                                 {errors.password && (
-                                    <div className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-sm mt-1">
+                                    <div className="text-red-500 font-semibold text-center absolute -bottom-6 left-0 w-full text-xs md:text-xl mt-1">
                                         {errors.password.message}
                                     </div>
                                 )}
@@ -345,14 +345,14 @@ export const SignUp = () => {
 
                             <div className="relative">
                                 <div className="flex gap-3 items-center">
-                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-sm md:text-base">
+                                    <label className="w-[45%] md:w-[30%] block font-medium text-[#1E318D] text-lg md:text-xl">
                                         Re-type Password
                                     </label>
                                     <div className="relative flex-grow">
                                         <input
                                             type={showConfirmPassword ? "text" : "password"}
                                             placeholder="Re-enter your password"
-                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-sm sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="w-full  border border-stroke bg-transparent py-2 pl-6 placeholder:text-lg sm:placeholder:text-base sm:pr-10 text-[#1E318D] outline-none focus:border-primary focus-visible:shadow-none"
                                             {...register("confirmPassword")}
                                         />
 
@@ -409,7 +409,7 @@ export const SignUp = () => {
                                     </div>
                                 </div>
                                 {errors.confirmPassword && (
-                                    <div className="text-red-500 font-semibold text-center absolute -bottom-8 sm:-bottom-6 left-0 w-full text-xs md:text-sm mt-1">
+                                    <div className="text-red-500 font-semibold text-center absolute -bottom-8 sm:-bottom-6 left-0 w-full text-xs md:text-xl mt-1">
                                         {errors.confirmPassword.message}
                                     </div>
                                 )}
@@ -431,13 +431,13 @@ export const SignUp = () => {
                             <div className="text-center !-mt-2 ">
                                 <p>
                                     Already have an account?{" "}
-                                    <Link href="/api/auth/signin" className="text-primary text-sm md:text-base font-semibold underline underline-offset-4 hover:text-primary/70">
+                                    <Link href="/api/auth/signin" className="text-primary text-lg md:text-xl font-semibold underline underline-offset-4 hover:text-primary/70">
                                         Sign in
                                     </Link>
                                 </p>
                             </div>
                             {errors.root && (
-                                <div className="absolute -bottom-10 text-sm md:text-base w-full left-1/2 -translate-x-1/2 text-red-500 font-semibold text-center mt-5">
+                                <div className="absolute -bottom-10 text-lg md:text-xl w-full left-1/2 -translate-x-1/2 text-red-500 font-semibold text-center mt-5">
                                     {errors.root.message}
                                 </div>
                             )}

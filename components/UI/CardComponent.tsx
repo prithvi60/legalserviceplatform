@@ -31,13 +31,13 @@ export const CardComponent = ({ data }: { data: Lists }) => {
                     <h4 className="text-lg md:text-xl font-Archivo font-medium tracking-wider">
                         {data.title}
                     </h4>
-                    <p className="text-sm font-Lorin">{data.summary}</p>
+                    <p className="text-lg font-Lorin">{data.summary}</p>
                 </div>
                 <ul className="space-y-4">
                     {data.lists.map((list, id) => (
                         <li
                             key={id}
-                            className="font-Lorin text-white text-sm flex justify-between items-center md:text-base"
+                            className="font-Lorin text-white text-lg flex justify-between items-center md:text-base"
                         >
                             <Link
                                 href={"#"}

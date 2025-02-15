@@ -31,7 +31,7 @@ const ProfileEditForm = () => {
                                 // onChange={handleChange}
                                 required
                                 placeholder="XXX XXX XXX"
-                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                             />
                         </div>
                     </div>
@@ -48,7 +48,7 @@ const ProfileEditForm = () => {
                                 // onChange={handleChange}
                                 required
                                 placeholder="777-888-9012"
-                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-sm focus:border-secondary focus-visible:shadow-none"
+                                className="w-full py-2 pl-6 pr-10 bg-transparent border outline-none border-stroke rounded-lg placeholder:text-slate-600 placeholder:text-lg focus:border-secondary focus-visible:shadow-none"
                             />
                         </div>
                     </div>
@@ -66,7 +66,7 @@ const ProfileEditForm = () => {
                                 <h5 className="font-Lorin font-normal tracking-wider text-base">
                                     Free Plan
                                 </h5>
-                                <p className="text-sm md:text-base font-Lorin opacity-60">
+                                <p className="text-lg md:text-xl font-Lorin opacity-60">
                                     1 month ago
                                 </p>
                             </div>
