@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import React from "react";
 import { MarqueeEffect } from "../UI/MarqueeEffect";
 
@@ -33,8 +33,8 @@ const OurClients = () => {
 export default OurClients;
 
 const clientsLogo: LogoItem[] = [
-    { img: "/client-icon.svg", alt: "icon" },
-    { img: "/client-icon.svg", alt: "icon" },
-    { img: "/client-icon.svg", alt: "icon" },
-    { img: "/client-icon.svg", alt: "icon" },
-];
+    { img: "/clientlogo-1.svg", alt: "icon" },
+    { img: "/clientlogo-2.svg", alt: "icon" },
+    { img: "/clientlogo-3.svg", alt: "icon" },
+    { img: "/clientlogo-4.svg", alt: "icon" },
+]
