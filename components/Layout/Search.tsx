@@ -10,7 +10,7 @@ const Search = () => {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 2,
+    slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <SamplePrevArrow />,
     prevArrow: <SampleNextArrow />,
@@ -51,11 +51,11 @@ const Search = () => {
         </p>
       </div>
       <div className="slider-container h-fit">
-        <Slider {...settings} className="custom-slider">
+        <Slider {...settings} className="custom-slider_1">
           {communityServices.map((item, idx) => (
             <Card
               key={idx}
-              className=" relative bg-[#3b58de] w-full mx-auto  hover:scale-105 hover:bg-[#3b58de]/90 cursor-pointer"
+              className=" relative bg-[#3b58de] w-full mx-auto hover:scale-105 hover:bg-[#3b58de]/90 cursor-pointer"
             >
               <div className="w-full ">
                 <video
