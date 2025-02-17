@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
     return (
-        <div className="bg-[#FFFBEE] padding w-full">
+        <div className="bg-[#F2F1F1] padding w-full">
             <ProfilePage />
         </div>
     );

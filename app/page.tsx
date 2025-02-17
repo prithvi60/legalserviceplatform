@@ -18,13 +18,13 @@ export default function Home() {
       <Search />
       <BusinessOverview />
       <ExploreSuit />
-      <Community mainTitle="Security, Confidentiality & Guaranteed Results" desc="" data={SCGResults} />
+      <Community type="" mainTitle="Security, Confidentiality & Guaranteed Results" desc="" data={SCGResults} />
       <AboutTemplate />
       <VideoSection />
-      <Community mainTitle="Expert Consultation - Talk to Our Specialists" desc="Speak to an Expert - Get Legal Help in Minutes!" data={ALCTools} />
+      <Community type="" mainTitle="Expert Consultation - Talk to Our Specialists" desc="Speak to an Expert - Get Legal Help in Minutes!" data={ALCTools} />
       <StartYourBusiness />
       <WhatCustomerSay />
-      <Community mainTitle="Expert Consultation - Talk to Our Specialists" desc="Speak to an Expert - Get Legal Help in Minutes!" data={talkToExpert} />
+      <Community type="true" mainTitle="Expert Consultation - Talk to Our Specialists" desc="Speak to an Expert - Get Legal Help in Minutes!" data={talkToExpert} />
       <CustomerFeedback />
     </div>
   );

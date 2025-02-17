@@ -99,9 +99,9 @@ export const DeleteDocument = ({
         <Button
             radius="md"
             size="md"
-            color={status === "IsPending" ? "primary" : "warning"}
+            color={status === "IsPending" ? "primary" : "success"}
             variant={status === "IsPending" ? "flat" : "bordered"}
-            className={`${status === "IsPending" ? "text-primary" : "text-warning"} font-medium`}
+            className={`${status === "IsPending" ? "text-primary" : "text-success"} font-medium`}
             onClick={handleDelete}
         >
             Discard

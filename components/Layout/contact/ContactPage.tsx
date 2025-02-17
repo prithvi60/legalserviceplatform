@@ -87,15 +87,15 @@ const contactLists = [
     {
         socialMedia: [
             {
-                icon: <FaXTwitter className="text-3xl md:text-4xl hover:text-primary hover:animate-pulse backdrop-blur shadow-lg text-black p-1.5 rounded-full bg-warning" />,
+                icon: <FaXTwitter className="text-3xl md:text-4xl hover:text-primary hover:animate-pulse backdrop-blur shadow-lg text-black p-1.5 rounded-full bg-success" />,
                 href: "#",
             },
             {
-                icon: <FaInstagram className="text-3xl md:text-4xl hover:text-primary hover:animate-pulse backdrop-blur shadow-lg text-black p-1.5 rounded-full bg-warning" />,
+                icon: <FaInstagram className="text-3xl md:text-4xl hover:text-primary hover:animate-pulse backdrop-blur shadow-lg text-black p-1.5 rounded-full bg-success" />,
                 href: "#",
             },
             {
-                icon: <FaLinkedinIn className="text-3xl md:text-4xl hover:text-primary hover:animate-pulse backdrop-blur shadow-lg text-black p-1.5 rounded-full bg-warning" />,
+                icon: <FaLinkedinIn className="text-3xl md:text-4xl hover:text-primary hover:animate-pulse backdrop-blur shadow-lg text-black p-1.5 rounded-full bg-success" />,
                 href: "#",
             },
         ],

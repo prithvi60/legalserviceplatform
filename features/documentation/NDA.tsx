@@ -753,10 +753,10 @@ const NDAPreview: React.FC = () => {
                                                 onPress={handleNext}
                                                 color="success"
                                                 radius="sm"
-                                                className="text-white font-semibold font-Lorin"
+                                                className="!text-primary font-semibold font-Lorin"
                                                 disabled={!isCurrentStepComplete()}
                                             >
-                                            Save & continue
+                                                Save & Continue
                                             </Button>
                                         )}
                                     {JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}")
@@ -766,7 +766,7 @@ const NDAPreview: React.FC = () => {
                                                 onClick={handleFinishClick}
                                                 color="success"
                                                 radius="sm"
-                                                className="text-white font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
+                                                className="text-primary font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
                                             >
                                                 Save & Finish!
                                             </Button>

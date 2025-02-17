@@ -45,7 +45,7 @@ export default {
             warning: "#FFC107",
             // danger: "#1D252D",
             // new theme
-            success: "#ffab34",
+            success: "#fff447",
             // cta:#ffab34
             // lightbg:#9affa3
           },

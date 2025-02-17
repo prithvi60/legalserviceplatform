@@ -12,9 +12,9 @@ export const ProfileDropdown = ({ email, loading }: { email?: string; loading: b
             <Avatar
                 size="md"
                 as="button"
-                color="warning"
+                color="success"
                 className="transition-transform p-0.5"
-                src="/avatar.png"
+                src="/profile.png"
             />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">

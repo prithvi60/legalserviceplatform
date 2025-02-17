@@ -21,7 +21,7 @@ const ExploreSuit = () => {
         autoplaySpeed: 5000,
         responsive: [
             {
-                breakpoint: 768,
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 1,
                 }
@@ -36,11 +36,11 @@ const ExploreSuit = () => {
                 </h3>
             </div>
             <div className="slider-container">
-                <Slider {...settings} className="custom-slider">
+                <Slider {...settings} className="custom-slider h-fit">
                     {exploreSuitLists.map((item, idx) => (
                         <Card
                             key={idx}
-                            className="py-4 px-6 relative bg-[#9affa3] w-full mx-auto md:w-[450px]"
+                            className="py-4 px-6 relative bg-[#d7ddd8] w-full mx-auto md:w-[450px]"
                         >
                             <CardHeader className="pb-3 pt-2 px-4 flex-col gap-2 items-start">
                                 <h4 className="text-xl text-black text-opacity-80 xl:text-2xl font-Archivo font-semibold tracking-wider">

@@ -58,9 +58,9 @@ const ProfilePage = () => {
                         <div className="flex items-center gap-5">
                             <Avatar
                                 className="w-20 h-20"
-                                color="primary"
+                                color="success"
                                 isBordered
-                                src="/avatar.png"
+                                src="/profile.png"
                             />
                             <div className="block space-y-1">
                                 <h5 className="font-Archivo font-medium tracking-wider text-lg md:text-xl">
@@ -96,7 +96,7 @@ const ProfilePage = () => {
                                 </div>
                             </div>
                             <Button
-                                className="font-Archivo hidden lg:block text-primary font-medium bg-[#1E318D] bg-opacity-10"
+                                className="font-Archivo hidden lg:block text-primary font-medium bg-success "
                                 size="lg"
                             >
                                 {"Upgrade plan now  >"}

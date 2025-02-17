@@ -61,7 +61,7 @@ const MyDocs = ({ data }: RecentActivityProps) => {
                                     <Button
                                         radius="md"
                                         size="md"
-                                        color="warning"
+                                        color="success"
                                         className="font-semibold font-Lorin"
                                         endContent={<MdDownload className="text-lg" />}
                                         as={Link}

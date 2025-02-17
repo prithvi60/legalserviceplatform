@@ -193,7 +193,7 @@ const ContactForm = () => {
                     <Button
                         radius="sm"
                         size="lg"
-                        color="warning"
+                        color="success"
                         type="submit"
                         className="w-max font-semibold"
                         disabled={status ? true : false}

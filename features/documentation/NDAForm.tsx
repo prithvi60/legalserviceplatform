@@ -598,7 +598,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                                 onPress={handleNext}
                                                 color="success"
                                                 radius="sm"
-                                                className="text-white font-semibold font-Lorin"
+                                                className="text-primary font-semibold font-Lorin"
                                                 disabled={!isCurrentStepComplete()}
                                             >
                                                 {getDocsLoading ? <Loader /> : "Save & continue"}
@@ -612,7 +612,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
                                                 onClick={handleFinishClick}
                                                 color="success"
                                                 radius="sm"
-                                                className="text-white disabled:bg-warning/60 font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
+                                                className="text-primary disabled:bg-warning/60 font-semibold font-Lorin animate-pulse hover:scale-110 transition-all transform duration-400 ease-in-out"
                                             >
                                                 Save & Finish!
                                             </Button>

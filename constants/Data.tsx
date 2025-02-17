@@ -4,6 +4,23 @@ import { FaArrowsToDot } from "react-icons/fa6";
 import { SiPivotaltracker } from "react-icons/si";
 import { MdOutlineSecurity } from "react-icons/md";
 import { GrMoney } from "react-icons/gr";
+import {
+    FaBalanceScale,
+    FaBuilding,
+    FaCalculator,
+    FaChartLine,
+    FaClipboardList,
+    FaFileContract,
+    FaFileInvoiceDollar,
+    FaGavel,
+    FaGlobe,
+    FaHandHoldingUsd,
+    FaLaptopHouse,
+    FaRegCalendarAlt,
+    FaUserGraduate,
+    FaUsers,
+    FaUserTie,
+} from "react-icons/fa";
 
 export const navLinks = [
     {
@@ -232,6 +249,8 @@ export const navLinks2 = [
                     {
                         href: "/business_setup/uae/IBS",
                         subLink: "International business setup ",
+                        note: "Guidance on setting up businesses internationally",
+                        icon: <FaGlobe className="text-lg xl:text-xl text-primary flex-shrink-0" />,
                     },
                 ],
             },
@@ -246,24 +265,47 @@ export const navLinks2 = [
                     {
                         href: "/tax_compliance/india/GIT",
                         subLink: "GST and Indirect Tax",
+                        note: "Compliance with GST & indirect taxes",
+                        icon: (
+                            <FaFileInvoiceDollar className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
                     },
                     {
                         href: "tax_compliance/india/AF",
                         subLink: "Annual Filings",
+                        note: "Regulatory filings & financial compliance",
+                        icon: (
+                            <FaRegCalendarAlt className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
                     },
                     {
                         href: "tax_compliance/india/ATB",
                         subLink: "Accounting & Tax Convert Your Business",
+                        note: "Tax planning & bookkeeping",
+                        icon: (
+                            <FaCalculator className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
                     },
                 ],
             },
             {
                 subMenu: "UAE",
                 subDivision: [
-                    { href: "tax_compliance/uae/AT", subLink: "Accounting & Tax" },
+                    {
+                        href: "tax_compliance/uae/AT",
+                        subLink: "Accounting & Tax",
+                        note: "Tax planning & bookkeeping",
+                        icon: (
+                            <FaCalculator className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
+                    },
                     {
                         href: "tax_compliance/uae/AF",
                         subLink: "Annual Filings",
+                        note: "Regulatory filings & financial compliance",
+                        icon: (
+                            <FaRegCalendarAlt className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
                     },
                 ],
             },
@@ -278,36 +320,61 @@ export const navLinks2 = [
                     {
                         href: "/legal_documentation/india/BC",
                         subLink: "Business Contracts",
+                        note: "Drafting & reviewing agreements",
+                        icon: (
+                            <FaFileContract className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
                     },
                     {
                         href: "/legal_documentation/india/EA",
                         subLink: "Employee Agreement",
+                        note: "Employment contracts & policies",
+                        icon: <FaUserTie className="text-lg xl:text-xl text-primary flex-shrink-0" />,
                     },
                     {
                         href: "/legal_documentation/india/RA",
                         subLink: "Remote Agreement",
+                        note: "Contracts for remote work",
+                        icon: (
+                            <FaLaptopHouse className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
                     },
                     {
                         href: "legal_documentation/india/PF",
                         subLink: "Personal & Family",
+                        note: "Legal support for family matters",
+                        icon: <FaUsers className="text-lg xl:text-xl text-primary flex-shrink-0" />,
                     },
                     {
                         href: "legal_documentation/india/REN",
                         subLink: "Real Estate Notices HR Policies",
+                        note: "Property & workplace legalities",
+                        icon: <FaBuilding className="text-lg xl:text-xl text-primary flex-shrink-0" />,
                     },
                 ],
             },
             {
                 subMenu: "UAE",
                 subDivision: [
-                    { href: "legal_documentation/uae/BC", subLink: "Business Contracts" },
+                    {
+                        href: "legal_documentation/uae/BC",
+                        subLink: "Business Contracts",
+                        note: "Drafting & reviewing agreements",
+                        icon: (
+                            <FaFileContract className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                        ),
+                    },
                     {
                         href: "legal_documentation/uae/PF",
                         subLink: "Personal & Family",
+                        note: "Legal support for family matters",
+                        icon: <FaUsers className="text-lg xl:text-xl text-primary flex-shrink-0" />,
                     },
                     {
                         href: "legal_documentation/uae/REN",
                         subLink: "Real Estate Notices HR Policies",
+                        note: "Property & workplace legalities",
+                        icon: <FaBuilding className="text-lg xl:text-xl text-primary flex-shrink-0" />,
                     },
                 ],
             },
@@ -319,28 +386,41 @@ export const navLinks2 = [
             {
                 href: "/financial_consultation/lawyers",
                 subMenu: "Strategic Business Finance",
+                icon: <FaChartLine className="text-lg xl:text-xl text-primary flex-shrink-0" />,
             },
             {
                 href: "/financial_consultation/BVFM",
                 subMenu: "Business Valuation & Financial Modelling",
+                icon: <FaBalanceScale className="text-lg xl:text-xl text-primary flex-shrink-0" />,
             },
             {
                 href: "/financial_consultation/FIA",
                 subMenu: "Fundraising & Investment Advisory",
+                icon: (
+                    <FaHandHoldingUsd className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                ),
             },
             {
                 href: "/financial_consultation/PDI",
                 subMenu: "Pitch Deck & Investment Documentation",
+                icon: (
+                    <FaClipboardList className="text-lg xl:text-xl text-primary flex-shrink-0" />
+                ),
             },
         ],
     },
     {
         menu: "Expert Consultation",
         subCategories: [
-            { href: "/consultAExpert/lawyers", subMenu: "Lawyers" },
+            {
+                href: "/consultAExpert/lawyers",
+                subMenu: "Lawyers",
+                icon: <FaGavel className="text-lg xl:text-xl text-primary flex-shrink-0" />,
+            },
             {
                 href: "/consultAExpert/CA_CS",
                 subMenu: "CAs & CSs at your fingertips",
+                icon: <FaUserGraduate className="text-lg xl:text-xl text-primary flex-shrink-0" />,
             },
         ],
     },
@@ -354,12 +434,12 @@ export const communityServices = [
                 country: "INDIA",
                 lists:
                     "GST and Indirect Tax , Annual Filings , Accounting & Tax Convert Your Business",
-                href: "/legal_documentation/india/BC"
+                href: "/legal_documentation/india/BC",
             },
             {
                 country: "UAE",
                 lists: "Accounting & Tax , Annual Filings",
-                href: "/legal_documentation/india/BC"
+                href: "/legal_documentation/india/BC",
             },
         ],
     },
@@ -370,13 +450,13 @@ export const communityServices = [
                 country: "INDIA",
                 lists:
                     "Business Contracts ,Personal & Family, Real Estate Notices HR Policies",
-                href: "/legal_documentation/india/BC"
+                href: "/legal_documentation/india/BC",
             },
             {
                 country: "UAE",
                 lists:
                     "Business Contracts ,Personal & Family, Real Estate Notices HR Policies",
-                href: "/legal_documentation/india/BC"
+                href: "/legal_documentation/india/BC",
             },
         ],
     },
@@ -386,17 +466,17 @@ export const communityServices = [
             {
                 country: "India",
                 lists: "Lawyers",
-                href: "consultAExpert/lawyers"
+                href: "consultAExpert/lawyers",
             },
             {
                 country: "India",
                 lists: "CAs",
-                href: "consultAExpert/CA_CS"
+                href: "consultAExpert/CA_CS",
             },
             {
                 country: "India",
                 lists: "CSs",
-                href: "consultAExpert/CA_CS"
+                href: "consultAExpert/CA_CS",
             },
         ],
     },
@@ -406,7 +486,7 @@ export const communityServices = [
             {
                 country: "UAE",
                 lists: "International business setup",
-                href: "/legal_documentation/india/BC"
+                href: "/legal_documentation/india/BC",
             },
         ],
     },
@@ -417,7 +497,7 @@ export const communityServices = [
                 country: "",
                 lists:
                     "Strategic Business Finance,Business Valuation,Financial Modelling,Fundraising & Investment Advisory,Pitch Deck & Investment Documentation",
-                href: "/legal_documentation/india/BC"
+                href: "/legal_documentation/india/BC",
             },
         ],
     },
@@ -712,5 +792,5 @@ export const customerFeedbackLists = [
         review: "Making Business Setup Faster & Easier for Entrepreneurs.",
         reviewer: "news channel 3",
         href: "",
-    }
+    },
 ];

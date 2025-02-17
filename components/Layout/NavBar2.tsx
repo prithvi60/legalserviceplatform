@@ -40,7 +40,7 @@ const AuthSection = ({
   if (status === "loading") {
     return (
       <div className="w-10 h-10 flex-center">
-        <Spinner size="md" color="warning" />
+        <Spinner size="md" color="success" />
       </div>
     );
   }
@@ -54,7 +54,7 @@ const AuthSection = ({
   return (
     <Link
       href="/api/auth/signin"
-      className="flex rounded-md py-1 hover:bg-success px-4 border-2 border-white font-semibold"
+      className="flex rounded-md py-1 text-sm md:text-base hover:bg-success px-4 border-2 border-white font-semibold"
     >
       Login
     </Link>
@@ -72,30 +72,31 @@ const NavBar2 = () => {
 
   return (
     <header className="px-5 md:px-10 py-8 md:py-3 text-lg z-50 sticky inset-0 flex-center text-white bg-[#3b58de]">
-      <nav className="flex-center w-full justify-center">
-        <Link
-          href="/"
-          className="z-[999] flex-center gap-x-2 absolute left-4 md:left-32"
-        >
-          {/* <AcmeLogo /> */}
-          <h3 className="text-lg xl:text-2xl font-Inter italic font-bold tracking-widest">
-            Rezolvate
-          </h3>
-        </Link>
+      <nav className="flex-center-between w-full">
+        <div>
+          <Link
+            href="/"
+            className="flex-center gap-x-2"
+          >
+            {/* <AcmeLogo /> */}
+            <h3 className="text-base xl:text-lg 2xl:text-2xl font-Inter italic font-bold tracking-widest">
+              Rezolvate
+            </h3>
+          </Link>
+        </div>
 
-        <div className="flex-center gap-x-5">
+        <div className="flex-center gap-x-3.5 xl:gap-x-5">
           <ul className="gap-x-1 lg:!flex items-center hidden">
             {navLinks2.map((menu, idx) => (
               <DesktopMenu key={idx} menu={menu} />
             ))}
           </ul>
-          <div className="absolute md:right-32 md:ml-4  right-4 flex items-center">
-            <AuthSection
-              status={status}
-              userData={userData}
-              loading={loading}
-            />
-
+          <AuthSection
+            status={status}
+            userData={userData}
+            loading={loading}
+          />
+          <div className="md:ml-4 flex items-center">
             <div className="lg:!hidden ml-2">
               <MobMenu Menus={navLinks2} />
             </div>

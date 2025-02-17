@@ -17,9 +17,10 @@ const HeroSection = () => {
               Get Expert Help Instantly
             </h5>
           </div>
-          <div className="w-[360px] h-[450px] md:w-[500px] md:h-[700px]  md:basis-2/5 overflow-hidden relative z-0">
+          <div className="w-[360px] md:w-[450px] h-[250px] md:h-[350px] 2xl:h-[450px] md:basis-2/5 overflow-hidden relative z-0">
             <Image
               priority
+              unoptimized
               className="object-contain object-center"
               alt="bg image"
               src={"/hero-gif-2.gif"}
@@ -32,7 +33,7 @@ const HeroSection = () => {
       <section className="padding bg-white w-full h-full flex items-center relative flex-col md:flex-row overflow-hidden gap-5">
         <div className="block space-y-4 w-full md:w-3/5">
           <h2 className="font-Inter font-bold tracking-wide text-2xl md:text-3xl xl:text-5xl">
-            India’s Top-Rated Professional Services Platform
+            India&apos;s Top-Rated Professional Services Platform
           </h2>
           <h5 className="font-Lorin text-secondary ml-1 font-medium tracking-wide   text-lg md:text-xl">
             Trusted by businesses across India!

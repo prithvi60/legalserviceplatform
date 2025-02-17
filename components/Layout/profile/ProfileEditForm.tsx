@@ -71,13 +71,13 @@ const ProfileEditForm = () => {
                                 </p>
                             </div>
                         </div>
-                        <Button className="font-Archivo  text-primary font-medium bg-[#1E318D] bg-opacity-10" size="lg">
+                        <Button className="font-Archivo  text-primary font-medium bg-success" size="lg">
                             {"+  Add Email Address"}
                         </Button>
                     </div>
                 </div>
                 <div className='w-full md:w-1/2 text-left md:text-right'>
-                    <Button size='lg' radius='md' color='warning' className='text-black font-bold'>
+                    <Button size='lg' radius='md' color='success' className='text-black font-bold'>
                         Edit
                     </Button>
                 </div>

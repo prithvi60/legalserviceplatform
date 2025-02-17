@@ -19,6 +19,18 @@ const Search = () => {
     autoplaySpeed: 2000,
     responsive: [
       {
+        breakpoint: 1536,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
@@ -38,61 +50,9 @@ const Search = () => {
           and accelerate your Legal processes.
         </p>
       </div>
-      {/* <div className="grid grid-cols-3 place-content-center place-items-center gap-5 xl:gap-10 w-full">
-                {communityServices.map((item, idx) => (
-                    <Card
-                        key={idx}
-                        className={`py-6 px-5 md:px-10 linear-blue_1 text-white mx-auto w-full h-full col-span-5 `}
-                    >
-                        <CardBody className="overflow-visible lg:flex-row gap-10 lg:gap-5 py-2">
-                            <div className="block space-y-4 w-full md:w-2/5">
-                                <h4 className="text-2xl md:text-3xl font-Archivo font-bold tracking-wider">
-                                    {item.title}
-                                </h4>
-                                <ul className="space-y-4">
-                                    {item.services.map((service, id) => (
-                                        <li
-                                            key={id}
-                                            className="font-Lorin text-lg block md:text-base border-b-2 border-white"
-                                        >
-                                            <Link href={service.href} className="space-y-1.5">
-                                                {service.country !== "" && (
-                                                    <h4
-                                                        className="w-full flex justify-between items-center pb-2"
-                                                    >
-                                                        {service.country}
-                                                    </h4>
-                                                )}
-                                                {service?.lists !== "" && (
-                                                    <p className="text-xs pb-2 font-Lorin font-medium">
-                                                        {service?.lists}
-                                                    </p>
-                                                )}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="w-full ">
-                                <video
-                                    ref={videoRef}
-                                    muted
-                                    loop
-                                    autoPlay
-                                    playsInline
-                                    className="h-full md:h-[330px] w-full object-contain xl:object-cover object-center"
-                                >
-                                    <source src="/demo.mp4" type="video/mp4" />
-                                </video>
-                            </div>
-                        </CardBody>
-                    </Card>
-                ))}
-            </div> */}
-      <div className="slider-container">
+      <div className="slider-container h-fit">
         <Slider {...settings} className="custom-slider">
           {communityServices.map((item, idx) => (
-            // bg-[#3b58de]
             <Card
               key={idx}
               className=" relative bg-[#3b58de] w-full mx-auto  hover:scale-105 hover:bg-[#3b58de]/90 cursor-pointer"
@@ -123,8 +83,8 @@ const Search = () => {
 
                     <div key={id}>
 
-                        <li className="list-none text-success font-semibold">{list.country}</li>
-                        <a href={list.href} className="text-default font-light">{list.lists}</a>
+                      <li className="list-none text-success font-semibold">{list.country}</li>
+                      <a href={list.href} className="text-default font-light">{list.lists}</a>
                     </div>
                   ))}
                 </ul>
@@ -153,7 +113,7 @@ function SampleNextArrow(props: ArrowProps) {
   const { onClick } = props;
   return (
     <div
-      className={`absolute -top-[45px] lg:-top-[88px] right-20 xl:right-12 cursor-pointer`}
+      className={`absolute -top-[45px] lg:-top-[105px] xl:-top-[88px] right-20 xl:right-12 cursor-pointer`}
       onClick={onClick}
     >
       <MdArrowBackIos className="text-3xl hover:text-primary text-secondary" />
@@ -165,7 +125,7 @@ function SamplePrevArrow(props: ArrowProps) {
   const { onClick } = props;
   return (
     <div
-      className={`absolute cursor-pointer -top-[45px] right-10 xl:right-5 lg:-top-[88px] z-30`}
+      className={`absolute cursor-pointer -top-[45px] right-10 xl:right-5 lg:-top-[105px] xl:-top-[88px] z-30`}
       onClick={onClick}
     >
       <MdArrowForwardIos className="text-3xl hover:text-primary text-secondary" />

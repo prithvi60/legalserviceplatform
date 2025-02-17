@@ -15,10 +15,12 @@ const Community = ({
     mainTitle,
     desc,
     data,
+    type
 }: {
     mainTitle: string;
     desc?: string;
     data: CommunityList[];
+    type: string
 }) => {
     return (
         <section className="padding bg-white w-full space-y-12">
@@ -49,7 +51,7 @@ const Community = ({
                                 {item.title}
                             </h4>
                             {item.lists ? (
-                                <ul className="text-lg mx-auto pl-2 w-1/2 space-y-1.5 list-disc font-Lorin font-medium list-outside">
+                                <ul className={`text-lg mx-auto pl-2 space-y-1.5 list-disc font-Lorin font-medium list-outside  ${type === "true" ? "w-full text-center" : "w-1/2"}`}>
                                     {item.lists.map((list, id) => (
                                         <li key={id}>{list}</li>
                                     ))}
