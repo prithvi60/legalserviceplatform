@@ -505,30 +505,25 @@ export const communityServices = [
 
 export const businessOverviews = [
     {
-        icon: (
-            <MdSpaceDashboard className="text-4xl md:text-5xl text-primary flex-shrink-0" />
-        ),
+        // icon: (
+        //     <MdSpaceDashboard className="text-4xl md:text-5xl text-primary flex-shrink-0" />
+        // ),
+        icon:"/gifs/unified.gif",
         title: "Unified Dashboard",
         desc: "Track compliance, legal, and tax matters seamlessly.",
     },
     {
-        icon: (
-            <RiTeamFill className="text-4xl md:text-5xl text-primary flex-shrink-0" />
-        ),
+        icon:"/gifs/team.gif",
         title: "Your Legal & Compliance Team",
         desc: "Lawyers + CAs + CSs in your pocket.",
     },
     {
-        icon: (
-            <FaArrowsToDot className="text-4xl md:text-5xl text-primary flex-shrink-0" />
-        ),
+        icon:"/gifs/reminder2.gif",
         title: "Automatic Reminders",
         desc: "Stay on top of deadlines & legal requirements.",
     },
     {
-        icon: (
-            <SiPivotaltracker className="text-4xl md:text-5xl text-primary flex-shrink-0" />
-        ),
+        icon:"/gifs/tracking.gif",
         title: "Efficient Tracking",
         desc: "Real-time updates on compliance & financial health.",
     },
@@ -536,21 +531,21 @@ export const businessOverviews = [
 
 export const SCGResults = [
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/shield.gif",
         alt: "icons",
         href: "#",
         title: "100% Data Security",
         summary: "We ensure privacy & professional discretion.",
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/shield.gif",
         alt: "icons",
         href: "#",
         title: "On-Time Delivery",
         summary: "Quick turnaround for all legal & compliance needs.",
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/shield.gif",
         alt: "icons",
         href: "#",
         title: "Accurate & Reliable Solutions",
@@ -560,28 +555,28 @@ export const SCGResults = [
 
 export const ALCTools = [
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "AI Case Alerts & Research",
         summary: "Stay updated on legal developments.",
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Judgment Database",
         summary: "5M+ legal case references at your fingertips.",
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Compliance Tracking",
         summary: "Never miss a tax or regulatory deadline.",
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Live Court Display Board",
@@ -591,28 +586,28 @@ export const ALCTools = [
 
 export const talkToExpert = [
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Talk to Lawyer",
         lists: ["Draft contracts", "handle disputes", "legal advisory"],
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Talk to CAs",
         lists: ["Tax planning", "auditing", "financial compliance"],
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Talk to CSs",
         lists: ["Corporate governance", "regulatory compliance."],
     },
     {
-        icon: "/Icon-1.svg",
+        icon: "/gifs/ppl.gif",
         alt: "icons",
         href: "#",
         title: "Talk to Financial analysts",

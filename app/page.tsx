@@ -33,47 +33,47 @@ export default function Home() {
     <div className="">
       <HeroSection />
 
-      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <Search />
       </motion.div>
 
-      <motion.div variants={fadeLeftVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeLeftVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <BusinessOverview />
       </motion.div>
 
-      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <ExploreSuit />
       </motion.div>
 
-      <motion.div variants={fadeLeftVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeLeftVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <Community type="" mainTitle="Security, Confidentiality & Guaranteed Results" desc="" data={SCGResults} />
       </motion.div>
 
-      <motion.div variants={scaleInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={scaleInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
         <AboutTemplate />
       </motion.div>
 
-      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
         <VideoSection />
       </motion.div>
 
-      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <Community type="" mainTitle="Expert Consultation - Talk to Our Specialists" desc="Speak to an Expert - Get Legal Help in Minutes!" data={ALCTools} />
       </motion.div>
 
-      <motion.div variants={fadeLeftVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeLeftVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <StartYourBusiness />
       </motion.div>
 
-      <motion.div variants={scaleInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={scaleInVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <WhatCustomerSay />
       </motion.div>
 
-      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <Community type="true" mainTitle="Expert Consultation - Talk to Our Specialists" desc="Speak to an Expert - Get Legal Help in Minutes!" data={talkToExpert} />
       </motion.div>
 
-      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
+      <motion.div variants={fadeUpVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.35 }}>
         <CustomerFeedback />
       </motion.div>
     </div>

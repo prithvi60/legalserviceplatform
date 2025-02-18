@@ -120,7 +120,7 @@ const HeroSection = () => {
             >
               {/* <FaStar className="text-warning mx-2 text-2xl md:text-4xl xl:text-6xl" /> */}
               <Image
-              alt="bg image"
+              alt="star image"
               src={"/gifs/star.gif"}
               width={100}
               height={100}

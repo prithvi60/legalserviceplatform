@@ -5,6 +5,8 @@ import { useRef } from "react";
 import Slider from "react-slick";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
 const Search = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const settings = {
@@ -80,19 +82,29 @@ const Search = () => {
               <CardBody className="overflow-visible gap-5 justify-center  py-4 px-6">
                 <ul className="text-lg px-4 font-medium space-y-1.5 list-disc font-Lorin list-outside text-white z-10">
                   {item.services.map((list, id) => (
-
                     <div key={id}>
-
-                      <li className="list-none text-success font-semibold">{list.country}</li>
-                      <a href={list.href} className="text-default font-light">{list.lists}</a>
+                      <li className="list-none text-success font-semibold">
+                        {list.country}
+                      </li>
+                      <a href={list.href} className="text-default font-light">
+                        {list.lists}
+                      </a>
                     </div>
                   ))}
                 </ul>
               </CardBody>
               <CardFooter className="flex-row justify-between sm:justify-start gap-5 items-center sm:items-start lg:items-center sm:flex-col lg:flex-row lg:justify-between">
-                <div className="absolute size-44 md:size-48 -bottom-3 right-0">
+                <motion.div
+                  className="absolute size-44 md:size-48 -bottom-3 right-0"
+                  animate={{ opacity: [1, 0.6, 1] }}
+                  transition={{
+                    duration: 12,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }} // Slower pulse (3s)
+                >
                   <Image fill alt="icon" src={"/Ellipse2.svg"} />
-                </div>
+                </motion.div>
               </CardFooter>
             </Card>
           ))}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PiStarFill } from "react-icons/pi";
+// import { PiStarFill } from "react-icons/pi";
 import CalendlyComponent from './CalendlyComponent';
 import Image from 'next/image';
 const WhatCustomerSay = () => {
@@ -8,15 +8,30 @@ const WhatCustomerSay = () => {
             <h2 className='font-Archivo w-full font-bold tracking-wide text-2xl md:text-3xl xl:text-5xl text-secondary'>What Our Customers Say</h2>
             <div className='flex flex-col md:flex-row md:items-center gap-6'>
                 <div className='flex items-center gap-2.5'>
-                    <PiStarFill className='text-warning text-opacity-90 text-4xl' />
+                           <Image
+              alt="star image"
+              src={"/gifs/star.gif"}
+              width={100}
+              height={100}
+            />
                     <h5 className='font-Inter font-bold tracking-wide text-xl md:text-2xl xl:text-3xl text-primary'>4.5/5 on Google</h5>
                 </div>
                 <div className='flex items-center gap-2.5'>
-                    <PiStarFill className='text-warning text-opacity-90 text-4xl' />
+                           <Image
+              alt="star image"
+              src={"/gifs/star.gif"}
+              width={100}
+              height={100}
+            />
                     <h5 className='font-Inter font-bold tracking-wide text-xl md:text-2xl xl:text-3xl text-primary'>4.3/5 on TrustPilot</h5>
                 </div>
                 <div className='flex items-center gap-2.5'>
-                    <PiStarFill className='text-warning text-opacity-90 text-4xl' />
+                           <Image
+              alt="star image"
+              src={"/gifs/star.gif"}
+              width={100}
+              height={100}
+            />
                     <h5 className='font-Inter font-bold tracking-wide text-xl md:text-2xl xl:text-3xl text-primary'>4.3/5 on MouthShut</h5>
                 </div>
             </div>

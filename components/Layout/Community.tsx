@@ -60,7 +60,7 @@ const Community = ({
                 </h4>
                 {item.lists ? (
                   <ul
-                    className={`text-lg mx-auto pl-2 space-y-1.5 list-disc font-Lorin font-medium list-outside ${
+                    className={`text-lg mx-auto pl-2 space-y-1.5 list-none font-Lorin font-medium ${
                       type === "true" ? "w-full text-center" : "w-1/2"
                     }`}
                   >

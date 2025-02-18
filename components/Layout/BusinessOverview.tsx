@@ -1,6 +1,7 @@
 import { businessOverviews } from "@/constants/Data";
 import React from "react";
 import CalendlyComponent from "./CalendlyComponent";
+import Image from "next/image";
 
 const BusinessOverview = () => {
   return (
@@ -24,7 +25,15 @@ const BusinessOverview = () => {
             key={idx}
             className="relative flex items-center gap-10 p-5 bg-[#F1F2F5] rounded-lg"
           >
-            <div>{list.icon}</div>
+            {/* <div>{list.icon}</div> */}
+            <div className="relative overflow-hidden size-14 md:size-20">
+                  <Image
+                    alt={list.title}
+                    className="object-contain rounded-xl"
+                    src={list.icon}
+                    fill
+                  />
+                </div>
             <div className=" block space-y-1.5">
               <h4 className="font-Archivo tracking-wide text-secondary text-opacity-80 font-semibold text-xl md:text-2xl xl:text-3xl">
                 {list.title}
