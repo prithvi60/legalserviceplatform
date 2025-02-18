@@ -66,7 +66,9 @@
 .custom-slider_1 .slick-slide > div {
   padding: 30px 0px;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 /* .custom-slider .slick-slide > div {
   margin: 0 8px !important;
 }
