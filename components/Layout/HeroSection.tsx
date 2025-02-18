@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { FaStar } from "react-icons/fa6";
+// import { FaStar } from "react-icons/fa6";
 import OurClients from "./OurClients";
 import { motion } from "framer-motion";
 
