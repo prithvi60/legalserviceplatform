@@ -1,66 +1,63 @@
-'use client'
+"use client";
 
 // import { Button } from '@heroui/button'
-import { FaLongArrowAltRight } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface CalendlyLinkProps {
-    url: string
-    text?: string
+    url: string;
+    text?: string;
 }
 
 interface CalendlyInterface {
-    initPopupWidget: (options: { url: string }) => void
+    initPopupWidget: (options: { url: string }) => void;
 }
 
 declare global {
     interface Window {
-        Calendly?: CalendlyInterface
+        Calendly?: CalendlyInterface;
     }
 }
 
-const CalendlyLink = ({
-    url,
-    text
-}: CalendlyLinkProps) => {
-    const [isScriptLoaded, setIsScriptLoaded] = useState(false)
-    const [isAnimating, setIsAnimating] = useState(false)
+const CalendlyLink = ({ url, text }: CalendlyLinkProps) => {
+    const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
         const handleScriptLoad = () => {
-            setIsScriptLoaded(true)
-        }
+            setIsScriptLoaded(true);
+        };
 
-        const script = document.createElement('script')
-        script.src = 'https://assets.calendly.com/assets/external/widget.js'
-        script.async = true
-        script.onload = handleScriptLoad
-        document.body.appendChild(script)
+        const script = document.createElement("script");
+        script.src = "https://assets.calendly.com/assets/external/widget.js";
+        script.async = true;
+        script.onload = handleScriptLoad;
+        document.body.appendChild(script);
 
         return () => {
-            document.body.removeChild(script)
-        }
-    }, [])
+            document.body.removeChild(script);
+        };
+    }, []);
 
     // Auto-play hover effect every 4 seconds
     useEffect(() => {
         const interval = setInterval(() => {
-            setIsAnimating(true)
-            setTimeout(() => setIsAnimating(false), 800) // Reset after animation
-        }, 2000) // Repeat every 4s
+            setIsAnimating(true);
+            setTimeout(() => setIsAnimating(false), 800); // Reset after animation
+        }, 2000); // Repeat every 4s
 
-        return () => clearInterval(interval)
-    }, [])
+        return () => clearInterval(interval);
+    }, []);
 
     const handleCalendlyClick = (e: React.MouseEvent | React.TouchEvent) => {
-        e.preventDefault()
+        e.preventDefault();
         if (window.Calendly && isScriptLoaded) {
-            window.Calendly.initPopupWidget({ url })
+            window.Calendly.initPopupWidget({ url });
         } else {
-            console.error('Calendly script not loaded')
+            console.error("Calendly script not loaded");
         }
-    }
+    };
 
     return (
         <>
@@ -96,7 +93,7 @@ const CalendlyLink = ({
                 </motion.span>
             </motion.button>
         </>
-    )
-}
+    );
+};
 
-export default CalendlyLink
+export default CalendlyLink;

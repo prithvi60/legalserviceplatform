@@ -265,7 +265,7 @@ export const resolvers = {
     ): Promise<boolean> => {
       try {
         const { userId, DocType, DocNumber } = input;
-        console.log(input);
+        // console.log(input);
 
         // Check if the form exists
         const existingForm = await prisma.businessForm.findFirst({

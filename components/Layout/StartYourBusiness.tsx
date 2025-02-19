@@ -1,5 +1,6 @@
 import { startBusiness } from '@/constants/Data'
 import { Card, CardBody, CardHeader } from '@heroui/card'
+import Image from 'next/image'
 import React from 'react'
 
 const StartYourBusiness = () => {
@@ -17,8 +18,13 @@ const StartYourBusiness = () => {
                         className="py-4 px-6 bg-[#FFBF0033] min-w-72 mx-auto md:min-w-96"
                     >
                         <CardHeader className="pb-3 pt-2 px-4 flex-col gap-2 items-start">
-                            <div>
-                                {item.icon}
+                            <div className="relative overflow-hidden size-14 md:size-20 mx-auto">
+                                <Image
+                                    alt={"icons"}
+                                    className="object-contain rounded-xl"
+                                    src={item.icon}
+                                    fill
+                                />
                             </div>
                         </CardHeader>
                         <CardBody className="overflow-visible gap-5 justify-center py-2">

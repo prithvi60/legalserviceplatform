@@ -5,7 +5,7 @@ import Image from 'next/image'
 const AboutTemplate = () => {
     return (
         <section className='w-full h-full space-y-10 bg-white'>
-            <p className='px-[40px] py-[40px] bg-white md:px-[80px] xl:px-[144px] font-Inter text-xl md:text-2xl xl:text-3xl'>With<span className="text-primary font-bold mx-3">Resolve</span>, crafting airtight contracts is no longer a tedious process.<span className="text-primary font-bold mx-3">Customize, manage, and deploy contract templates in minutes</span> — without the constant back-and-forth with Legal.</p>
+            <p className='px-[40px] py-[40px] bg-white md:px-[80px] xl:px-[144px] font-Inter text-xl md:text-2xl xl:text-3xl'>With<span className="text-primary font-bold mx-3">Rezolvate</span>, crafting airtight contracts is no longer a tedious process.<span className="text-primary font-bold mx-3">Customize, manage, and deploy contract templates in minutes</span> — without the constant back-and-forth with Legal.</p>
             <div className="px-[40px] py-[40px] md:px-[80px] xl:px-[144px] w-full h-full bg-[#F8F8FA] flex relative flex-col lg:flex-row overflow-hidden gap-5">
                 <div className="w-full h-[320px] md:h-[520px] overflow-hidden relative z-0 lg:basis-3/5">
                     <Image
@@ -86,7 +86,10 @@ const AboutTemplate = () => {
             </div>
             <div className='padding bg-white w-full h-full block space-y-5 text-center'>
                 <p className='font-Archivo w-full font-bold tracking-wide text-2xl md:text-3xl xl:text-4xl text-secondary'>Start Your Business Hassle-Free - Book a Free Consultation Today!</p>
-                <CalendlyComponent text='Get Started' url="https://calendly.com/prithvi-webibee/general" /></div>
+                <div className='flex justify-center items-center'>
+                    <CalendlyComponent text='Get Started' url="https://calendly.com/prithvi-webibee/general" />
+                </div>
+            </div>
         </section>
     )
 }

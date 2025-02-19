@@ -57,7 +57,7 @@ const Search = () => {
           {communityServices.map((item, idx) => (
             <Card
               key={idx}
-              className=" relative bg-[#3b58de] w-full mx-auto hover:scale-105 hover:bg-[#3b58de]/90 cursor-pointer"
+              className=" relative bg-[#3b58de] w-full h-[510px] sm:h-[500px] xl:h-[480px] mx-auto hover:scale-105 hover:bg-[#3b58de]/90 cursor-pointer"
             >
               <div className="w-full ">
                 <video

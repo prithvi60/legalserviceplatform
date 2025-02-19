@@ -40,10 +40,10 @@ const Community = ({
             key={idx}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3  }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <Card className="py-4 px-6 linear-blue_1 w-72 mx-auto md:w-80">
+            <Card className="py-4 px-6 linear-blue_1 w-72 h-64 md:h-72 mx-auto md:w-80">
               <CardHeader className="pb-3 pt-2 px-4 flex-col gap-2 items-start">
                 <div className="relative overflow-hidden size-14 md:size-20 mx-auto">
                   <Image
@@ -60,9 +60,8 @@ const Community = ({
                 </h4>
                 {item.lists ? (
                   <ul
-                    className={`text-lg mx-auto pl-2 space-y-1.5 list-none font-Lorin font-medium ${
-                      type === "true" ? "w-full text-center" : "w-1/2"
-                    }`}
+                    className={`text-lg mx-auto pl-2 space-y-1.5 list-none font-Lorin font-medium ${type === "true" ? "w-full text-center" : "w-1/2"
+                      }`}
                   >
                     {item.lists.map((list, id) => (
                       <li key={id}>{list}</li>

@@ -304,7 +304,7 @@ const RenderFields = () => {
                     </Button>
 
                     <Button
-                        onClick={step === totalSteps ? () => console.log('Submit') : handleNext}
+                        onClick={step === totalSteps ? () => { } : handleNext}
                     >
                         {step === totalSteps ? 'Submit' : 'Next'}
                     </Button>

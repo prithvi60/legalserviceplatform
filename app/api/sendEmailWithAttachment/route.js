@@ -30,17 +30,17 @@ export async function POST(request) {
   }
 
   const userMailOptions = {
-    from: `Resolve <${process.env.EMAIL_ID}>`,
+    from: `Rezolvate <${process.env.EMAIL_ID}>`,
     to: email,
-    subject: "Your Customized Acknowledgment PDF - Resolve",
+    subject: "Your Customized Acknowledgment PDF - Rezolvate",
     html: `<p>Dear Applicant,</p>
-           <p>Greetings from Resolve!</p>
-           <p>Thank you for using Resolve service. We appreciate your time and effort in customizing your document.</p>
+           <p>Greetings from Rezolvate!</p>
+           <p>Thank you for using Rezolvate service. We appreciate your time and effort in customizing your document.</p>
            <p>You can download your customized PDF file below - ${pdfName}</p>
            <p>If you need any further assistance, feel free to reach out to us.</p>
            <p>Best Regards,<br>
            <br>
-           <span style="margin-top: 2px;">Resolve<span><br>
+           <span style="margin-top: 2px;">Rezolvate<span><br>
            <span style="margin-top: 2px;">No. 12, Lakshmi Towers, 4th Floor<br>
            Gandhi Nagar<br>
            Chennai, Tamil Nadu, India - 600102</span><br></p>`,
@@ -57,13 +57,13 @@ export async function POST(request) {
 
   try {
     await transporter.sendMail(userMailOptions);
-    console.log("Email sent successfully");
+    // console.log("Email sent successfully");
     return NextResponse.json({
       success: true,
       message: "Email sent successfully",
     });
   } catch (error) {
-    console.error("Error sending email:", error);
+    // console.error("Error sending email:", error);
     return NextResponse.json(
       { success: false, message: error.message || "Error sending email" },
       { status: 500 }

@@ -194,137 +194,139 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
 
     // Reusable function to save progress to the database
     const saveProgressToDatabase = useCallback(async () => {
-        if (!userId) return;
+        if (title === "Non-Disclosure Agreement") {
+            if (!userId) return;
 
-        const input = {
-            userId,
-            DocType: docType !== null && docNumber > 0 ? docType : documentSlug,
-            formData: currentData,
-            status:
-                (docType !== null && docNumber > 0
-                    ? currentData.progress
-                    : state.progress) === 100
-                    ? "IsComplete"
-                    : "IsPending",
-        };
+            const input = {
+                userId,
+                DocType: docType !== null && docNumber > 0 ? docType : documentSlug,
+                formData: currentData,
+                status:
+                    (docType !== null && docNumber > 0
+                        ? currentData.progress
+                        : state.progress) === 100
+                        ? "IsComplete"
+                        : "IsPending",
+            };
 
-        // Get existing form based on document type
-        const existingForm =
-            docType !== null && docNumber > 0
-                ? GetDoc?.getBusinessForm || null
-                : GetDocType?.getBusinessForms
-                    ?.filter((form) => form.DocType === input.DocType)
-                    ?.sort((a, b) => b.DocNumber - a.DocNumber)?.[0];
-        // console.log("existing", existingForm);
-
-        try {
+            // Get existing form based on document type
+            const existingForm =
+                docType !== null && docNumber > 0
+                    ? GetDoc?.getBusinessForm || null
+                    : GetDocType?.getBusinessForms
+                        ?.filter((form) => form.DocType === input.DocType)
+                        ?.sort((a, b) => b.DocNumber - a.DocNumber)?.[0];
             // console.log("existing", existingForm);
 
-            if (
-                existingForm &&
-                (state.step > 1 || (docType !== null && docNumber > 0))
-            ) {
-                const { data } = await updateBusinessForm({
-                    variables: { input: { ...input, DocNumber: existingForm.DocNumber } },
-                });
-                if (data) {
-                    toast.success("Form updated successfully!", {
-                        position: "top-right",
-                        duration: 3000,
-                        style: {
-                            border: "1px solid #65a34e",
-                            padding: "16px",
-                            color: "#65a34e",
-                        },
-                        iconTheme: {
-                            primary: "#65a34e",
-                            secondary: "#FFFAEE",
-                        },
-                    });
-                    setState((prevState) => ({ ...prevState, step: state.step + 1 }));
-                } else {
-                    console.error("No data returned from update mutation.");
-                    toast.error(
-                        "An error occurred while updating the form. Please try again.",
-                        {
-                            position: "top-right",
-                            duration: 3000,
-                            style: {
-                                border: "1px solid #EB1C23",
-                                padding: "16px",
-                                color: "#EB1C23",
-                            },
-                            iconTheme: {
-                                primary: "#EB1C23",
-                                secondary: "#FFFAEE",
-                            },
-                        }
-                    );
-                }
-            } else {
-                // Create a new form
-                const { data } = await createBusinessForm({
-                    variables: {
-                        input: {
-                            ...input,
-                            url,
-                        },
-                    },
-                });
+            try {
+                // console.log("existing", existingForm);
 
-                if (data) {
-                    toast.success("Form submitted successfully!", {
-                        position: "top-right",
-                        duration: 3000,
-                        style: {
-                            border: "1px solid #65a34e",
-                            padding: "16px",
-                            color: "#65a34e",
-                        },
-                        iconTheme: {
-                            primary: "#65a34e",
-                            secondary: "#FFFAEE",
-                        },
+                if (
+                    existingForm &&
+                    (state.step > 1 || (docType !== null && docNumber > 0))
+                ) {
+                    const { data } = await updateBusinessForm({
+                        variables: { input: { ...input, DocNumber: existingForm.DocNumber } },
                     });
-                    setState((prevState) => ({ ...prevState, step: state.step + 1 }));
-                } else {
-                    console.error("No data returned from create mutation.");
-                    toast.error(
-                        "An error occurred while updating the form. Please try again.",
-                        {
+                    if (data) {
+                        toast.success("Form updated successfully!", {
                             position: "top-right",
                             duration: 3000,
                             style: {
-                                border: "1px solid #EB1C23",
+                                border: "1px solid #65a34e",
                                 padding: "16px",
-                                color: "#EB1C23",
+                                color: "#65a34e",
                             },
                             iconTheme: {
-                                primary: "#EB1C23",
+                                primary: "#65a34e",
                                 secondary: "#FFFAEE",
                             },
-                        }
-                    );
+                        });
+                        setState((prevState) => ({ ...prevState, step: state.step + 1 }));
+                    } else {
+                        console.error("No data returned from update mutation.");
+                        toast.error(
+                            "An error occurred while updating the form. Please try again.",
+                            {
+                                position: "top-right",
+                                duration: 3000,
+                                style: {
+                                    border: "1px solid #EB1C23",
+                                    padding: "16px",
+                                    color: "#EB1C23",
+                                },
+                                iconTheme: {
+                                    primary: "#EB1C23",
+                                    secondary: "#FFFAEE",
+                                },
+                            }
+                        );
+                    }
+                } else {
+                    // Create a new form
+                    const { data } = await createBusinessForm({
+                        variables: {
+                            input: {
+                                ...input,
+                                url,
+                            },
+                        },
+                    });
+
+                    if (data) {
+                        toast.success("Form submitted successfully!", {
+                            position: "top-right",
+                            duration: 3000,
+                            style: {
+                                border: "1px solid #65a34e",
+                                padding: "16px",
+                                color: "#65a34e",
+                            },
+                            iconTheme: {
+                                primary: "#65a34e",
+                                secondary: "#FFFAEE",
+                            },
+                        });
+                        setState((prevState) => ({ ...prevState, step: state.step + 1 }));
+                    } else {
+                        console.error("No data returned from create mutation.");
+                        toast.error(
+                            "An error occurred while updating the form. Please try again.",
+                            {
+                                position: "top-right",
+                                duration: 3000,
+                                style: {
+                                    border: "1px solid #EB1C23",
+                                    padding: "16px",
+                                    color: "#EB1C23",
+                                },
+                                iconTheme: {
+                                    primary: "#EB1C23",
+                                    secondary: "#FFFAEE",
+                                },
+                            }
+                        );
+                    }
                 }
+            } catch (error) {
+                console.error("Error saving progress:", error);
+                toast.error(
+                    "Failed to submit the form. Please check your internet connection and reload or try again later.",
+                    {
+                        position: "top-right",
+                        duration: 3000,
+                        style: {
+                            border: "1px solid #EB1C23",
+                            padding: "16px",
+                            color: "#EB1C23",
+                        },
+                        iconTheme: {
+                            primary: "#EB1C23",
+                            secondary: "#FFFAEE",
+                        },
+                    }
+                );
             }
-        } catch (error) {
-            console.error("Error saving progress:", error);
-            toast.error(
-                "Failed to submit the form. Please check your internet connection and reload or try again later.",
-                {
-                    position: "top-right",
-                    duration: 3000,
-                    style: {
-                        border: "1px solid #EB1C23",
-                        padding: "16px",
-                        color: "#EB1C23",
-                    },
-                    iconTheme: {
-                        primary: "#EB1C23",
-                        secondary: "#FFFAEE",
-                    },
-                }
-            );
         }
     }, [
         userId,
@@ -338,6 +340,7 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         documentSlug,
         url,
         docNumber,
+        title
     ]);
 
     const handleNext = useCallback(async () => {
@@ -440,95 +443,6 @@ const NDAPreview: React.FC<DocumentPreviewProps> = ({ documentType }) => {
         const newProgress = calculateProgress();
         setState((prev) => ({ ...prev, progress: newProgress }));
     }, [state.formData, state.step, calculateProgress]);
-
-    // const generatePDF = async () => {
-    //     const element = targetRef.current;
-    //     if (!element) return console.error("Error: targetRef is null.");
-
-    //     await new Promise(resolve => setTimeout(resolve, 500));
-
-    //     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    //     const [pageWidth, pageHeight, margin] = [210, 297, 10];
-    //     let yOffset = margin;
-
-    //     for (const child of element.children) {
-    //         const canvas = await html2canvas(child, { scale: 2 });
-    //         const imgData = canvas.toDataURL("image/jpeg", 0.8);
-    //         const imgWidth = pageWidth - 2 * margin;
-    //         const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    //         if (yOffset + imgHeight > pageHeight - margin) {
-    //             pdf.addPage();
-    //             yOffset = margin;
-    //         }
-    //         pdf.addImage(imgData, "JPEG", margin, yOffset, imgWidth, imgHeight);
-    //         yOffset += imgHeight + 5;
-    //     }
-    //     return pdf.output('blob');
-    // };
-
-    // const performDownloadAndSendEmail = async () => {
-    //     if (!(paymentStatus === "success" && !state.isDownloading && GetDocType?.getBusinessForms?.length)) return;
-
-    //     try {
-    //         await new Promise(resolve => {
-    //             const interval = setInterval(() => {
-    //                 if (targetRef.current) {
-    //                     clearInterval(interval);
-    //                     resolve(undefined);
-    //                 }
-    //             }, 500);
-    //         });
-
-    //         if (!targetRef.current) return console.error("Error: targetRef.current is still null after delay.");
-
-    //         setState(prev => ({ ...prev, isDecrypted: true, isDownloading: true }));
-
-    //         const pdfBlob = await generatePDF();
-    //         if (!pdfBlob) throw new Error("PDF generation failed.");
-
-    //         const pdfBase64 = await new Promise((resolve, reject) => {
-    //             const reader = new FileReader();
-    //             reader.readAsDataURL(pdfBlob);
-    //             reader.onloadend = () => typeof reader.result === "string"
-    //                 ? resolve(reader.result.split(",")[1])
-    //                 : reject(new Error("Failed to read PDF Blob"));
-    //             reader.onerror = reject;
-    //         });
-
-    //         const response = await fetch("/api/sendEmailWithAttachment", {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({ pdfBlob: pdfBase64, email: sessionData?.user?.email, pdfName: fileName }),
-    //         });
-
-    //         const result = await response.json();
-    //         if (!result.success) throw new Error(result.message);
-
-    //         toast.success("Mail sent successfully!", {
-    //             position: "top-right",
-    //             duration: 3000,
-    //             style: { border: "1px solid #65a34e", padding: "16px", color: "#65a34e" },
-    //             iconTheme: { primary: "#65a34e", secondary: "#FFFAEE" },
-    //         });
-
-    //         sessionStorage.removeItem(storageKey);
-    //         setState(prev => ({ ...prev, isDecrypted: false, isDownloading: false }));
-
-    //         const urlLink = new URL(window.location.href);
-    //         urlLink.searchParams.delete("paymentStatus");
-    //         window.history.replaceState({}, "", url);
-    //         setTimeout(() => window.location.replace(url), 500);
-    //     } catch (error) {
-    //         console.error("Error generating PDF or sending email:", error);
-    //         setState(prev => ({ ...prev, isDownloading: false, isDecrypted: false }));
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     const timer = setTimeout(performDownloadAndSendEmail, 1000);
-    //     return () => clearTimeout(timer);
-    // }, [paymentStatus, state.isDownloading, GetDocType?.getBusinessForms?.length, storageKey, url, targetRef, fileName, sessionData?.user?.email]);
 
     usePDFGeneration({
         targetRef,

@@ -24,7 +24,7 @@ const ProfilePage = () => {
             variables: { userId, DocType: "BC", orderBy: { DocNumber: "desc" } },
         }
     );
-    console.log(GetDocType?.getBusinessForms);
+    // console.log(GetDocType?.getBusinessForms);
 
     const filteredDataOfRA = GetDocType?.getBusinessForms.filter(
         (doc) => doc.status === "IsPending"

@@ -9,7 +9,7 @@ export interface FieldGroup<T> {
 }
 
 export const documentConfig = {
-    BC: {
+    "business-contracts": {
         title: "Non-Disclosure Agreement",
         documentSlug: "BC",
         initialFormData: {
@@ -44,7 +44,7 @@ export const documentConfig = {
         renderStep: NDARenderSteps,
         letterPreview: NDALetterPreview
     },
-    EA: {
+    "employee-agreement": {
         title: "Employee Agreement",
         documentSlug: "EA",
         initialFormData: {
